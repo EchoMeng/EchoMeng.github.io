@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Echo Meng">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="TryWeexAndMVVM"/>
+  <meta property="og:description" content="Can&#39;t help but code." />
+  <meta property="og:site_name" content="Echo Meng&#39;s Blog"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://www.echomeng.cn"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Echo Meng&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Echo Meng's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">TryWeexAndMVVM</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/EchoMeng/">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:mengxiangxxa@163.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Echo Meng</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-08-28</span>
+            <span class="time">19:36:19</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/技术/">技术</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/weex/">#weex</a> <a class="tag" href="/tags/前端/">#前端</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>weex学习笔记。自己搭建坑好多啊！挖坑一分钟，填坑200小时…</p>
+<p>持续更新中…</p>
+<a id="more"></a>
+<h1 id="TryWeexAndMVVM"><a href="#TryWeexAndMVVM" class="headerlink" title="TryWeexAndMVVM"></a>TryWeexAndMVVM</h1><p>Learn Weex and MVVM</p>
+<p>一、前端相关；</p>
+<p>二、MVVM设计模式相关；</p>
+<p>三、Vue和Node相关；</p>
+<p>四、Weex相关。</p>
+<h2 id="一、整理一点点简单的前端"><a href="#一、整理一点点简单的前端" class="headerlink" title="一、整理一点点简单的前端"></a>一、整理一点点简单的前端</h2><p>主要参考：《HTML、XHTML和CSS宝典（第5版）》、《JavaScript DOM编程艺术》</p>
+<h3 id="HTML、-CSS"><a href="#HTML、-CSS" class="headerlink" title="HTML、 CSS"></a>HTML、 CSS</h3><h4 id="标准的HTML的设计目的是提供静态的、纯文本的文档，脚本编程语言能够帮助HTML实现交互功能"><a href="#标准的HTML的设计目的是提供静态的、纯文本的文档，脚本编程语言能够帮助HTML实现交互功能" class="headerlink" title="标准的HTML的设计目的是提供静态的、纯文本的文档，脚本编程语言能够帮助HTML实现交互功能"></a>标准的HTML的设计目的是提供静态的、纯文本的文档，脚本编程语言能够帮助HTML实现交互功能</h4><h4 id="所有的HTML文件都有3个文档级标签-lt-html-gt-lt-head-gt-lt-gt-body-gt"><a href="#所有的HTML文件都有3个文档级标签-lt-html-gt-lt-head-gt-lt-gt-body-gt" class="headerlink" title="所有的HTML文件都有3个文档级标签: &lt;html&gt;, &lt;head&gt;, &lt;&gt;body&gt;"></a>所有的HTML文件都有3个文档级标签: &lt;html&gt;, &lt;head&gt;, &lt;&gt;body&gt;</h4><ul>
+<li>&lt;head&gt;标签界定HTML文档的头部区域。文档的标题、元信息以及文档的脚本在多数情况下均包含在&lt;head&gt;节。</li>
+<li>&lt;body&gt;HTML文档中主要的可视部分包含在&lt;body&gt;标签内。</li>
+</ul>
+<h4 id="MIME类型："><a href="#MIME类型：" class="headerlink" title="MIME类型："></a>MIME类型：</h4><p>多用途互联网邮件扩展类型，即传输内容的分类类型</p>
+<h4 id="分区（division）："><a href="#分区（division）：" class="headerlink" title="分区（division）："></a>分区（division）：</h4><p>与段落有类似之处，用来将相关对象（段落、图片等）组织在一起，通过在分区上应用格式，还可以是组合在一起的对象继承大多数相同的格式，这样就省略了在其中每个对象上分别应用格式的需求</p>
+<h4 id="有两类脚本：客户端脚本和服务端脚本"><a href="#有两类脚本：客户端脚本和服务端脚本" class="headerlink" title="有两类脚本：客户端脚本和服务端脚本"></a>有两类脚本：客户端脚本和服务端脚本</h4><p>客户端脚本由客户端软件运行，即由用户代理运行。（JavaScript等）</p>
+<p>服务端脚本由web服务器运行，通常被称为CGI(Common Gateway Interface)，是服务器端web脚本的第一个接口。（Perl, Python, PHP, Java等）</p>
+<p>1、 在文档中包含脚本</p>
+<p>要在文档中包含脚本，可将脚本代码写在&lt;script&gt;标签中。可以在这个标签内包含任意数量的脚本代码，脚本可以包含在文档头或者文档体内，而且可以包含任意多个脚本区，但是在HTML内不能嵌套&lt;script&gt;标签。</p>
+<p>一般来说，应该讲脚本放在文档的头部区域，以便在后面加载的页面内容上使用脚本。</p>
+<p>2、 调用外部脚本<br>如果希望多个文档内使用某些脚本，可以将脚本放在外部文件中，然后使用&lt;script&gt;标签的src特性指定脚本内容再次文件内查找到。</p>
+<h4 id="CSS-Cascading-Style-Sheet-层级样式表"><a href="#CSS-Cascading-Style-Sheet-层级样式表" class="headerlink" title="CSS:Cascading Style Sheet 层级样式表"></a>CSS:Cascading Style Sheet 层级样式表</h4><p>CSS级别1、2、3</p>
+<ul>
+<li>CSS1:定义了基本样式功能、有限的文字支持和有限的定位支持；</li>
+<li>CSS2:添加了声音属性、分页媒介、更好的字体支持和定位支持；</li>
+<li>CSS3:添加了演示样式属性，能够有效的用Web文档形成演示效果。</li>
+</ul>
+<p>CSS按照一下方式引用声明的位置：</p>
+<ul>
+<li>作者来源：文档作者通过&lt;style&gt;区或者链接表（通过&lt;link&gt;）包含样式；</li>
+<li>用户来源：用户（文档的查看者）指定文本样式表；</li>
+<li>用户代理来源：用户代理制定默认样式表（在不存在其他样式表的时候）。</li>
+</ul>
+<p>当一个元素上存在多个样式的时候，CSS标准根据以下规则决定使用哪个样式：<br>元素内嵌样式的优先级比前面声明的所有样式都高。</p>
+<ol>
+<li>找到对应在此元素上的来自所有来源的所有样式声明；</li>
+<li>对于普通声明，作者样式表覆盖用户样式表，后者又覆盖默认样式表。对于！important样式声明，用户样式表覆盖作者样式表，后者又覆盖默认样式表；</li>
+<li>较具体的声明比不太具体的声明优先；</li>
+<li>最后指定的样式比其他同级样式优先。</li>
+</ol>
+<h4 id="CSS基本格式："><a href="#CSS基本格式：" class="headerlink" title="CSS基本格式："></a>CSS基本格式：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">selector &#123;</span><br><span class="line">	property: value(s);</span><br><span class="line">	property: value(s);</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>selector是可以用来与HTML文档中的特定元素进行匹配的表达式；</p>
+<p>property指定此定义影响的元素属性；</p>
+<p>value为属性分配值。</p>
+<ul>
+<li>按类型匹配元素：普通元素选择器，所有对应对象都适用该定义中的属性-值进行格式化；</li>
+<li>通用选择器匹配：可以用来和文档中的任意元素匹配，用*表示；</li>
+<li>按类匹配元素：在样式选择器和对应的元素中使用不同的类，需要在选择器后加.类名，将一个给定的类与多个元素匹配；</li>
+<li>按标识符匹配元素：根据id特性匹配，使用#+id作为选择器前缀；</li>
+<li>按特定特性匹配元素：选择器与元素中的任意特性匹配，在选择器的末尾方括号中指定要匹配的特性和值；</li>
+<li>匹配子元素、后代元素和相邻兄弟元素：根据与其他元素的关系进行匹配。</li>
+</ul>
+<h4 id="CSS样式继承："><a href="#CSS样式继承：" class="headerlink" title="CSS样式继承："></a>CSS样式继承：</h4><p>在CSS中所有的前景属性都会被后代元素继承，但是背景属性（背景色、背景图片等）不会被后代元素自动继承。</p>
+<p>想要覆盖继承，可以为元素定义一个样式，并指定与继承属性不同的属性值。</p>
+<p>彼此不相冲突的特性会被后代元素累计继承。</p>
+<h4 id="伪类："><a href="#伪类：" class="headerlink" title="伪类："></a>伪类：</h4><p>伪类就是用户代理能够理解的标识符，不需要明确的指定元素的样式就能够在特定的类型元素上应用。这样的类是实质上是动态的，所以要使用其他机制而不是静态的class特性来进行跟踪。<br>例如，有一些伪类用于修改文档中已经访问的锚链和违背访问的锚链。如果使用伪类，就不必在每个锚链的标签中指定类，用户代理回判断哪些锚链属于那些类，并在用户浏览网页的时候实时地应用合适的判断。</p>
+<ul>
+<li>锚链样式：未被访问的链接、已经访问过的链接、鼠标在浏览器中正在经过的链接等；</li>
+<li><code>：first-child</code>伪类：用于将样式定义分配给特定元素的第一个子元素，可以用这个伪类为第一个子元素增加更多的空间或者修改第一个子元素格式化；</li>
+<li><code>：lang</code>伪类：用于根据文档使用的语言修改元素。</li>
+</ul>
+<h4 id="伪元素："><a href="#伪元素：" class="headerlink" title="伪元素："></a>伪元素：</h4><p>伪元素是另一种虚拟构造，有助于将样式动态的应用到文档的元素上。例如元素文本的第一行，元素前面的空间，元素后面的空间等。</p>
+<h4 id="层级："><a href="#层级：" class="headerlink" title="层级："></a>层级：</h4><p>层级指样式在文档上的关联效果是层级的。在文档上应用的样式可以有多个来源：</p>
+<ol>
+<li>作者样式：文档作者包含的样式，或者是直接嵌在文档头部、链接在单独的样式表中（使用&lt;link&gt;标签或者CSS的<code>@import</code>规则）、或者在单个元素内。这些样式代表作者期望文档显示的样式。</li>
+<li>用户样式：最终用户为文档指定采用的样式。这些样式由最终用户从本地样式表中选择，可以用来修改文档的默认外观。</li>
+<li>用户代理样式：在特定元素或者文档上没有指定其他样式时，用户代理默认使用的样式。</li>
+</ol>
+<p>来自以上3个来源的每个样式都被分配以权重，当3个来源的样式相互冲突时，就会根据他们分配的权重来决定应该应用哪个样式。默认情况下作者样式比用户样式优先，用户样式比用户代理样式优先。使用！important规则可以强制执行例外。</p>
+<p>确定层级排序顺序的实际机制：</p>
+<ol>
+<li>取出应用到元素和属性的所有定义；</li>
+<li>按权重和来源对定义排序：作者样式》用户样式》用户代理样式。对于<code>!important</code>定义，用户样式比作者样式优先。所有<code>!important</code>定义比普通定义优先。导入的定义被认为与导入它们的样式表同源；</li>
+<li>按选择器的具体程度对定义排序：具体选择器比通用选择器优先；</li>
+<li>按定义的指定顺序排序：如果连个定义有相同的权重、来源和具体程度，那么最后一个指定的定义优先。导入的样式表中的规则比样式表本省的规则优先。</li>
+</ol>
+<h3 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h3><h4 id="DOM-Document-Object-Model-一套对文档内容进行抽象和概念化的方法"><a href="#DOM-Document-Object-Model-一套对文档内容进行抽象和概念化的方法" class="headerlink" title="DOM:Document Object Model 一套对文档内容进行抽象和概念化的方法"></a>DOM:Document Object Model 一套对文档内容进行抽象和概念化的方法</h4><p>W3C的定义：一个与系统平台和编程语言无关的接口，程序和脚本可以通过这个接口动态对文档的内容和样式进行访问和修改。</p>
+<h4 id="DHTML"><a href="#DHTML" class="headerlink" title="DHTML:"></a>DHTML:</h4><ol>
+<li>利用HTML把网页标记为各种元素；</li>
+<li>利用CSS设计各元素的排版样式并确定它们在窗口中的显示位置；</li>
+<li>利用JavaScript实时地操控和改变各有关样式。</li>
+</ol>
+<h4 id="Tips："><a href="#Tips：" class="headerlink" title="Tips："></a>Tips：</h4><p>程序设计语言分为解释型和编译型两大类。Java和C++等语言需要一个编译器，将高级语言编写出来的源代码翻译为直接在计算机上执行的二进制可执行文件。</p>
+<p>解释性程序设计语言不需要编译器，只需要解释器，解释器将直接读入源代码进行执行。</p>
+<p>如果用编译型程序设计语言编写的代码包含错误，错误代码将在代码编译阶段被发现并报告；对于解释型程序设计语言，代码中的错误只有都等到解释器实际执行到有关代码时才会被发现。</p>
+<p>与解释型程序设计语言相比，编译型程序设计语言往往速度更快，可移植性也更好，但是学习曲线往往更陡峭。</p>
+<h4 id="弱类型："><a href="#弱类型：" class="headerlink" title="弱类型："></a>弱类型：</h4><p>JavaScript不要求编程时进行类型声明，被称为弱类型。（反之为强类型）</p>
+<h4 id="JavaScript中的对象："><a href="#JavaScript中的对象：" class="headerlink" title="JavaScript中的对象："></a>JavaScript中的对象：</h4><ol>
+<li>用户定义对象：由程序员自行创建的对象；</li>
+<li>内建对象：内建在JavaScript语言中的对象，例如Array, Math, Data等；</li>
+<li>宿主对象：由浏览器提供的对象。</li>
+</ol>
+<h4 id="JavaScript中声明函数的几种方法"><a href="#JavaScript中声明函数的几种方法" class="headerlink" title="JavaScript中声明函数的几种方法"></a>JavaScript中声明函数的几种方法</h4><p><a href="http://javascript.ruanyifeng.com/grammar/function.html" target="_blank" rel="noopener">JavaScript标准参考教程</a></p>
+<p>JavaScript 语言将函数看作一种值，与其它值（数值、字符串、布尔值等等）地位相同。凡是可以使用值的地方，就能使用函数。比如，可以把函数赋值给变量和对象的属性，也可以当作参数传入其他函数，或者作为函数的结果返回。函数只是一个可以执行的值，此外并无特殊之处。</p>
+<ol>
+<li><code>function()</code>命令</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">print</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>function</code>命令声明的代码区块就是一个函数，<code>function</code>命令后面是函数名。以后使用<code>print()</code>这种形式，就可以调用相应的代码，这种叫做函数的声明。<br></p>
+<ol start="2">
+<li>函数表达式</li>
+</ol>
+<p>采用变量赋值的写法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var print = function(s) &#123;</span><br><span class="line">	console.log(s);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这种写法将一个匿名函数赋值给变量，这是，这个匿名函数又称为函数表达式。采用函数表达式声明函数时，function命令后面不带有函数名，如果加上函数名，该函数名只在函数体内部有效，在函数体外部无效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var print = function x() &#123;</span><br><span class="line">	console.log(typeod x);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">x;</span><br><span class="line">// ReferenceError: x is not defined</span><br><span class="line"></span><br><span class="line">print();</span><br><span class="line">// function</span><br></pre></td></tr></table></figure>
+<p>在上面的到面的函数表达式中，加上了函数名x，这个函数名只有在函数体内部中可以使用，知道函数表达式本身，其他地方都不可用。这种写法有两种用处，第一，可以在函数体内部调用自身，第二，可以方便debug。debug工具显示函数调用栈时，将显示函数名，而不再显示这里是一个匿名函数。<br></p>
+<ol start="3">
+<li>Function构造函数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var add = new Function(</span><br><span class="line">	&apos;x&apos;,</span><br><span class="line">	&apos;y&apos;,</span><br><span class="line">	&apos;return x + y&apos;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">// 等同于</span><br><span class="line">function add(x, y) &#123;</span><br><span class="line">	return x + y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码中，Function构造函数接受三个参数，除了最后一个参数时add函数的“函数体”，其他参数都是函数的参数。</p>
+<p>可以传递任意数量的参数给Function构造函数，只有最后一个参数会被当作函数体，如果只有一个参数，该参数就是函数体。</p>
+<h4 id="节点："><a href="#节点：" class="headerlink" title="节点："></a>节点：</h4><ol>
+<li>元素节点：nodeType属性值是1；</li>
+<li>文本节点：nodeType属性值是3；</li>
+<li>属性节点：nodeType属性值是2，属性节点总是被包含在元素节点中。</li>
+</ol>
+<h4 id="DOM-Core几个关键函数："><a href="#DOM-Core几个关键函数：" class="headerlink" title="DOM Core几个关键函数："></a>DOM Core几个关键函数：</h4><ul>
+<li><code>getElementById()</code></li>
+<li><code>getElementsByTagName()</code></li>
+<li><code>getAttribute()</code></li>
+<li><code>setAttribute()</code></li>
+</ul>
+<h4 id="包含在-lt-p-gt-中的子节点："><a href="#包含在-lt-p-gt-中的子节点：" class="headerlink" title="包含在&lt;p&gt;中的子节点："></a>包含在&lt;p&gt;中的子节点：</h4><p>包含在&lt;p&gt;元素里的文本是另一种节点，它在DOM里是&lt;p&gt;元素的第一个子节点。如果想获得&lt;p&gt;元素的文本内容，必须检索它的第一个子节点的nodeValue属性值。</p>
+<p>e.g. <code>description.childNodes[0].nodeValue</code></p>
+<h4 id="JavaScript几个编程原则："><a href="#JavaScript几个编程原则：" class="headerlink" title="JavaScript几个编程原则："></a>JavaScript几个编程原则：</h4><ol>
+<li>预留后路：确保网页在没有JaveScript的情况下也能正常工作；</li>
+<li>分离JaveScript：把网页的结构和内容与JaveScript脚本的动作行为分开；</li>
+<li>向后兼容性：确保老版本的浏览器不会因为你的JaveScript而死机。</li>
+</ol>
+<h4 id="动态创建HTML内容-DOM提供的方法"><a href="#动态创建HTML内容-DOM提供的方法" class="headerlink" title="动态创建HTML内容:DOM提供的方法"></a>动态创建HTML内容:DOM提供的方法</h4><ol>
+<li><code>createElement()</code>：创建元素节点</li>
+<li><code>appendChild()</code>：使新节点称为已有节点的子节点</li>
+<li><code>createTextNode()</code>：创建文本节点</li>
+<li><code>insertBefore()</code>：把一个新元素插入到现有元素前面，两个元素有相同父元素</li>
+</ol>
+<h2 id="二、什么是MVVM设计模式"><a href="#二、什么是MVVM设计模式" class="headerlink" title="二、什么是MVVM设计模式"></a>二、什么是MVVM设计模式</h2><p><a href="http://blog.leichunfeng.com/blog/2016/02/27/mvvm-with-reactivecocoa/" target="_blank" rel="noopener">MVVM With ReactiveCocoa-雷纯锋的技术博客</a></p>
+<p><a href="https://blog.devtang.com/2015/11/02/mvc-and-mvvm/" target="_blank" rel="noopener">被误解的 MVC 和被神化的 MVVM-唐巧的博客</a></p>
+<p>MVVM:Model-View-ViewModel</p>
+<p>在 iOS 开发中实践MVVM，通常会把大量原来放在 ViewController 里的视图逻辑和数据逻辑移到 ViewModel 里，从而有效的减轻了 ViewController 的负担。MVVM 通常还会和一个强大的绑定机制一同工作，一旦 ViewModel 所对应的 Model 发生变化时，ViewModel 的属性也会发生变化，而相对应的 View 也随即产生变化。</p>
+<p>除了 view 、viewModel 和 model 之外，MVVM 中还有一个非常重要的隐含组件 binder：</p>
+<ul>
+<li>view ：由 MVC 中的 view 和 controller 组成，负责 UI 的展示，绑定 viewModel 中的属性，触发 viewModel 中的命令；</li>
+<li>viewModel ：从 MVC 的 controller 中抽取出来的展示逻辑，负责从 model 中获取 view 所需的数据，转换成 view 可以展示的数据，并暴露公开的属性和命令供 view 进行绑定；</li>
+<li>model ：与 MVC 中的 model 一致，包括数据模型、访问数据库的操作和网络请求等；</li>
+<li>binder ：在 MVVM 中，声明式的数据和命令绑定是一个隐含的约定，它可以让开发者非常方便地实现 view 和 viewModel 的同步，避免编写大量繁杂的样板化代码。</li>
+</ul>
+<h2 id="三、Vue和Node"><a href="#三、Vue和Node" class="headerlink" title="三、Vue和Node"></a>三、Vue和Node</h2><h4 id="What-is-Node-js"><a href="#What-is-Node-js" class="headerlink" title="What is Node.js?"></a>What is Node.js?</h4><p><a href="http://nodejs.cn/api/" target="_blank" rel="noopener">Node.js v10.8.0 文档</a><br></p>
+<blockquote>
+<p>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。<br><br>Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效。<br><br>Node.js 的包管理器 npm，是全球最大的开源库生态系统。</p>
+</blockquote>
+<h4 id="What-is-Vue"><a href="#What-is-Vue" class="headerlink" title="What is Vue?"></a>What is Vue?</h4><p><a href="https://cn.vuejs.org/" target="_blank" rel="noopener">Vue.js</a></p>
+<blockquote>
+<p>Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动。</p>
+</blockquote>
+<h4 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h4><p><a href="https://www.jianshu.com/p/918314e9f757" target="_blank" rel="noopener">在Mac环境下搭建Vue.js开发环境</a></p>
+<ol>
+<li><p>安装homebrew<br><br><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code><br><br><br>注：在Max OS X 10.11（El Capitan)版本中，homebrew在安装软件时可能会碰到/usr/local目录不可写的权限问题。可以使用下面的命令修复：<br><br><br><code>sudo chown -R</code>whoami<code>/usr/local</code><br><br><br>在终端输入brew -v,如果能查询到brew的版本信息，那么恭喜你安装成功。可以继续往下撸了<br></p>
+</li>
+<li><p>使用homebrew安装node.js<br><br><code>brew install node</code><br><br><br>同上，如果在终端输入node -v 能够查询到版本信息，就说明安装成功。<br></p>
+</li>
+<li><p>获取nodejs模块安装目录访问权限<br><br><code>sudo chmod -R 777 /usr/local/lib/node_modules/</code><br></p>
+</li>
+<li><p>安装全局的webpack<br><br><code>npm install webpack -g</code><br></p>
+</li>
+<li><p>安装vue脚手架vue-cli<br><br><code>npm install vue-cli -g</code><br></p>
+</li>
+<li><p>找一个合适的位置存放你的vue工程<br><br><code>cd 目录路径</code><br><br><br>注：目录路径直接把创建好的文件夹拖拽到终端里就可以<br></p>
+</li>
+<li><p>创建项目<br><br><code>vue init webpack-simple 项目名</code><br><br><br>如：<code>vue init webpack-simple vue2demo</code><br><br><br>注：项目名不可以使用中文，也不能使用大写字母<br><br><br>创建项目之后会出现一系列的参数配置，根据自己的情况 进行选择，因为最后2个的配置具体是啥意思我也没搞懂呢<br></p>
+</li>
+<li><p>将根目录切换到项目<br><br><code>cd 项目名</code><br><br><br>如：<code>cd vue2demo</code></p>
+</li>
+<li><p>安装项目依赖<br><br><code>npm install</code><br></p>
+</li>
+<li><p>安装 vue 路由模块vue-router和网络请求模块vue-resource<br><br><code>npm install vue-router vue-resource --save</code><br></p>
+</li>
+<li><p>启动项目<br><br><code>npm run dev</code><br></p>
+</li>
+</ol>
+<h4 id="搭建Vue遇到的坑："><a href="#搭建Vue遇到的坑：" class="headerlink" title="搭建Vue遇到的坑："></a>搭建Vue遇到的坑：</h4><ol>
+<li>localhost:8080无法打开<br>两个原因：一个是Chrome浏览器的vue插件中访问本地文件开关未打开，二是设置了代理</li>
+<li>使用vscode的debugger for Chrome插件时不能连接到Chrome浏览器：<br>很玄幻，将浏览器进程杀掉或者是关机重启之后成功了</li>
+</ol>
+<p><a href="http://www.runoob.com/vue2/vue-tutorial.html" target="_blank" rel="noopener">Vue.js 教程-菜鸟教程</a><br>菜鸟教程里面有基本的vue方法，可以简单借鉴</p>
+<h2 id="四、Weex"><a href="#四、Weex" class="headerlink" title="四、Weex"></a>四、Weex</h2><h4 id="What-is-Weex"><a href="#What-is-Weex" class="headerlink" title="What is Weex?"></a>What is Weex?</h4><blockquote>
+<p>Weex 是一个使用 Web 开发体验来开发高性能原生应用的框架。<br><br><br>Weex 致力于使开发者能基于当代先进的 Web 开发技术，使用同一套代码来构建 Android、iOS 和 Web 应用。具体来讲，在集成了 WeexSDK 之后，你可以使用 JavaScript 和现代流行的前端框架来开发移动应用。<br><br>Weex 的结构是解耦的，渲染引擎与语法层是分开的，也不依赖任何特定的前端框架，目前主要支持 Vue.js 和 Rax 这两个前端框架。<br><br>Weex 的另一个主要目标是跟进当代先进的 Web 开发和原生开发的技术，使生产力和性能共存。在开发 Weex 页面就像开发普通网页一样；在渲染 Weex 页面时和渲染原生页面一样。</p>
+</blockquote>
+<p><a href="https://segmentfault.com/a/1190000011027225" target="_blank" rel="noopener">网易严选App感受Weex开发（已完结）</a></p>
+<p><a href="https://github.com/CarGuo/GSYGithubAppWeex" target="_blank" rel="noopener">Weex Demo</a></p>
+<p><a href="https://www.gaoshilei.com/2017/05/26/weex-1/" target="_blank" rel="noopener">Weex从入门到超神</a></p>
+<h4 id="几个关键的命令行"><a href="#几个关键的命令行" class="headerlink" title="几个关键的命令行"></a>几个关键的命令行</h4><ol>
+<li><code>npm run dev</code> 进行打包（需要在项目文件夹中）</li>
+<li><code>npm run serve</code> 运行服务</li>
+<li><code>weexpack run ios</code> 打包iOS项目并模拟器运行</li>
+<li><code>weexpack build ios</code> 构建ipa包</li>
+</ol>
+<h4 id="几点小规范"><a href="#几点小规范" class="headerlink" title="几点小规范"></a>几点小规范</h4><ol>
+<li>方法和css{}前要有空格；</li>
+<li>行末不要有多余的空格；</li>
+<li>方法行末位不需要分号；</li>
+</ol>
+<h4 id="weex常规组件渲染流程"><a href="#weex常规组件渲染流程" class="headerlink" title="weex常规组件渲染流程"></a>weex常规组件渲染流程</h4><p><a href="https://github.com/Hanks10100/weex-native-directive/blob/master/Design.md" target="_blank" rel="noopener">长列表的复用方案</a></p>
+<p>在 Weex 的架构中，可以简略的分成三层：【DSL】-&gt;【JS Framework】-&gt;【原生渲染引擎】。其中 DSL (Domain Specific Language) 指的是 Weex 里支持的上层前端框架，即 Vue 和 Rax。原生渲染引擎就是在 Weex 支持的平台上（Android 或 iOS）绘制原生 UI 的引擎。JS Framework 是桥接并适配 DSL 和原生渲染引擎的一层。</p>
+<p>常规组件的渲染过程可以分为如下这几个步骤：</p>
+<ol>
+<li>创建前端组件</li>
+<li>构建 Virtual DOM</li>
+<li>生成“真实” DOM</li>
+<li>发送渲染指令</li>
+<li>绘制原生 UI</li>
+</ol>
+<p><img src="/images/常规组件渲染过程.png" alt="常规组件渲染过程"></p>
+<h4 id="Weex原理"><a href="#Weex原理" class="headerlink" title="Weex原理"></a>Weex原理</h4><p><a href="https://github.com/halfrost/Halfrost-Field/blob/master/contents/iOS/Weex/Weex_ingenuity_JS_framework.md" target="_blank" rel="noopener">Weex 中别具匠心的 JS Framework</a></p>
+<p>这一篇解读比较详细，暂时还理解不了，存在以后看…</p>
+<h4 id="踩坑记录"><a href="#踩坑记录" class="headerlink" title="踩坑记录"></a>踩坑记录</h4><p>挖坑1分钟，踩坑200小时…</p>
+<p>1、无法build iOS包，无论是用哪种命令行方式都构建失败，并且日志提示的内容完全不明确。日志如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">18 verbose node v8.12.0</span><br><span class="line">19 verbose npm  v6.4.1</span><br><span class="line">20 error code ELIFECYCLE</span><br><span class="line">21 error errno 2</span><br><span class="line">22 error first-app@1.0.0 build: `webpack --env.NODE_ENV=common`</span><br><span class="line">22 error Exit status 2</span><br><span class="line">23 error Failed at the first-app@1.0.0 build script.</span><br><span class="line">23 error This is probably not a problem with npm. There is likely additional logging output above.</span><br><span class="line">24 verbose exit [ 2, true ]</span><br></pre></td></tr></table></figure>
+<p>构建错误大概是在升级电脑系统之后产生的，因此重新添加iOS platform或者升级可解决</p>
+<p><code>weex platform update ios</code></p>
+<p>或者</p>
+<p><code>week platform add ios</code></p>
+<p>2、Xcode真机运行的时候，build成功，但是运行不起来，报错：</p>
+<p><code>App installation failed. No code signature found.</code></p>
+<p>看起来是证书的问题…模拟器跑起来没有问题，但是真机调试就会运行不起来，测试了各种方法无果，所以放弃了…以后找到解决办法再来填坑。</p>
+<p>3、发现网页版的调试和手机上的调试显示出来的东西是不一样的，不知道是不是weex的bug，所以还是要实际上用真机来做一下测试。</p>
+<p>debug模式下发现输出log</p>
+<p><code>No component config for name:router-view, use default config</code></p>
+<p>4、作用域问题</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在function里this的作用域是当前的函数</span></span><br><span class="line"><span class="built_in">module</span>.openWindow(obj, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;&#125;);</span><br><span class="line"><span class="comment">//在箭头函数里，this的作用域是全局的</span></span><br><span class="line"><span class="built_in">module</span>.openWindow(obj, (e) =&gt; &#123;&#125;);</span><br></pre></td></tr></table></figure>
+<p>在回调的内部函数内调用外部函数或者变量，最好把回调写为箭头函数，在箭头函数内的作用域是全局的，可以用this直接调用外部的函数或者属性。</p>
+<p>使用计算属性时注意<br>computed 计算属性下调用data里的值或者methods里的方法都需要用this，这里也是一个作用域问题。</p>
+<p>5、 在学习的过程中发现weex和mvvm设计模式并没有什么关系…所以这个repo大概是用来搞笑的QAQ</p>
+<p>6、 list里面的cell宽度和list宽度一致，并且其高度是自适应的，制定margin也不起作用。</p>
+<p>7、 使用内置模块navigator实现导航/使用vue-router实现导航</p>
+<p>发现构建之后不能生成跳转页面的js文件，可能是在bottombar的跳转中已使用router导致文件编译方式不一样了？ 最终选择使用vue-router的方式实现，但是又遇到navigation bar不显示的情况。</p>
+<p><a href="https://segmentfault.com/a/1190000012629351" target="_blank" rel="noopener">使用navigator内置模块实现导航</a></p>
+<p><a href="https://www.jianshu.com/p/3a15706bd430" target="_blank" rel="noopener">Weex NavigationBar 设置</a></p>
+<p>看了很多文档，发现自己执行打包命令之后，在dist文件夹中并没有生成.vue文件所对应的.js文件，应该是我的config文件配置的不对。后来修改了config文件中的<code>WeexEntry</code>，再次执行打包，生成了对应的.js文件，代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> weexEntry = &#123;</span><br><span class="line">  <span class="string">'index'</span>: helper.root(<span class="string">'entry.js'</span>),</span><br><span class="line">  <span class="string">'CellPage'</span>: helper.root(<span class="string">'views/HomeView/CellPage.vue'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>问题在于：每一次想要生成对应的.js文件都要手动添加对应的<code>WeexEntry</code>吗？应该对应的配置还是不太对，继续研究中…</p>
+<p>最终放弃使用<code>navigator.push()</code>方法进行跳转了…采用router+自定义导航栏实现。</p>
+<p>8、打包相关需要理解的地方：<br><a href="http://webpack.css88.com/" target="_blank" rel="noopener">webpack中文文档</a></p>
+<p>9、 这个踩坑教程还挺详细的，也贴在这里…</p>
+<p><a href="https://juejin.im/entry/599d2a06518825243d1efbad" target="_blank" rel="noopener">WEEX从入门到放肆</a></p>
+<p><a href="https://www.jianshu.com/p/43adc80ab60b" target="_blank" rel="noopener">iOS 开发者的 Weex 伪最佳实践指北</a></p>
+<p>10、 使用<code>weexpack build ios</code>命令打包iOS总是会报错，报错信息也很诡异</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Command failed: xcodebuild -workspace WeexDemo.xcworkspace -scheme WeexDemo -configuration PROD -sdk iphoneos -derivedDataPath build clean build</span><br><span class="line">2018-10-16 20:45:50.314 xcodebuild[2146:684549] [MT] PluginLoading: Required plug-in compatibility UUID ************* for plug-in at path &apos;~/Library/Application Support/Developer/Shared/Xcode/Plug-ins/FuzzyAutocomplete.xcplugin&apos; not present in DVTPlugInCompatibilityUUIDs</span><br><span class="line">2018-10-16 20:45:50.314 xcodebuild[2146:684549] [MT] PluginLoading: Required plug-in compatibility UUID ************* for plug-in at path &apos;~/Library/Application Support/Developer/Shared/Xcode/Plug-ins/Alcatraz.xcplugin&apos; not present in DVTPlugInCompatibilityUUIDs</span><br><span class="line">** BUILD FAILED **</span><br></pre></td></tr></table></figure>
+<p>看不懂这个报错信息的问题在哪，感觉像是缺少插件之类的，折腾了两天最后该用<code>npm run ios</code>的方式跑iOS了并且可以跑起来…</p>
+<p>11、 很多组件可以使用官方的weex-ui组件库<br><a href="https://alibaba.github.io/weex-ui/#/cn/weex-ui-report" target="_blank" rel="noopener">Weex UI</a></p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
