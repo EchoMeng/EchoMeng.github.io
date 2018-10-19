@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Echo Meng">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Core Animation"/>
+  <meta property="og:description" content="Can&#39;t help but code." />
+  <meta property="og:site_name" content="Echo Meng&#39;s Blog"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://www.echomeng.cn"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Echo Meng&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Echo Meng's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Core Animation</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/EchoMeng/">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:mengxiangxxa@163.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Echo Meng</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-10-19</span>
+            <span class="time">21:43:12</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/技术/">技术</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/iOS/">#iOS</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>iOS视图相关的东西总要系统的看一下Core Animation才能安排的明明白白，这一篇是学习《iOS Core Animation: Advanced Techniques》的笔记，主要是一些之前遗漏或者觉得重要的点的摘录。</p>
+<a id="more"></a>
+<p>(10.30要发布新的iPad的了，好想买一个能用笔的iPad可是穷QAQ)</p>
+<h4 id="drawRect-方法"><a href="#drawRect-方法" class="headerlink" title="drawRect:方法"></a>drawRect:方法</h4><p><code>- drawRect:</code>方法没有默认的实现，对于<code>UIView</code>并不是必须有寄宿图，当检测到<code>drawRect</code>方法被调用之后，才会为视图分配寄宿图。如果没有自定义绘制的任务就不要在子类中写一个空的<code>drawRect</code>方法，会造成CPU和内存资源的浪费。</p>
+<h4 id="frame和bounds宽高一定一致吗？"><a href="#frame和bounds宽高一定一致吗？" class="headerlink" title="frame和bounds宽高一定一致吗？"></a>frame和bounds宽高一定一致吗？</h4><p>以前被问到过的一个面试题，这里看到了答案。</p>
+<p>当对图层做变换的时候，比如旋转或者缩放，frame实际上代表了覆盖在涂层旋转之后的整个轴对齐的矩形区域，也就是说frame和bounds的宽高可能不再一致。</p>
+<p><img src="/images/CoreAnimation/旋转之后frame.png" alt="旋转之后的frame属性"></p>
+<h4 id="Z坐标轴"><a href="#Z坐标轴" class="headerlink" title="Z坐标轴"></a>Z坐标轴</h4><p>UIView使用的是严格的二维坐标系，CALayer是存在于三维空间的，有zPosition和anchorPointZ两个属性，可以通过调整zPosition调整视图的显示顺序。</p>
+<h4 id="Hit-Testing"><a href="#Hit-Testing" class="headerlink" title="Hit Testing"></a><code>Hit Testing</code></h4><p>CALayer不处理响应链事件，但是<code>- containsPoints:</code> <code>- hitTest:</code> 两个方法是属于layer的。</p>
+<p>当调用<code>- hitTest:</code> 方法时，测算的顺序严格依赖于图层树当中的图层顺序，虽然zPosition可以明显改变屏幕上图层的顺序，但是不能改变时间传递的顺序。</p>
+<h4 id="阴影"><a href="#阴影" class="headerlink" title="阴影"></a>阴影</h4><p>图层的阴影继承自内容的外形，这和图层的边框不同，阴影不是根据边界和角半径确定的，Core Animation会将寄宿图（包括子视图）考虑在内，通过这些来完美搭配图层形状从而创建一个阴影。因此实时计算阴影非常消耗资源，尤其是当图层有多个子视图并且图层有包含透明效果的寄宿图的时候。</p>
+<p>可以通过<code>shadowPath</code>指定阴影形状并提高性能。</p>
+<h4 id="拉伸过滤"><a href="#拉伸过滤" class="headerlink" title="拉伸过滤"></a>拉伸过滤</h4><p>重绘图片进行拉伸时，<code>CALayer</code>提供了三种拉伸过滤方法：</p>
+<ul>
+<li>kCAFilterLinear 双线性滤波算法</li>
+<li>kCAFilterNearest 三线型滤波算法</li>
+<li>kCAFilterTrilinear 最近滤波</li>
+</ul>
+<p>最近滤波方法图片质量更差，计算更快。</p>
+<h4 id="组透明"><a href="#组透明" class="headerlink" title="组透明"></a>组透明</h4><p>直接设置视图的<code>alpha</code>值改变透明度，空间的子视图会有透明度的叠加效果，可以通过设置<code>CALayer</code>的<code>shouldRasterize</code>属性实现组透明效果，在应用透明度之前，图层及子图层都会被整合成为一个整体的图片，这样就没有透明度混合的问题了。</p>
+<p><code>shouldRasterize</code>和<code>UIViewGroupOpacity</code>同时使用时，可能会出现性能问题，之后详解。</p>
+<h4 id="CAShapeLayer"><a href="#CAShapeLayer" class="headerlink" title="CAShapeLayer"></a>CAShapeLayer</h4><p><code>CAShapeLayer</code>是一个通过矢量图形而不是bitmap来绘制的图层子类。指定颜色、线宽灯属性，用<code>CGPath</code>来定义想要绘制的图形，最后<code>CAShapeLayer</code>就自动渲染出来了。</p>
+<p>也可以通过Core Graphics直接向原始的<code>CALayer</code>的内容中绘制一个路径，相比之下，使用<code>CAShapeLayer</code>有以下优点：</p>
+<ul>
+<li>渲染快速。<code>CAShapeLayer</code>使用了硬件加速，绘制同一个图形会比使用Core Graphics快很多。</li>
+<li>高效使用内存。一个<code>CAShapeLayer</code>不需要像普通<code>CALayer</code>一样创建一个寄宿图形，所以无论有多大，都不会占用太多的内存。</li>
+<li>不会被图层边界剪裁掉。一个<code>CAShapeLayer</code>可以在边界之外绘制，图层路径不会像在使用Core Graphics的普通<code>CALayer</code>一样被剪裁掉。</li>
+<li>不会出现像素化。当你给<code>CAShapeLayer</code>做3D变换时，不像一个有寄宿图的普通图层一样变得像素化。</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
