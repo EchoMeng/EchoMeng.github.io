@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-10-19</span>
-            <span class="time">21:45:28</span>
+            <span class="time">20:18:08</span>
           </span>
           
           <!--  Categories  -->
@@ -151,9 +151,31 @@
 <li>不会被图层边界剪裁掉。一个<code>CAShapeLayer</code>可以在边界之外绘制，图层路径不会像在使用Core Graphics的普通<code>CALayer</code>一样被剪裁掉。</li>
 <li>不会出现像素化。当你给<code>CAShapeLayer</code>做3D变换时，不像一个有寄宿图的普通图层一样变得像素化。</li>
 </ul>
-<hr>
-<p>明天继续</p>
-<hr>
+<h4 id="CATextLayer"><a href="#CATextLayer" class="headerlink" title="CATextLayer"></a>CATextLayer</h4><p>CATextLayer是CALayer的子类，以图层的形式包含了UILabel的几乎所有绘制特性，渲染速度要比UILabel快得多。</p>
+<p>Tips:直接用CATextLayer进行文字绘制发现文本有一些像素化了，这是因为没有以Retina的方式进行渲染，contentScale属性用来决定图层内容应该以怎样的分辨率进行选谈，contentScale不关心屏幕的拉伸因素总是默认的乘以1.0，如果想要用Retina的方式显示文字，需要设置contentScale跟屏幕的scale一致。</p>
+<p>缺点：CALayer并不支持自动缩放和自动布局，子视图并不能主动跟踪视图边界大小，每次视图大小被更改，就必须手动更新子视图的边界。</p>
+<p>CATextLayer比UILabel有更好的性能表现，同时还有额外的布局选项，但是更繁琐。一种思路是创建一个UILabel的子类，然后添加一个字图层CATextLayer并重写显示文本的方法，但是仍然会有UILabel的<code>-drawRect:</code>方法创建的空寄宿图，并且CALayer不会自动布局。对于每一个UIView都寄宿在一个CALayer的实例上，这个图层是由视图自动创建和管理的，一旦被创建就无法替代这个图层，但是我们可以重写<code>+layerClass</code>方法，然后用它的返回类型创建寄宿主图层。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;LayerLabel.h&quot;</span><br><span class="line"></span><br><span class="line">@implementation LayerLabel</span><br><span class="line"></span><br><span class="line">+ (Class)layerClass &#123;</span><br><span class="line">    return [CATextLayer class];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (CATextLayer *)textLayer &#123;</span><br><span class="line">    return (CATextLayer *)self.layer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)setUp &#123;</span><br><span class="line">    self.text = self.text;</span><br><span class="line">    self.textColor = self.textColor;</span><br><span class="line">    self.font = self.font;</span><br><span class="line">    </span><br><span class="line">    [self textLayer].alignmentMode = kCAAlignmentJustified;</span><br><span class="line">    [self textLayer].wrapped = YES;</span><br><span class="line">    [self.layer display];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (id)initWithFrame:(CGRect)frame &#123;</span><br><span class="line">    if (self = [super initWithFrame:frame]) &#123;</span><br><span class="line">        [self setUp];</span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)awakeFromNib &#123;</span><br><span class="line">    [super awakeFromNib];</span><br><span class="line">    [self setUp];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)setText:(NSString *)text &#123;</span><br><span class="line">    super.text = text;</span><br><span class="line">    [self textLayer].string = text;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)setTextColor:(UIColor *)textColor &#123;</span><br><span class="line">    super.textColor = textColor;</span><br><span class="line">    [self textLayer].foregroundColor = textColor.CGColor;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)setFont:(UIFont *)font &#123;</span><br><span class="line">    super.font = font;</span><br><span class="line">    CFStringRef fontName = (__bridge CFStringRef)font.fontName;</span><br><span class="line">    CGFontRef fontRef = CGFontCreateWithFontName(fontName);</span><br><span class="line">    [self textLayer].font = fontRef;</span><br><span class="line">    [self textLayer].fontSize = font.pointSize;</span><br><span class="line">    </span><br><span class="line">    CGFontRelease(fontRef);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h4 id="CATransformLayer"><a href="#CATransformLayer" class="headerlink" title="CATransformLayer"></a>CATransformLayer</h4><p>可以用来构造复杂的3D事物。不同于普通的CALayer,它不能展示自己的内容，只有当存在了一个能作用于字图层的变换时才真正存在。CATransformLayer并不平面化他的子图层，所以能够构造一个层级的3D结构。</p>
+<h4 id="CAGradientLayer"><a href="#CAGradientLayer" class="headerlink" title="CAGradientLayer"></a>CAGradientLayer</h4><p>用来生成两种或者更过颜色平滑渐变的。使用Core Graphic复制一个CAGradientLayer并将内容绘制在一个普通图层的寄宿图也可以实现，但是CAGradientLayer的优点在于绘制使用了硬件加速。</p>
+<h4 id="CAReplicatorLayer"><a href="#CAReplicatorLayer" class="headerlink" title="CAReplicatorLayer"></a>CAReplicatorLayer</h4><p>用来搞笑生成许多相似的图层，它会绘制一个或者多个图层的子图层，并在每个复制体上应用不同的变换。</p>
+<h4 id="CAScrollLayer"><a href="#CAScrollLayer" class="headerlink" title="CAScrollLayer"></a>CAScrollLayer</h4><p>CAScrollLayer有一个<code>scrollToPoint:</code><br>方法，自动适应bounds的原点以便图层内容出现在滑动的地方。但是Core Animation是不处理用户输入的，所以CAScrollLayer并不负责将出没时间转换为滑动事件，既不渲染滚动条，也不实现任何iOS指定行为例如滑动反弹。</p>
+<h4 id="CATiledLayer"><a href="#CATiledLayer" class="headerlink" title="CATiledLayer"></a>CATiledLayer</h4><p>iOS载入很大的图片由于内存限制载入可能会很慢，在主线程点用还可能会组赛用户界面；内高效绘制在iOS上的图片也有一个大小限制，所有显示在屏幕上的图片都会被转化为OpenGL纹理，同时OpenGL也有一个最大的纹理尺寸，如果想要在单个纹理中显示一个比这个限制要更大的图片，即使这个图片已经存在在内存中了，也可能导致性能问题，因为Core Animation处理图片使用的是CPU而不是更快的GPU。</p>
+<p>CATiledLayer提供了一个解决方案：将大图分解成小片然后将它们单独按需求载入。</p>
+<h4 id="CAEmitterLayer"><a href="#CAEmitterLayer" class="headerlink" title="CAEmitterLayer"></a>CAEmitterLayer</h4><p>CAEmitterLayer是一个高性能粒子引擎，被用来创建实时粒子动画，例如火、烟雾等。</p>
+<h4 id="CAEAGLLayer"><a href="#CAEAGLLayer" class="headerlink" title="CAEAGLLayer"></a>CAEAGLLayer</h4><p>用来显示任意的OpenGL图形。</p>
+<h4 id="AVPlayerLayer"><a href="#AVPlayerLayer" class="headerlink" title="AVPlayerLayer"></a>AVPlayerLayer</h4><p>视频播放图层。</p>
+<h4 id="隐式动画"><a href="#隐式动画" class="headerlink" title="隐式动画"></a>隐式动画</h4><p>之所以叫隐式动画是因为我们并没有制定任何动画的类型，仅仅改变了一个属性，然后Core Animation来决定如何并且何时去做动画。</p>
+<p>动画执行的时间取决于当前事务的设置，一旦事务提交就开始用一个动画过渡到新值；动画类型取决于图层的行为。</p>
+<p>事务通过CATransaction来管理，可以用<code>+begin</code>和<code>+commit</code>分别来入栈和出栈。</p>
+<p>Core Animation在每个runloop周期中自动开始一次新的事务，即使不显式的调用<code>[CATransaction begin]</code>开始一次事务，任何一次runloop循环中属性的改变都会被集中起来，然后做一次0.25s的动画（默认0.25s）。</p>
+<p>CALayer属性被修改后进行隐式动画的实现过程：</p>
+<ul>
+<li>图层首先检测它是否有委托，并且是否实现CALayerDelegate协议指定的<code>-actionForLayer:forKey:</code>方法。如果有，直接调用并返回结果。</li>
+<li>如果没有委托，或者没有实现<code>-actionForLayer:forKey:</code>方法，图层接着检查包含属性名称对应行为映射的actions字典。</li>
+<li>如果actions字典没有包含对应的属性，那么图层接着在它的style之巅接着搜索属性名。</li>
+<li>最后，如果在style里面也找不到对应的行为，那么图层会直接调用定义了没哥属性的标准行为的<code>-defaultActionKey:</code>方法。</li>
+</ul>
 
         </div>
       </div>
