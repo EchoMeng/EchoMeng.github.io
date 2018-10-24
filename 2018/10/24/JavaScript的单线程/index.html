@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="Echo Meng">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="Hello World!"/>
+  <meta property="og:title" content="JacaScript的单线程"/>
   <meta property="og:description" content="Can&#39;t help but code." />
   <meta property="og:site_name" content="Echo Meng&#39;s Blog"/>
   <meta property="og:type" content="article" />
@@ -43,7 +43,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-title with-background-image">
-          <p class="title">Hello World!</p>
+          <p class="title">JacaScript的单线程</p>
           <p class="subtitle"></p>
         </div>
         <div class="site-menu with-background-image">
@@ -99,14 +99,14 @@
           
           <!-- Date -->
           <span class="date-time info">On
-            <span class="date">2018-10-18</span>
+            <span class="date">2018-10-24</span>
             <span class="time">19:16:11</span>
           </span>
           
           <!--  Categories  -->
             <span class="categories info">Under 
 
-<a href="/categories/随笔/">随笔</a>
+<a href="/categories/技术/">技术</a>
 </span>
           
         </div>
@@ -115,20 +115,37 @@
           <div class="post-tags text-muted">
             Tags: 
 
-<a class="tag" href="/tags/心情/">#心情</a>
+<a class="tag" href="/tags/前端/">#前端</a>
 
 
           </div>
         
         <!-- Post Main Content -->
         <div class="post-content">
-          <p>就从这里开始吧！<br><a id="more"></a></p>
-<p>参照<a href="https://zhuanlan.zhihu.com/p/26625249?utm_source=wechat_session&amp;utm_medium=social" target="_blank" rel="noopener">GitHub+Hexo 搭建个人网站详细教程</a>搭建了这个个人网站，用来自己跟自己对话。</p>
-<p>非技术博客，记录自己的学习过程以及吐槽，不知道自己能坚持几天。</p>
-<p>Mark网站：<br><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a></p>
-<p>Mark几个常用命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;我的博客&quot; == hexo new &quot;我的博客&quot; #新建文章</span><br><span class="line">hexo g == hexo generate #生成</span><br><span class="line">hexo s == hexo server #启动服务预览</span><br><span class="line">hexo d == hexo deploy #部署</span><br><span class="line"></span><br><span class="line">hexo server #Hexo会监视文件变动并自动更新，无须重启服务器</span><br><span class="line">hexo server -s #静态模式</span><br><span class="line">hexo server -p 5000 #更改端口</span><br><span class="line">hexo server -i 192.168.1.1 #自定义 IP</span><br><span class="line">hexo clean #清除缓存，若是网页正常情况下可以忽略这条命令</span><br></pre></td></tr></table></figure>
-<p>就这样！Enjoy Yourself! :D</p>
+          <p>深入理解一下JavaScript的单线程执行原理</p>
+<a id="more"></a>
+<p>本文主要参考： <a href="https://juejin.im/post/59e85eebf265da430d571f89" target="_blank" rel="noopener">这一次，彻底弄懂 JavaScript 执行机制</a></p>
+<p>JavaScript是单线程运行的语言，所有多线程编程都是用单线程模拟出来的。</p>
+<p>遇到需要进行多线程操作的场景，解决的方式是使用同步任务和异步任务：</p>
+<ul>
+<li>同步和异步任务分别进入不同的执行”场所”，同步的进入主线程，异步的进入Event Table并注册函数。</li>
+<li>当指定的事情完成时，Event Table会将这个函数移入Event Queue。</li>
+<li>主线程内的任务执行完毕为空，会去Event Queue读取对应的函数，进入主线程执行。</li>
+<li>上述过程会不断重复，也就是常说的Event Loop(事件循环)。</li>
+</ul>
+<p><code>setTimeOut</code>是异步延时执行，<code>setTimeout(fn,t)</code>的含义是，指定某个任务在主线程最早可得的空闲时间执行，<code>t</code>s后，只要主线程执行栈内的同步任务全部执行完成，栈为空就马上执行。</p>
+<p><code>setInterval</code>会每隔指定的时间将注册的函数置入Event Queue，如果前面的任务耗时太久，那么同样需要等待。</p>
+<p>除了广义的同步任务和异步任务，我们对任务有更精细的定义：</p>
+<p><code>macro-task</code>(宏任务)：包括整体代码script，<code>setTimeout</code>，<code>setInterval</code><br><code>micro-task</code>(微任务)：<code>Promise</code>，<code>process.nextTick</code></p>
+<p>不同类型的任务会进入对应的Event Queue，比如<code>setTimeout</code>和<code>setInterval</code>会进入相同的Event Queue。<br>事件循环的顺序，决定js代码的执行顺序。进入整体代码(宏任务)后，开始第一次循环。接着执行所有的微任务。然后再次从宏任务开始，找到其中一个任务队列执行完毕，再执行所有的微任务。</p>
+<hr>
+<ul>
+<li><p>javascript是一门单线程语言</p>
+</li>
+<li><p>Event Loop是javascript的执行机制</p>
+</li>
+</ul>
+<hr>
 
         </div>
       </div>
