@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-10-24</span>
-            <span class="time">20:14:19</span>
+            <span class="time">21:51:04</span>
           </span>
           
           <!--  Categories  -->
@@ -131,6 +131,26 @@
 <li>文档对象模型（DOM），提供访问和操作网页内容的方法和接口；</li>
 <li>浏览器对象模型（BOM），提供与浏览器交互的方法和接口。</li>
 </ol>
+<h4 id="在HTML中使用JavaScript"><a href="#在HTML中使用JavaScript" class="headerlink" title="在HTML中使用JavaScript"></a>在HTML中使用JavaScript</h4><ul>
+<li>带有<code>src</code>属性的<code>&lt;script&gt;</code>元素不应该在<code>&lt;script&gt;`</code>`标签之间包含额外的JavaScript代码，如果包含了嵌入的代码，则只会下载并执行外部脚本文件，嵌入的代码会被忽略。</li>
+<li>将所有的外部文件都放在页面的<code>&lt;head&gt;</code>元素中会导致：必须等到全部的JavaScript代码都被下载、解析和执行完成之后，才能开始呈现页面的内容，浏览器是遇到<code>&lt;body&gt;</code>标签之后才会开始呈现内容的。对于包含很多脚本文件的页面来说，会导致浏览器在呈现页面时出现明显的延迟。</li>
+<li><code>deger</code>只适用于外部脚本文件，用于表明脚本在执行时不会影响页面的构造，脚本会被延迟到整个页面都解析完毕后再执行，实际执行时间可能在<code>DOMContentLoaded</code>事件触发之前或之后。</li>
+<li><code>async</code>只适用于外部脚本文件，用于异步执行，标记为<code>async</code>的脚本并不保证按照指定脚本的先后顺序执行。异步脚本一定会在页面的<code>load</code>事件前执行，但是可能会在<code>DOMContentLoaded</code>事件触发之前或之后执行。</li>
+<li>提倡使用外部文件包含JavaScript代码，原因是可维护性、可缓存（重用文件浏览器可以只缓存一次）、适应未来。</li>
+</ul>
+<h4 id="JavaScript语法"><a href="#JavaScript语法" class="headerlink" title="JavaScript语法"></a>JavaScript语法</h4><ul>
+<li>ECMAScript 5引入了严格模式，为JavaScript定义了一种不同的解析和执行模型。需要在代码顶部添加：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"use scrict"</span></span><br></pre></td></tr></table></figure>
+<p>这行代码是一个编译指示。</p>
+<ul>
+<li><p>句尾分号可省略，但是不建议省略。</p>
+</li>
+<li><p>ECMAScript的变量是松散型的，可以用来保存任何类型的数据，每个变量仅仅是一个用于保存值的占位符而已。可以在修改变量值的过程中同时修改值的类型。</p>
+</li>
+<li><p>使用<code>var</code>定义的变量将会成为定义该变量的作用域中的局部变量，如果函数中使用<code>var</code>定义一个变量，那么变量在函数退出之后将被销毁。可以省略<code>var</code>操作符定义全局变量，但是不推荐在局部作用域中定义全局变量，会导致难以维护的问题，严格模式下会抛出错误。</p>
+</li>
+</ul>
 
         </div>
       </div>
