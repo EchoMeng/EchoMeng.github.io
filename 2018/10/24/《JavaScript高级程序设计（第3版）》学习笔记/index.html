@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-10-24</span>
-            <span class="time">21:51:04</span>
+            <span class="time">17:04:31</span>
           </span>
           
           <!--  Categories  -->
@@ -150,8 +150,46 @@
 </li>
 <li><p>使用<code>var</code>定义的变量将会成为定义该变量的作用域中的局部变量，如果函数中使用<code>var</code>定义一个变量，那么变量在函数退出之后将被销毁。可以省略<code>var</code>操作符定义全局变量，但是不推荐在局部作用域中定义全局变量，会导致难以维护的问题，严格模式下会抛出错误。</p>
 </li>
+<li><p>ECMAScript有物种简单数据类型：Undefined, Null, Boolean, Number, String，一种复杂数据类型：Object，Object本质是由一组无序的名值对组成的。不支持任何创建自定义类型的机制。</p>
+</li>
+<li><p>ECMAScript中所有类型的值都等转换为Boolean值，可以调用<code>Boolean()</code>，结果为：</p>
+</li>
 </ul>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-------------------------------------------------------</span><br><span class="line">数据类型		<span class="literal">true</span>			<span class="literal">false</span></span><br><span class="line">-------------------------------------------------------</span><br><span class="line">Boolen		<span class="literal">true</span>			<span class="literal">false</span></span><br><span class="line">-------------------------------------------------------</span><br><span class="line"><span class="built_in">String</span>		任何非空字符串		<span class="string">""</span>（空字符串）</span><br><span class="line">-------------------------------------------------------</span><br><span class="line"><span class="built_in">Number</span>		任何非零数字值（包括无穷大）	<span class="number">0</span>和<span class="literal">NaN</span></span><br><span class="line">-------------------------------------------------------</span><br><span class="line"><span class="built_in">Object</span>		任何对象			<span class="literal">null</span></span><br><span class="line">-------------------------------------------------------</span><br><span class="line">Undefined	无			<span class="literal">undefined</span></span><br><span class="line">-------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>NaN</code>:Not a Number。这个数值用来表示一个本来要返回数值的操作数未返回数值的情况（这样就不会直接抛出错误了）。有两个特点：第一，任何涉及NaN的操作（例如<code>NaN</code>/10）都会返回<code>NaN</code>，这个特点在多步计算中有可能会导致问题；第二，<code>NaN</code>和任何值都不想等，包括<code>NaN</code>本身，可以用<code>isNaN()</code>函数判断是否是NaN。</li>
+</ul>
+<ul>
+<li><p><code>parseInt()</code>函数在转换字符串的时候，更多的看其是否符合数值模式，它会忽略字符串前面的空格，知道找到第一个非空格字符。如果第一个字符不是数字字符或者负号，那么直接返回<code>NaN</code>；如果第一个字符是数字字符，<code>parseInt()</code>会继续解析第二个字符，直到解析完成所有后续字符或者遇到了一个非数字字符，之后的非数字字符会被忽略。</p>
+</li>
+<li><p>ECMAScript中字符串由单引号和双引号表示完全相同。</p>
+</li>
+<li><p>ECMAScript中字符串是不可变的，字符串一旦创建，它们的值不能改变，要改变某个变量保存在字符串，首先要销毁原来的字符串，然后再用另一个包含新值的字符串填充该变量。（用起来好像没什么变化，但是先销毁后创建可能导致性能问题，但是在现在浏览器中性能问题已经被修复）。</p>
+</li>
+<li><p>ECMAScript中的对象其实就是一组数据和功能的集合，可以通过执行<code>new</code>操作符后跟要创建的对象类型的名称来创建。</p>
+</li>
+<li><p>ECMAScript中所有的数值都以IEEE-754 64位格式存储，但是位操作并不直接操作64位的值，而是先将64位的值转换为32位的整数，然后执行操作，最后再将结果转换为64位。</p>
+</li>
+<li><p>左移位操作不会影响操作数的符号位；有符号的右移会保留符号位；无符号的右移（<code>&gt;&gt;&gt;</code>）对于正数来说和有符号一致，对于负号来说，由于附属以其绝对值的二进制补码形式表示，因此会导致无符号右移后的结果非常之大。</p>
+</li>
+<li><p>相等(<code>==</code>)和不相等(<code>!=</code>)操作符存在类型转换问题，全等(<code>===</code>)和不全等(<code>!==</code>)操作不会进行类型转换。</p>
+</li>
+<li><p><code>label</code>语句可以在代码中添加标签，以便将来使用，语法：<code>label: statement</code></p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">start: <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">	alert(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个例子中定义的<code>start</code>标签可以再将来由<code>break</code>或<code>continue</code>语句引用。加标签的语句一般都要与<code>for</code>语句等循环语句使用。</p>
+<ul>
+<li><code>with</code>语句的作用是将代码的作用域设置到一个特定的对象中。<code>with</code>语句的语法：<code>with (expression) statement;</code><br>示例：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> qs = location.search.substring(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">var</span> hostName = location.hostname;</span><br><span class="line"><span class="keyword">var</span> url = location.href;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 使用with可以表述为下面： */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span>(location) &#123;</span><br><span class="line">	<span class="keyword">var</span> qs = search.substring(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">var</span> hostName = hostname;</span><br><span class="line">	<span class="keyword">var</span> url = href;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>ECMAScript中函数在定义的时候不必指定是否返回值，任何函数在任何时候都可以通过<code>return</code>语句实现返回值。</p>
+</li>
+<li><p>理解函数的参数：ECMAScript函数不介意传递进来多少个参数，也不介意传进来的参数是什么数据类型，即使定义额函数只接收两个参数，但是可以传递一个、三个参数甚至不传参数。原因在于，ECMAScript中的参数在内部是用一个数组表示的，函数接受到的始终都是这个数组，而不关心数组中包含哪些参数。在函数体内，可以通过<code>arguments</code>对象来访问这个参数组，可以用方括号语法访问每一个元素，可以用<code>length</code>属性来确定传递进来多少个参数。</p>
+</li>
+</ul>
+<h4 id="变量、作用域和内存问题"><a href="#变量、作用域和内存问题" class="headerlink" title="变量、作用域和内存问题"></a>变量、作用域和内存问题</h4>
         </div>
       </div>
     </div>
