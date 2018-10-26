@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-10-24</span>
-            <span class="time">17:04:31</span>
+            <span class="time">21:52:04</span>
           </span>
           
           <!--  Categories  -->
@@ -189,7 +189,36 @@
 <li><p>理解函数的参数：ECMAScript函数不介意传递进来多少个参数，也不介意传进来的参数是什么数据类型，即使定义额函数只接收两个参数，但是可以传递一个、三个参数甚至不传参数。原因在于，ECMAScript中的参数在内部是用一个数组表示的，函数接受到的始终都是这个数组，而不关心数组中包含哪些参数。在函数体内，可以通过<code>arguments</code>对象来访问这个参数组，可以用方括号语法访问每一个元素，可以用<code>length</code>属性来确定传递进来多少个参数。</p>
 </li>
 </ul>
-<h4 id="变量、作用域和内存问题"><a href="#变量、作用域和内存问题" class="headerlink" title="变量、作用域和内存问题"></a>变量、作用域和内存问题</h4>
+<h4 id="变量、作用域和内存问题"><a href="#变量、作用域和内存问题" class="headerlink" title="变量、作用域和内存问题"></a>变量、作用域和内存问题</h4><h5 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h5><p>ECMAScript变量可能包含两种不同数据类型的值：基本类型值和引用类型值。基本类型值指的是简单的数据段，而引用类型值指那些可能由多个值构成的对象。</p>
+<p>引用类型的值可以添加属性和方法，基本类型值不可以。</p>
+<p>如果一个变量向另一个变量复制基本类型的值，会在变量对象上创建一个新值，然后把该值复制到为新变量分配的位置上。当从一个变量向另一个变量复制引用类型的值时，同样也会将存储在变量对象中的值复制一份放到为新变量分配的空间中，不同的是，这个值的副本实际上是一个指针，而这个指针指向存储在堆中的一个对象，复制操作结束后，两个变量实际上将引用同一个对象。（相当于值类型是深拷贝，引用类型是浅拷贝。）</p>
+<p>ECMAScript中所有函数的参数是按值传递的，函数外部的值复制给函数内部的参数，就和把值从一个变量复制到另一个变量一样。基本类型值的传递是值复制，引用类型是指针复制。</p>
+<p><code>typeof</code>操作符能确定一个变量是字符串、数值、布尔值，还是<code>undefined</code>；</p>
+<p><code>instanceof</code>检测一个变量是不是引用类型。</p>
+<h5 id="执行环境"><a href="#执行环境" class="headerlink" title="执行环境"></a>执行环境</h5><p>执行环境定义了变量或函数有权访问的其他数据，决定了它们各自的行为。每个执行环境都有一个与之关联的变量对象，环境中定义额所有变量和函数都保存在这个对象中，虽然编写代码无妨访问这个对象，但是解析器在处理数据的时候会在后台使用它。</p>
+<p>全局执行环境是最外围的一个执行环境，根据ECMAScript实现所在的宿主环境不同，表示执行环境的对象也不一样。在web浏览器中，全局执行环境被认为是window对象，因此所有全局变量和函数都是作为window对象的属性和方法创建的。某个执行环境中的所有代码执行完毕后，该环境被销毁，保存在其中的所有变量和函数定义也随之销毁。全局执行环境知道应用程序退出（例如浏览器关闭）时才会销毁。</p>
+<p>每个函数都有自己的执行环境。当执行流进入到一个函数时，单数的环境就被推入到一个环境栈中。而当这个函数执行之后，栈将其环境弹出，把控制权返回给之前的执行环境。ECMAScript程序中的执行流正式由这个机制控制。</p>
+<p>当代码在一个环境中执行时，会创建变量对象的一个作用域链。作用域链的用途，是保证对执行环境有权访问的所有变量和函数的有序访问。作用域链的前端，始终都是当前执行代码所在环境的变量对象。如果这个环境是函数，则将其活动对象作为变量对象。活动对象在最开始时只是一个变量，即<code>arguments</code>对象（这个对象在全局环境中是不存在的）。作用域链中的下一个变量对象来自包含环境，而再下一个对象则来自下一个包含环境，这样一直连续到全局执行环境；全局执行环境始终都是作用域链中的最后一个对象。</p>
+<p>标识符解析是沿着作用域链一级一级的搜索标识符的过程。搜索过程始终从作用域链的最前端开始，然后逐级地向后回溯，直至找到标识符为止。</p>
+<p>执行环境只有全局和局部两种，但是可以延长作用域链，有些语句可以在作用域链的前端临时增加一个变量对象，该变量对象会在代码执行后被移除。当执行流进入到一下任何一个语句时，作用域链就会得到加长：</p>
+<ul>
+<li><code>try-catch</code>语句的<code>catch</code>快</li>
+<li><code>with</code>语句</li>
+</ul>
+<p>这两个语句都会在作用域链的前端添加一个变量对象，对<code>with</code>语句来说，会讲指定的对象添加到作用域链中，对于<code>catch</code>语句来说，会创建一个新的变量对象，其中包含的是被抛出的错误对象声明。</p>
+<p>举个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">buildUrl</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> qs = <span class="string">"?debug=true"</span>;</span><br><span class="line">	<span class="keyword">with</span>(location) &#123;</span><br><span class="line">		<span class="keyword">var</span> url = href + qs;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> url;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>with</code>语句接收的是<code>location</code>对象，因此其变量对象中就包含了<code>location</code>对象的所有属性和方法，而这个变量对象被添加到作用域链的前端。<code>buildUrl()</code>函数中定义了一个变量<code>qs</code>。当在<code>with</code>语句中引用变量<code>href</code>时（实际上引用的是<code>location.href</code>），可以在当前执行环境的变量对象中找到。当引用变量<code>qs</code>的时候，引用的则是在<code>buildUrl()</code>中定义的那个变量，而该变量位于函数环境的变量对象中。至于<code>with</code>语句内部，则定义了一个名为<code>url</code>的变量，因而<code>url</code>就成了函数执行环境的一部分，所以可以作为函数的值被返回。</p>
+<p>JavaScript美誉块级作用域（花括号作用域）。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">	<span class="keyword">var</span> color = <span class="string">"blue"</span>;</span><br><span class="line">&#125;</span><br><span class="line">alert(color); <span class="comment">/* blue */</span></span><br></pre></td></tr></table></figure>
+<p>JavaScript中if语句中的变量声明会将变量添加到当前的执行环境中。由<code>for</code>语句创建的变量即使在<code>for</code>循环结束后，也依旧会存在于循环外部的执行环境中。</p>
+<p>使用<code>var</code>声明的变量会自动被添加到最接近的环境中。在函数内部，最接近的环境就是函数的局部环境；在<code>with</code>语句中，最接近的环境是函数环境。如果初始化变量时没有使用<code>var</code>声明，该变量会自动被添加到全局环境。</p>
+<h5 id="垃圾收集"><a href="#垃圾收集" class="headerlink" title="垃圾收集"></a>垃圾收集</h5><p>JavaScript具有自动垃圾回收机制，执行环境会负责管理代码执行过程中使用的内存。</p>
+<p>JavaScript中最常用的垃圾收集方式是标记清除。当变量进入环境时（例如在函数中声明一个变量），就将这个变量标记为“进入环境”。从逻辑上讲，永远不能释放进入环境的变量所占的内存，因为只要执行流进入相应的环境，就可能会用到它们。当变量离开环境时，则将其标记为“离开环境”。</p>
+<p>垃圾收集器在运行的时候会给存储在内存中的所有变量都加上标记，然后，它会去掉环境中的变量以及被环境中的变量引用的变量的标记。而在此之后再被加上标记的变量将被视为准备删除的变量，原因是环境中的变量已经无法访问到这些变量了。最后，垃圾收集器完成内存清除工作，销毁那些带标记的值并回收它们所占用的内存空间。</p>
+<p>垃圾收集器时周期性运行的，运行时间策略会影响性能。</p>
+<p>因为系统分配给web浏览器的可用内存适量通常要比分配给桌面应用的少，这要是处于安全方面的考虑，防止运行JavaScript的网页耗尽全部系统内存而崩溃。内存限制问题会影响分配给变量的内存，同时会影响调用栈以及在一个线程中能够同时执行的语句数量。因此确保占用最少的内存可以让页面获得更好的性能。优化内存占用的最佳方式，就是为执行中的代码只保存必要的数据。一旦数据不再有用，最好通过将其值设置为<code>null</code>来释放引用，这个方法称为解除引用。这个做法适用于大多数全局变量和全局对象的属性。局部变量会在它们离开执行环境时自动解除引用。解除一个值的引用并不意味着自动回收该值所占用的内存，真正作用是让值脱离执行环境，以便垃圾收集器下次运行时将其回收。</p>
+<h4 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h4>
         </div>
       </div>
     </div>
