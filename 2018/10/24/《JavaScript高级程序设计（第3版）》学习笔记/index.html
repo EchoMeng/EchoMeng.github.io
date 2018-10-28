@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-10-24</span>
-            <span class="time">17:24:12</span>
+            <span class="time">21:56:14</span>
           </span>
           
           <!--  Categories  -->
@@ -258,7 +258,49 @@
 </li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> values = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">var</span> sum = values.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">prev, cur, index, array</span>)) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> prev + cur;</span><br><span class="line">&#125;;</span><br><span class="line">alert sum; <span class="comment">/* 15 */</span></span><br></pre></td></tr></table></figure>
-<h5 id="Date类型"><a href="#Date类型" class="headerlink" title="Date类型"></a>Date类型</h5>
+<h5 id="Date类型"><a href="#Date类型" class="headerlink" title="Date类型"></a>Date类型</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 不传递参数情况下新创建的对象自动获得当前日期和时间 */</span></span><br><span class="line"><span class="keyword">var</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br></pre></td></tr></table></figure>
+<p>构造函数可以传入时间字符串或者时间戳作为参数。</p>
+<p><code>Date.parse()</code>方法接受一个表示日期的字符串参数，返回对应时间的时间戳。如果字符串不能表示日期，则返回<code>NaN</code>。</p>
+<p><code>Date.UTC()</code>也返回时间戳，但是参数不一样，参数分别是年份、基于0的月份（一月是0）、月中的哪一天、小时数（0-23）、分钟、秒以及毫秒数，只有前两个参数是必须的，省略的参数全部自动填充为0。</p>
+<p><code>Date.now()</code>获取当前时间戳。</p>
+<p>日期格式化方法：</p>
+<ul>
+<li><code>toDateString()</code>：以特定于实现的格式显示星期几、月、日和年</li>
+<li><code>toTimeString()</code>：以特定于实现的格式显示时、分、秒和时区</li>
+<li><code>toLocaleDateString()</code>：以特定于地区的格式显示星期几、月、日和年</li>
+<li><code>toLocaleTimeString()</code>：以特定于实现的格式显示时、分、秒</li>
+<li><code>toUTCString()</code>：以特定于实现的格式完整的UTC日期</li>
+</ul>
+<p>具体格式因浏览器而异。</p>
+<h5 id="RegExp类型"><a href="#RegExp类型" class="headerlink" title="RegExp类型"></a>RegExp类型</h5><p>ECMAScript通过RegExp类型支持正则表达式，使用下面类似Prel的语法，就可以创建一个正则表达式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> expression = <span class="regexp">/ pattern /</span> flags;</span><br></pre></td></tr></table></figure>
+<p>其中模式（pattern）部分可以是任何简单或者负责的正则表达式，可以包含字符类、限定符、分组、向前查找以及反向引用。每个正则表达式都可以带有一或多个标志（flags），用以标明正则表达式的行为。正则表达式的匹配模式支持下列3个标志：</p>
+<ul>
+<li>g：表示全局模式，即模式将被应用于所有字符串，并非在发现第一个匹配项时立即停止；</li>
+<li>i：表示不区分大小写，即在确定匹配项时忽略模式与字符串的大小写；</li>
+<li>m：表示多行模式，即在到达一行文本末尾时还会继续查找下一行中是否存在与模式相匹配的项。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 匹配字符串中所有的“at”实例 */</span></span><br><span class="line"><span class="keyword">var</span> pattern1 = <span class="regexp">/at/g</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 匹配第一个“bat”或者“cat”，不区分大小写 */</span></span><br><span class="line"><span class="keyword">var</span> pattern2 = <span class="regexp">/[bc]at/i</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 陪陪所有以“at”结尾的3个字符的组合，不区分大小写 */</span></span><br><span class="line"><span class="keyword">var</span> pattern3 = <span class="regexp">/.at/gi</span>;</span><br></pre></td></tr></table></figure>
+<p>模式中使用的所有元字符都必须转义。正在表达式中的元字符包括:<br><code>( [ { \ ^ $ | ) ? * + . ] }</code></p>
+<p>除了上述使用字面量形式来定义的正则表达式，另一种创建正则表达式的方式是使用RegExp构造函数，它接收两个参数：一个是要匹配的字符串模式，另一个是可选的标志字符串。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pattern2 = <span class="keyword">new</span> RecExp(<span class="string">"[bc]at"</span>, <span class="string">"i"</span>);</span><br></pre></td></tr></table></figure>
+<p>RegExp每个实例具备以下属性：</p>
+<ul>
+<li><code>global</code>:布尔值，是否设置了g标志</li>
+<li><code>ignoreCase</code>:布尔值，是否设置了i标志</li>
+<li><code>lastIndex</code>:整数，表示开始搜索下一个匹配项的字符位置，从0算起</li>
+<li><code>multiline</code>:布尔值，表示是否设置了m标志</li>
+<li><code>source</code>:正则表达式的字符串表示，按照字面量形式而非传入构造函数中的字符串模式返回</li>
+</ul>
+<p>RegExp对象的主要方法是<code>exec()</code>，该方法是专门为捕获组而设计的。接收一个参数，即要应用模式的字符串，然后返回包含第一个匹配项信息的数组；或者在没有匹配项的情况下返回<code>null</code>。返回的数组虽然是<code>Array</code>的实例，但是包含两个额外的属性：<code>index`</code>input<code>。</code>index<code>表示匹配项在字符串中的位置，</code>input`表示应用正则表达式的字符串。在数组中，第一项是与整个模式匹配的字符串，其他项是与模式中的捕获组匹配的字符串。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text = <span class="string">"mom and dad and baby"</span>;</span><br><span class="line"><span class="keyword">var</span> pattern = <span class="regexp">/mom( and dad( and baby)?)?/gi</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> matches = pattern.exec(text);</span><br><span class="line">alert(matches.index); <span class="comment">/* 0 */</span></span><br><span class="line">alert(matches.input); <span class="comment">/* "mom and dad and baby" */</span></span><br><span class="line">alert(matches[<span class="number">0</span>]); <span class="comment">/* "mom and dad and baby" */</span></span><br><span class="line">alert(matches[<span class="number">1</span>]); <span class="comment">/* " and dad and baby" */</span></span><br><span class="line">alert(matches[<span class="number">2</span>]); <span class="comment">/* " and baby" */</span></span><br></pre></td></tr></table></figure>
+<h5 id="Function类型"><a href="#Function类型" class="headerlink" title="Function类型"></a>Function类型</h5><p>每个函数都是Function类型的实例，而且都与其他引用类型一样具有属性和方法。由于函数是对象，因此函数名实际上也是一个指向函数对象的指针，不会与某个函数绑定。</p>
+<p>ECMAScript中没有函数重载的概念，声明两个同名函数的结果是后声明额函数覆盖先声明的函数。</p>
+<p>把函数名看作是置身，函数名本身就是变量，函数可以作为值使用，可以像传递参数一样把一个函数传递给另一个函数，可以将一个函数作为另一个函数的结果返回。</p>
+<p>在函数内部有两个特殊对象:<code>arguments`</code>this<code>。</code>arguments<code>是一个类数组对象，包含着传入函数的所有参数，这个对象有一个</code>callee<code>属性，该属性是一个指针，指向拥有这个</code>arguments<code>对象的函数。</code>this`对象引用的是函数执行的环境对象。</p>
+<p>ECMAScript 5规范化了一个函数对象的属性：<code>caller</code>。这个属性中保存着调用当前函数的函数的引用，如果是在全局作用域中调用当前函数，它的值为<code>null</code>。</p>
+<p>严格模式下，访问<code>arguments.callee</code>会导致错误。<code>arguments.caller</code>会导致错误，而在非严格模式下，始终为<code>undefined</code>。定义<code>arguments.callee</code>属性是为了分清<code>arguments.caller</code>和函数的<code>caller</code>属性。严格模式下，不能为函数的<code>caller</code>属性赋值，否则会导致错误。这些错误是为了加强语言安全性，防止第三方代码在相同的环境下窥视其他代码。</p>
+
         </div>
       </div>
     </div>
