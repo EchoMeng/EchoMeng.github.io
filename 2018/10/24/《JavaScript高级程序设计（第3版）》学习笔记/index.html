@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-10-24</span>
-            <span class="time">21:52:04</span>
+            <span class="time">17:24:12</span>
           </span>
           
           <!--  Categories  -->
@@ -218,7 +218,47 @@
 <p>垃圾收集器在运行的时候会给存储在内存中的所有变量都加上标记，然后，它会去掉环境中的变量以及被环境中的变量引用的变量的标记。而在此之后再被加上标记的变量将被视为准备删除的变量，原因是环境中的变量已经无法访问到这些变量了。最后，垃圾收集器完成内存清除工作，销毁那些带标记的值并回收它们所占用的内存空间。</p>
 <p>垃圾收集器时周期性运行的，运行时间策略会影响性能。</p>
 <p>因为系统分配给web浏览器的可用内存适量通常要比分配给桌面应用的少，这要是处于安全方面的考虑，防止运行JavaScript的网页耗尽全部系统内存而崩溃。内存限制问题会影响分配给变量的内存，同时会影响调用栈以及在一个线程中能够同时执行的语句数量。因此确保占用最少的内存可以让页面获得更好的性能。优化内存占用的最佳方式，就是为执行中的代码只保存必要的数据。一旦数据不再有用，最好通过将其值设置为<code>null</code>来释放引用，这个方法称为解除引用。这个做法适用于大多数全局变量和全局对象的属性。局部变量会在它们离开执行环境时自动解除引用。解除一个值的引用并不意味着自动回收该值所占用的内存，真正作用是让值脱离执行环境，以便垃圾收集器下次运行时将其回收。</p>
-<h4 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h4>
+<h4 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h4><p>ECMAScript中引用类型是一种数据结构，用于将数据和功能组织在一起。也常常被称为类，但是实际上ECMAScript技术上讲虽然是一门面向对象的语言，但是并不具备传统的面向对象的语言所支持的类和接口等基本机构。</p>
+<h5 id="Object类型"><a href="#Object类型" class="headerlink" title="Object类型"></a>Object类型</h5><p>是引用类型,创建方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">person.name = <span class="string">"Jack"</span>;</span><br><span class="line">person.age = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 也可以用 对象字面量表示法 创建实例 */</span></span><br><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">	name : <span class="string">"Jack"</span>,</span><br><span class="line">	age : <span class="number">20</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h5 id="Array数组类型"><a href="#Array数组类型" class="headerlink" title="Array数组类型"></a>Array数组类型</h5><p>ECMAScript数组的每一项可以用来保存任何类型的数据，同一个数组项之间不用保持类型一致。ECMAScript数组的大小可以动态调整，即可以随着数据的添加自动增长以容纳新的数据。数组的<code>length</code>属性不是只读的，可以通过设置这个属性，从数组末尾移除项或者添加新项，这样新增的每一项都会取得<code>undifined</code>值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (value <span class="keyword">instanceof</span> <span class="built_in">Array</span>) &#123;</span><br><span class="line">	<span class="comment">// 对数组执行某些操作</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>instanceof</code>操作符的问题在于，它嘉定只有一个全局执行环境。如果网页中包含多个框架，实际上就存在多个不同的全局执行环境，从而存在多个不同版本的<code>Array</code>构造函数。如果从一个框架向另一个框架传入一个数组，那么传入的数组与在第二个框架中原生创建的数组分别具有个字不同的构造函数。ECMAScript5新增了<code>Array.isArray()</code>方法判断到底是不是数组。</li>
+<li>ECMAScript为数组提供了<code>push()`</code>pop()`方法，一遍实现类似栈的行为；</li>
+<li>提供<code>push()`</code>shift()<code>方法模拟队列的行为。</code>unshift()<code>方法可以与</code>shift()`想法，在数组前端添加任意个项并返回新数组的长度。</li>
+<li>数组的<code>reverse()</code>方法反转数组项的顺序。</li>
+<li><code>sort()</code>方法能按升序排列数组项，从小到大排列，会调用每个数组项的<code>toString()</code>方法，然后排序。因为是按字符串排序，常常不能满足需求。<code>sort()</code>方法还能接受一个参数作为比较函数。举个例子：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compare</span>(<span class="params">value1, value2</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (value1 &lt; value2) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (value1 &gt; value2) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> values = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>];</span><br><span class="line">values.sort(compare);</span><br><span class="line">alert(values); <span class="comment">/* 0, 1, 5, 10, 15 */</span></span><br><span class="line"></span><br><span class="line">values.sort();</span><br><span class="line">alert(values); <span class="comment">/* 0, 1, 10, 15, 5 */</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>concat()</code>方法可以基于当前数组中的所有项创建一个新数组。具体的，这个方法会先创建当前数组一个副本，然后将接收到的参数添加到这个副本的末尾，最后返回新创建的数组。在没有给<code>concat()</code>方法传递参数的情况下，它只是复制当前数组并返回副本，如果传递给<code>concat()</code>方法的是一个或者多个数组，则该方法会将这些数组中的每一项都添加到结果数组中。如果传递的值不是数组，这些值就会被简单的添加到结果数组的末尾。</li>
+<li><code>slice()</code>方法能够基于当前数组中的一个或者多个项创建一个新数组。<code>slice()</code>方法可以接受一个或者多个参数，即要返回项的起始和结束为止。在只有一个参数的情况下，<code>slice()</code>方法返回从该参数指定位置开始到当前数组末尾的所有项。<code>slice()</code>方法不会影响原始数组。</li>
+<li><p><code>splice()</code>方法的主要用途是向数组中插入项。包括：</p>
+<ol>
+<li>删除任意数量的项，需要指定要删除的第一项的位置和要删除的项数；</li>
+<li>插入任意数量的项，需要指定起始位置、0（要删除的项数）、要插入的项。如果要插入多个项，可以传入第四、第五或者更多的参数。</li>
+<li><p>替换任意数量的项，需要指定起始位置、要删除的项数和要插入的任意数量的项。</p>
+<p><code>splice()</code>方法返回一个数组，该数组中包含从原始数组中删除的项，如果没有删除则返回空数组。</p>
+</li>
+</ol>
+</li>
+<li><p><code>indexOf()`</code>lastIndexOf()<code>两个位置方法，都接收两个参数：要查找的项和（可选的）表示查找起点位置的索引。</code>indexOf()<code>方法从数组的开头（位置0）开始向后查找，</code>lastIndexOf()<code>方法从数组的末尾开始向前查找。两个方法都返回要查找的项在数组中的位置，或者在没找到的情况下返回</code>-1`。</p>
+</li>
+<li><p>迭代方法：每个方法都接收两个参数：要在每一项上运行的函数和（可选的）运行该函数的作用域对象——影响<code>this</code>的值。传入迭代方法中的函数会接收三个参数：数组项的值、该项在数组中的位置和数组对象本身。</p>
+<ol>
+<li><code>every()</code>：对数组中的每一项运行给定函数，如果该函数对每一项都返回<code>true</code>，则返回<code>true</code>。</li>
+<li><code>filter()</code>：对数组中的每一项运行给定函数，返回该函数会返回<code>true</code>的项组成的数组。</li>
+<li><code>forEach()</code>：对数组中的每一项运行给定函数，这个方法没有返回值。</li>
+<li><code>map()</code>：对数组中的每一项运行给定函数，返回每次函数调用的结果组成的数组。</li>
+<li><code>some()</code>：对数组中的每一项运行给定函数，如果该函数对任一项返回<code>true</code>，则返回<code>true</code>。只要有一项返回<code>true</code>即返回<code>true</code>。</li>
+</ol>
+</li>
+<li><p>归并方法：<code>reduce()`</code>reduceRight()<code>两个方法都会迭代数组的所有项，然后构建一个最终返回的值。</code>reduce()<code>方法从数组第一项开始，逐个遍历到最后，</code>reduceRight()<code>方法从数组的最后一项开始，向前逐个遍历到第一项。两个方法都接收两个参数：一个在每一项上调用的函数和（可选的）作为归并基础的初始值。传递给</code>reduce()<code></code>reduceRight()<code>的函数可以接收4个参数：前一个值、当前值、项的索引和数组对象。这个函数返回的任何值都会作为第一个参数自动传给下一项。第一次迭代发生在数组的第二项上，因此第一个参数是数组的第一项，第二个参数就是数组的第二项。举个例子：使用</code>reduce()`方法可以执行求数组中所有值的和：</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> values = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">var</span> sum = values.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">prev, cur, index, array</span>)) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> prev + cur;</span><br><span class="line">&#125;;</span><br><span class="line">alert sum; <span class="comment">/* 15 */</span></span><br></pre></td></tr></table></figure>
+<h5 id="Date类型"><a href="#Date类型" class="headerlink" title="Date类型"></a>Date类型</h5>
         </div>
       </div>
     </div>
