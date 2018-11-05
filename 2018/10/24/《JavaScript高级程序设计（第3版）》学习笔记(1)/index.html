@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-10-24</span>
-            <span class="time">21:47:34</span>
+            <span class="time">19:35:16</span>
           </span>
           
           <!--  Categories  -->
@@ -156,7 +156,37 @@
 <li><p>ECMAScript中所有类型的值都等转换为Boolean值，可以调用<code>Boolean()</code>，结果为：</p>
 </li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-------------------------------------------------------</span><br><span class="line">数据类型		<span class="literal">true</span>			<span class="literal">false</span></span><br><span class="line">-------------------------------------------------------</span><br><span class="line">Boolen		<span class="literal">true</span>			<span class="literal">false</span></span><br><span class="line">-------------------------------------------------------</span><br><span class="line"><span class="built_in">String</span>		任何非空字符串		<span class="string">""</span>（空字符串）</span><br><span class="line">-------------------------------------------------------</span><br><span class="line"><span class="built_in">Number</span>		任何非零数字值（包括无穷大）	<span class="number">0</span>和<span class="literal">NaN</span></span><br><span class="line">-------------------------------------------------------</span><br><span class="line"><span class="built_in">Object</span>		任何对象			<span class="literal">null</span></span><br><span class="line">-------------------------------------------------------</span><br><span class="line">Undefined	无			<span class="literal">undefined</span></span><br><span class="line">-------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">数据类型</th>
+<th style="text-align:center">true</th>
+<th style="text-align:center">false</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Boolen</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">false</td>
+</tr>
+<tr>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">任何非零数字值（包括无穷大）</td>
+<td style="text-align:center">0和NaN</td>
+</tr>
+<tr>
+<td style="text-align:center">Object</td>
+<td style="text-align:center">任何对象</td>
+<td style="text-align:center">null</td>
+</tr>
+<tr>
+<td style="text-align:center">Undefined</td>
+<td style="text-align:center">无</td>
+<td style="text-align:center">undefined</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li><code>NaN</code>:Not a Number。这个数值用来表示一个本来要返回数值的操作数未返回数值的情况（这样就不会直接抛出错误了）。有两个特点：第一，任何涉及NaN的操作（例如<code>NaN</code>/10）都会返回<code>NaN</code>，这个特点在多步计算中有可能会导致问题；第二，<code>NaN</code>和任何值都不想等，包括<code>NaN</code>本身，可以用<code>isNaN()</code>函数判断是否是NaN。</li>
 </ul>
