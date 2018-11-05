@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-10-24</span>
-            <span class="time">19:35:16</span>
+            <span class="time">20:15:37</span>
           </span>
           
           <!--  Categories  -->
@@ -240,10 +240,11 @@
 <p>举个例子：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">buildUrl</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> qs = <span class="string">"?debug=true"</span>;</span><br><span class="line">	<span class="keyword">with</span>(location) &#123;</span><br><span class="line">		<span class="keyword">var</span> url = href + qs;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> url;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>with</code>语句接收的是<code>location</code>对象，因此其变量对象中就包含了<code>location</code>对象的所有属性和方法，而这个变量对象被添加到作用域链的前端。<code>buildUrl()</code>函数中定义了一个变量<code>qs</code>。当在<code>with</code>语句中引用变量<code>href</code>时（实际上引用的是<code>location.href</code>），可以在当前执行环境的变量对象中找到。当引用变量<code>qs</code>的时候，引用的则是在<code>buildUrl()</code>中定义的那个变量，而该变量位于函数环境的变量对象中。至于<code>with</code>语句内部，则定义了一个名为<code>url</code>的变量，因而<code>url</code>就成了函数执行环境的一部分，所以可以作为函数的值被返回。</p>
-<p>JavaScript美誉块级作用域（花括号作用域）。例如：</p>
+<p>JavaScript没有块级作用域（花括号作用域）。例如：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">	<span class="keyword">var</span> color = <span class="string">"blue"</span>;</span><br><span class="line">&#125;</span><br><span class="line">alert(color); <span class="comment">/* blue */</span></span><br></pre></td></tr></table></figure>
 <p>JavaScript中if语句中的变量声明会将变量添加到当前的执行环境中。由<code>for</code>语句创建的变量即使在<code>for</code>循环结束后，也依旧会存在于循环外部的执行环境中。</p>
 <p>使用<code>var</code>声明的变量会自动被添加到最接近的环境中。在函数内部，最接近的环境就是函数的局部环境；在<code>with</code>语句中，最接近的环境是函数环境。如果初始化变量时没有使用<code>var</code>声明，该变量会自动被添加到全局环境。</p>
+<p><u>实际上ECMAScript 6 中引入了块级作用域，使用<code>let</code>关键字声明变量即可生成块级作用域。<code>const</code>关键字也可以形成块级作用域，有<code>{}</code>包裹即可。</u></p>
 <h5 id="垃圾收集"><a href="#垃圾收集" class="headerlink" title="垃圾收集"></a>垃圾收集</h5><p>JavaScript具有自动垃圾回收机制，执行环境会负责管理代码执行过程中使用的内存。</p>
 <p>JavaScript中最常用的垃圾收集方式是标记清除。当变量进入环境时（例如在函数中声明一个变量），就将这个变量标记为“进入环境”。从逻辑上讲，永远不能释放进入环境的变量所占的内存，因为只要执行流进入相应的环境，就可能会用到它们。当变量离开环境时，则将其标记为“离开环境”。</p>
 <p>垃圾收集器在运行的时候会给存储在内存中的所有变量都加上标记，然后，它会去掉环境中的变量以及被环境中的变量引用的变量的标记。而在此之后再被加上标记的变量将被视为准备删除的变量，原因是环境中的变量已经无法访问到这些变量了。最后，垃圾收集器完成内存清除工作，销毁那些带标记的值并回收它们所占用的内存空间。</p>
