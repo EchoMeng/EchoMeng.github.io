@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-11-15</span>
-            <span class="time">16:38:45</span>
+            <span class="time">21:52:08</span>
           </span>
           
           <!--  Categories  -->
@@ -123,8 +123,68 @@
         <!-- Post Main Content -->
         <div class="post-content">
           <p>习惯JavaScript这种语言的方式大概是理解它的设计模式吧…</p>
-<p>这一篇是《JavaScript:The Good Part》这本书中译版的学习笔记。</p>
+<p>这一篇是《JavaScript:The Good Part》这本书中译版的学习笔记，过程中遇到难以理解的地方会参考其他文章。</p>
 <a id="more"></a>
+<ol>
+<li>JavaScript是一门弱类型的语言，不会有编译器在编译时检测错误，无需建立复杂的类层次。</li>
+<li>JavaScript有非常强大的对象字面量表示法。通过列出对象的组成部分，就能简单的创建出来。</li>
+<li>JavaScript有一个无类型的对象系统，在这个系统中，对象直接从其他对象继承属性。</li>
+</ol>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>JavaScript中只有一个数字类型，在内部被表示为64位的浮点数，并且没有分离出整数类型，完全避免了短整型的溢出问题。</p>
+<p><code>NaN</code>是一个数值，它表示一个不能产生正常结果的运算结果，它不等于任何值，包括它自己。可以使用<code>isNaN(number)</code>检测<code>NaN</code>。</p>
+<p>字符串字面量可以被包在单引号或者双引号中。JavaScript被创建的时候，Unicode是一个16位的字符集，所以JavaScript中所有的字符都是16位的。JavaScript中是没有单个字符类型的。</p>
+<p>一个编译单元包含一组可执行的语句。在web浏览器中，每个<code>&lt;script&gt;</code>标签提供一个被编译且立即执行的编译单元。因为缺少链接器，JavaScript把它们一起抛到一个公共的全局名字空间中。</p>
+<hr>
+<p>Tip:</p>
+<p>全局变量：全局变量就是在所有作用域中都可见的变量，因为它可以在程序的任何地方被修改，会导致大型程序的行为变得极度复杂，降低程序的可靠性，而且可能会有命名冲突导致程序难以调试。JavaScript依赖于全局变量，它没有链接器，所有的编译单元都载入同一个公共全局对象中。</p>
+<p>在JavaScript中声明全局变量的三种方式：</p>
+<ol>
+<li>在任何函数之外放置一个<code>var</code>语句；</li>
+<li>直接给全局对象添加一个属性。全局对象是所有全局变量的容器，在web浏览器中，全局对象是<code>window</code>；</li>
+<li>直接使用未经声明的变量，这种被称为隐式的全局变量。</li>
+</ol>
+<hr>
+<p>JavaScript中的代码块不会创建新的作用域，因此变量应该被定义在函数的头部，而不是定义在代码块中。</p>
+<hr>
+<p>Tip:</p>
+<p><a href="https://juejin.im/post/59905bea6fb9a03c34192c51" target="_blank" rel="noopener">ES6 变量作用域与提升：变量的生命周期详解</a></p>
+<p>理解执行上下文：</p>
+<p>每个执行上下文又会分为内存创建（Creation Phase）与代码执行（Code Execution Phase）两个步骤，在创建步骤中会进行变量对象的创建（Variable Object）、作用域链的创建以及设置当前上下文中的 this 对象。所谓的 Variable Object ，又称为 Activation Object，包含了当前执行上下文中的所有变量、函数以及具体分支中的定义。当某个函数被执行时，解释器会先扫描所有的函数参数、变量以及其他声明。</p>
+<p>在 Variable Object 创建之后，解释器会继续创建作用域链（Scope Chain）；作用域链往往指向其副作用域，往往被用于解析变量。当需要解析某个具体的变量时，JavaScript 解释器会在作用域链上递归查找，直到找到合适的变量或者任何其他需要的资源。作用域链可以被认为是包含了其自身 Variable Object 引用以及所有的父 Variable Object 引用的对象。</p>
+<p><a href="https://juejin.im/post/5a5d64fbf265da3e243b831f" target="_blank" rel="noopener">JavaScript 运行原理解析</a></p>
+<p>JS引擎主要负责把JS代码转为机器能执行的机器码，而JS代码中调用的一些WEB API则由其运行环境提供，这里指的是浏览器。</p>
+<p>JS是单线程运行，每次都从调用栈出取出代码进行调用。如果当前代码非常耗时，则会阻塞当前线程导致浏览器卡顿。</p>
+<p>回调函数是通过加入到事件队列中，等待Event Loop拿出并放到调用栈中进行调用。只有Event Loop监听到调用栈为空时，才会从事件队列中从队头拿出回调函数放进调用栈里。</p>
+<p><a href="https://juejin.im/post/5a5ee28f6fb9a01cbe655860" target="_blank" rel="noopener">由变量提升谈谈 JavaScript Execution Context</a></p>
+<p>执行上下文期间JS引擎执行伪代码:</p>
+<ol>
+<li>找到调用函数</li>
+<li>执行函数代码前，创建execution context</li>
+<li>进行创建阶段：<ul>
+<li>初始化调用链 Scope Chain</li>
+<li>创建 variable object：<ul>
+<li>创建arguments对象，初始化该入参变量名和值</li>
+<li>扫描该执行上下文中声明的函数：<ul>
+<li>对于声明的函数，variable object中创建对应的变量名，其值指向该函数（函数是存在heap中的）</li>
+<li>如果函数名已经存在，用新的引用值覆盖已有的</li>
+</ul>
+</li>
+<li>扫描上下文中声明的变量：<ul>
+<li>对于变量的声明，同样在variable object中创建对应的变量名，其值初始化为undefined</li>
+<li>如果变量的名字已经存在，则直接略过继续扫描</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>决定上下文this的指向</li>
+</ul>
+</li>
+<li>代码执行阶段：<ul>
+<li>执行函数内的代码并给对应变量进行赋值（创建阶段为undefined的变量）</li>
+</ul>
+</li>
+</ol>
+<hr>
 
         </div>
       </div>
