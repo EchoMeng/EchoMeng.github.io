@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-11-15</span>
-            <span class="time">21:52:08</span>
+            <span class="time">17:38:43</span>
           </span>
           
           <!--  Categories  -->
@@ -184,6 +184,48 @@
 </ul>
 </li>
 </ol>
+<hr>
+<p><code>try</code>语句执行一个代码块，并捕获该代码块抛出的任何异常。<code>catch</code>从句定义一个新的变量<code>variable</code>来接收抛出的异常对象。<code>throw</code>语句抛出一个异常。如果<code>throw</code>语句在一个<code>try</code>代码块中，那么控制流会跳转到<code>catch</code>从句中。如果<code>throw</code>语句在函数中，则该函数调用被放弃，控制流跳转到调用该函数的<code>try</code>语句的<code>catch</code>从句中。<code>throw</code>语句中的表达式通常是一个对象字面量，它包含一个<code>name</code>属性和一个<code>message</code>属性，异常捕获器可以使用这些信息去决定该做什么。</p>
+<h1 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h1><p>尝试从<code>undefined</code>的成员属性中取值将会导致TypeError异常，可以通过<code>&amp;&amp;</code>运算符来避免错误。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">flight.equipment <span class="comment">/* undefined */</span></span><br><span class="line">flight.equipment.model <span class="comment">/* throw "TypeError" */</span></span><br><span class="line">flight.equipment &amp;&amp; flight.equipment.model <span class="comment">/* undefined */</span></span><br></pre></td></tr></table></figure>
+<p>原型连接在更新时是不起作用的，当对某个对象作出改变的时候，不会触及该对象的原型。原型连接只在检索值的时候才被用到。如果尝试去获取对象的某个属性值，但是该对象没有此属性名，那么JavaScript会尝试着从原型对象中获取属性值。如果那个原型对象也没有该属性，那么再从它的原型中寻找，以此类推，知道该过程最后到达终点<code>Object.prototype</code>。如果想要的属性完全不存在于原型链中，那么结果就是<code>undefined</code>值，这个过程称为委托。原型关系是一种动态的关系，如果我们添加一个新的属性到原型中，那么该属性会立即对所有基于该原型创建的对象可见。</p>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><p>调用一个函数会暂停当前函数的执行，传递控制权和参数给新的函数。除了声明时定义的形式参数，每个函数还要接收两个附加的参数：<code>this</code>和<code>arguments</code>。参数<code>this</code>在面向对象编程中非常重要，他的值取决于调用的模式。在JavaScript中一共有4中调用模式：</p>
+<ol>
+<li>方法调用模式；</li>
+<li>函数调用模式；</li>
+<li>构造器调用模式；</li>
+<li><code>apply</code>调用模式。</li>
+</ol>
+<p>这些模式在如何初始化关键参数<code>this</code>上存在差异。</p>
+<p>调用运算符跟在任何产生一个函数值的表达式之后的一对圆括号。圆括号内可以包含零个或者多个用逗号隔开的表达式。每个表达式产生一个参数值。每个参数值被赋予函数声明时定义的形式参数名。当实际参数的个数与形式参数的个数不匹配时。不会导致运行时错误。如果实际参数值过多了，超出的参数值会被忽略。如果实际参数值过少，缺失的值会被替换成<code>undefined</code>。对参数值不会进行类型检查，热河类型的值都可以被传递给任何参数。</p>
+<h6 id="方法调用模式"><a href="#方法调用模式" class="headerlink" title="方法调用模式"></a>方法调用模式</h6><p>当一个函数被保存为对象的一个属性时，称之为一个方法。方法可以使用<code>this</code>访问自己所属的对象，所以它能从对象中取值，或者对对象进行修改。<code>this</code>到对象的绑定发生在调用的时候。这个“超级”延迟绑定使得函数可以对<code>this</code>高度复用<br>。通过<code>this</code>可取得它们所属对象的上下文的方法称为公共方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myObject = &#123;</span><br><span class="line">	value: <span class="number">0</span>,</span><br><span class="line">	increment: <span class="function"><span class="keyword">function</span>(<span class="params">inc</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.value += <span class="keyword">typeof</span> inc === <span class="string">'number'</span>?inc:<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">myObject.increment(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<h6 id="函数调用模式"><a href="#函数调用模式" class="headerlink" title="函数调用模式"></a>函数调用模式</h6><p>当一个函数并非一个对象的属性时，那么他就被当作一个函数来调用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sum = add(<span class="number">3</span>, <span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+<p>在此模式调用函数时，<code>this</code>被绑定到全局对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">myObject.double = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> that = <span class="keyword">this</span>; <span class="comment">/* 内部函数使用函数调用模式导致this绑定问题的解决方法 */</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">var</span> helper = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		that.value = add(that.value, that.value);</span><br><span class="line">	&#125;;</span><br><span class="line">	helper(); <span class="comment">/* 以函数的形式调用helper */</span> </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 以方法的形式调用double */</span></span><br><span class="line">myObject.double();</span><br><span class="line"><span class="built_in">document</span>.writeIn(myObject.value);</span><br></pre></td></tr></table></figure>
+<p>在这个例子里，<code>helper</code>是个内部函数，这里调用它的时候才会发生<code>this</code>的绑定，由于调用方式时函数调用模式，因此<code>this</code>会被绑定在全局对象上，而不是我们希望的绑定在外部函数<code>double</code>函数的<code>this</code>上，为了解决这个问题，提前在外部函数中将<code>this</code>赋值给<code>that</code>。</p>
+<h6 id="构造器调用模式"><a href="#构造器调用模式" class="headerlink" title="构造器调用模式"></a>构造器调用模式</h6><p>构造器函数就是创建新对象的函数。如果一个函数前面带上<code>new</code>来调用，那么底层会创建一个连接到该函数的<code>prototype</code>成员的新对象，同时<code>this</code>会被绑定到新对象上。<code>new</code>前缀也会改变<code>return</code>语句的行为。</p>
+<h6 id="apply调用模式"><a href="#apply调用模式" class="headerlink" title="apply调用模式"></a><code>apply</code>调用模式</h6><p><code>apply</code>方法让我们构建一个参数数组传递给调用函数，并且允许选择<code>this</code>的值。<code>apply</code>方法接收两个参数，第一个时要绑定给<code>this</code>的值，第二个是参数数组。</p>
+<p>当一个函数被调用时，它从第一个语句开始执行，并在遇到关闭函数体的<code>}</code>时结束，然后函数把控制权交还给调用该函数的程序。</p>
+<p><code>return</code>语句可用来使函数提前返回。当<code>return</code>被执行时，函数立即返回而不再执行余下的语句。</p>
+<p>一个函数总是会返回一个值，如果没有指定返回值，那么返回<code>undefined</code>。</p>
+<p>如果函数调用时在前面加上了<code>new</code>前缀，并且返回值并不是一个对象，那么返回<code>this</code>(该新对象)。</p>
+<p>JavaScript确实有函数作用域，意味着定义在函数中的参数和变量在函数外部时不可见的，而在一个函数内部任何位置定义的变量，在该函数内部的任何地方都可见。由于JavaScript中没有块级作用域，因此最好的做法是在函数体的顶部声明函数中可能用到的所有变量。</p>
+<hr>
+<p>Tip:</p>
+<p><a href="http://www.laruence.com/2009/05/28/863.html" target="_blank" rel="noopener">Javascript作用域原理</a></p>
+<p>JavaScript中的函数运行在它们被定义的作用域里，而不是它们被执行的作用域里。JS中作用域的实现使用的并非“堆栈”的方式，而是使用列表。</p>
+<p>任何执行上下文时刻的作用域，都是由作用域链来实现的。在任何一个函数被定义的时候，会将它定义时刻的scope chain链接到这个函数对象的<code>[[scope]]</code>属性。在一个函数对象被调用的时候，会创建一个活动对象，然后对于每一个函数的形参，都命名为该活动对象的命名属性，然后将这个活动对象作为此时的作用域链最前端，并将这个函数对象的<code>[[scope]]</code>加入到scope chain中。</p>
+<p>JS在执行每一段代码之前，都会首先处理<code>var</code>关键字和<code>function</code>定义式（函数定义式和函数表达式）。在函数执行之前，会首先创建一个活动对象，然后搜寻这个函数中的局部变量定义和函数定义，将变量名和函数名作为这个活动对象的同名属性，对于局部变量定义，变量的值会在真正执行的时候才计算，此时只是简单的赋值为<code>undefined</code>。</p>
+<p>需要注意的是，函数定义式和函数表达式的不同。函数定义式，会将函数定义提前，而对于函数表达式，则会在执行过程中才计算。</p>
+<p>这个例子还是比较神奇的，列出来：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"meng"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">echo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	alert(name);</span><br><span class="line">	<span class="keyword">var</span> name = <span class="string">"eve"</span>;</span><br><span class="line">	alert(name);</span><br><span class="line">	alert(age);</span><br><span class="line">&#125;</span><br><span class="line">echo();</span><br></pre></td></tr></table></figure>
+<p>上面一段程序的输出结果是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">undefined</span></span><br><span class="line">eve</span><br><span class="line">[脚本出错]</span><br></pre></td></tr></table></figure>
+<p>为什么输出结果是这样的呢？当<code>echo</code>函数被调用的时候，<code>echo</code>的活动对象已经被预编译过程创建，这个时候<code>echo</code>的活动对象为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[callobj] = &#123;</span><br><span class="line">	name: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当第一次<code>alert</code>的时候，发生了标示符解析，在<code>echo</code>的活动对象中找到了<code>name</code>属性，所以这个<code>name</code>属性完全的遮挡了全局对象中的<code>name</code>属性。</p>
 <hr>
 
         </div>
