@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-11-15</span>
-            <span class="time">17:38:43</span>
+            <span class="time">20:17:41</span>
           </span>
           
           <!--  Categories  -->
@@ -227,6 +227,35 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[callobj] = &#123;</span><br><span class="line">	name: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当第一次<code>alert</code>的时候，发生了标示符解析，在<code>echo</code>的活动对象中找到了<code>name</code>属性，所以这个<code>name</code>属性完全的遮挡了全局对象中的<code>name</code>属性。</p>
 <hr>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures" target="_blank" rel="noopener">闭包</a></p>
+<p>理解闭包</p>
+<p>闭包是函数和声明该函数的词法环境的组合。</p>
+<p>怎么理解这句话呢？两个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> name = <span class="string">"Amy"</span>; <span class="comment">/* name是在init函数中创建的局部变量 */</span></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">displayName</span>(<span class="params"></span>) </span>&#123; <span class="comment">/* displayName就是一个闭包，实际上就是一个内部函数 */</span></span><br><span class="line">		alert(name); <span class="comment">/* 闭包中可以访问父函数中声明的局部变量 */</span></span><br><span class="line">	&#125;</span><br><span class="line">	displayName();</span><br><span class="line">&#125;</span><br><span class="line">init();</span><br></pre></td></tr></table></figure>
+<p>以上例子中示例了闭包的使用，实际上就是一个局部变量，闭包的特点在于嵌套的函数可以反问在其外部声明的变量。对于JS来说，几乎全是全局变量，想要避免全局变量造成的混乱，闭包是一个解决办法。但是上面的例子没有体现出来闭包中包含词法环境的特点。再看下一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeFunc</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> name = <span class="string">"Amy"</span>;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">dispalyName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		alert(name);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> displayName;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> myFunc = makeFunc();</span><br><span class="line">myFunc();</span><br></pre></td></tr></table></figure>
+<p>这段代码运行起来和上一个例子完全相同。在内部函数<code>displayName()</code>执行前，被外部函数返回，但是在js中闭包是由函数以及创建该函数的词法环境组合而成的，这个环境包含了这个闭包创建时所能访问的所有局部变量，因此即使这样也可以被正确的执行。</p>
+<p>可以借助闭包的这个特点，实现模块：利用函数作用域和闭包来闯将被绑定对象与私有成员的关联，提供接口但是隐藏状态与实现的函数或者对象。</p>
+<p>模块模式的一般形式是：一个定义了私有变量和函数的函数；利用闭包创建可以访问私有变量和函数的特权函数；最后返回这个特权函数，或者把它们保存到一个可访问到的地方。</p>
+<p>级联：有一些方法没有返回值。例如，一些设置或者修改对象的某个状态却不返回任何值的方法就是典型的例子。如果想要让这些方法返回<code>this</code>而不是<code>undefined</code>，就可以启用级联。在一个级联中，我们可以在单独一条语句中依次调用同一个对象的很多方法。</p>
+<p>柯里化：柯里化运行我们把函数与传递给它的参数像结合，产生出一个新的函数。</p>
+<p>记忆：函数可以将先前操作的结果记录在某个对象里，从而避免重复运算，这种优化称为记忆。</p>
+<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>这一部分不详细说了，之前一篇<a href="https://www.echomeng.cn/2018/11/04/JavaScript%E4%B8%AD%E7%9A%84%E7%BB%A7%E6%89%BF%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/">JavaScript中的继承和原型链</a>已经理解的差不太多了。</p>
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>数组是一段线性分配的内存，它通过整数计算偏移并访问其中的元素。JavaScript使用的是类数组特性的对象。它把数组的下标转变为字符串，用其作为属性。与数组相比更慢。</p>
+<p>JavaScript的数组不会发生越界。</p>
+<h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> parse_url = <span class="regexp">/^(?:([A-Za-z]+):)?(\/&#123;0,3&#125;)([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> url = <span class="string">"http://www.ora.com:80/goodparts?q#fragment"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = parse_url.exec(url);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> i;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> names = [<span class="string">'url'</span>, <span class="string">'scheme'</span>, <span class="string">'slash'</span>, <span class="string">'host'</span>, <span class="string">'port'</span>, <span class="string">'path'</span>, <span class="string">'query'</span>, <span class="string">'hash'</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; names.lengths; i += <span class="number">1</span>) &#123;</span><br><span class="line">	<span class="built_in">document</span>.writeIn(names[i] + <span class="string">':'</span>, result[i]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">url: http:<span class="comment">//www.ora.com:80/goodparts?q#fragment</span></span><br><span class="line">scheme: http</span><br><span class="line">slash: <span class="comment">//</span></span><br><span class="line">host: www.ora.com</span><br><span class="line">port: <span class="number">80</span></span><br><span class="line">path: goodparts</span><br><span class="line">query: q</span><br><span class="line">hash: fragment</span><br></pre></td></tr></table></figure>
+<p>分析以上的正则表达式：</p>
+<ul>
+<li><code>^</code>字符表示此字符串的开始。</li>
+<li>第一个分组<code>(?:([A-Za-z]+):)?</code>匹配一个协议名，但是仅当它后面跟随一个<code>:</code>的时候才开始匹配。<code>(?: . . .)</code>表示一个非捕获型分组。后缀<code>?</code>表示这个分组是可选的。<code>(. . .)</code>表示一个捕获型分组。一个捕获型分组会复制它所匹配的文本，并放在<code>result</code>数组中。每个捕获型分组都会被指定一个编号。<code>[. . .]</code>表示一个字符类。<code>+</code>后缀表示这个字符类会被匹配一次或者多次。</li>
+<li>第二个分组<code>(\/{0,3})</code>。反斜杠进行转义。<code>{0,3}</code>表示<code>/</code>会被匹配0次或者1～3次。</li>
+<li>第三个分组<code>([0-9.\-A-Za-z]+)</code></li>
+<li>第四个分组<code>(?::(\d+))?</code>匹配端口号，由一个<code>:</code>加上一个或者多个数字组成。<code>\d</code>表示一个数字字符。</li>
+<li>第五个分组<code>(?:\/([^?#]*))?</code>中<code>[^?#]</code>以一个<code>^</code>开头，表示这个类包含除了<code>?</code>和<code>#</code>之外的所有字符，其中包括了行结束符、控制字符等。<code>*</code>表示这个字符类会被匹配0次或者多次。</li>
+<li>第六个分组<code>(?:\?([^#]*))?</code></li>
+<li>第七个分组<code>(?:#(.*))?</code>中<code>.</code>表示会匹配除了行结束符以外的所有字符。</li>
+<li><code>$</code>表示这个字符串的结束。</li>
+</ul>
 
         </div>
       </div>
