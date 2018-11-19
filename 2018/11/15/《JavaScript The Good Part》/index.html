@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-11-15</span>
-            <span class="time">20:17:41</span>
+            <span class="time">11:21:35</span>
           </span>
           
           <!--  Categories  -->
@@ -122,6 +122,12 @@
         
         <!-- Post Main Content -->
         <div class="post-content">
+            
+              <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#语法"><span class="toc-text">语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象"><span class="toc-text">对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法调用模式"><span class="toc-text">方法调用模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数调用模式"><span class="toc-text">函数调用模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造器调用模式"><span class="toc-text">构造器调用模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#apply调用模式"><span class="toc-text">apply调用模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继承"><span class="toc-text">继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正则表达式"><span class="toc-text">正则表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a></li></ol>
+              </div>
+              
           <p>习惯JavaScript这种语言的方式大概是理解它的设计模式吧…</p>
 <p>这一篇是《JavaScript:The Good Part》这本书中译版的学习笔记，过程中遇到难以理解的地方会参考其他文章。</p>
 <a id="more"></a>
@@ -130,11 +136,10 @@
 <li>JavaScript有非常强大的对象字面量表示法。通过列出对象的组成部分，就能简单的创建出来。</li>
 <li>JavaScript有一个无类型的对象系统，在这个系统中，对象直接从其他对象继承属性。</li>
 </ol>
-<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>JavaScript中只有一个数字类型，在内部被表示为64位的浮点数，并且没有分离出整数类型，完全避免了短整型的溢出问题。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>JavaScript中只有一个数字类型，在内部被表示为64位的浮点数，并且没有分离出整数类型，完全避免了短整型的溢出问题。</p>
 <p><code>NaN</code>是一个数值，它表示一个不能产生正常结果的运算结果，它不等于任何值，包括它自己。可以使用<code>isNaN(number)</code>检测<code>NaN</code>。</p>
 <p>字符串字面量可以被包在单引号或者双引号中。JavaScript被创建的时候，Unicode是一个16位的字符集，所以JavaScript中所有的字符都是16位的。JavaScript中是没有单个字符类型的。</p>
 <p>一个编译单元包含一组可执行的语句。在web浏览器中，每个<code>&lt;script&gt;</code>标签提供一个被编译且立即执行的编译单元。因为缺少链接器，JavaScript把它们一起抛到一个公共的全局名字空间中。</p>
-<hr>
 <p>Tip:</p>
 <p>全局变量：全局变量就是在所有作用域中都可见的变量，因为它可以在程序的任何地方被修改，会导致大型程序的行为变得极度复杂，降低程序的可靠性，而且可能会有命名冲突导致程序难以调试。JavaScript依赖于全局变量，它没有链接器，所有的编译单元都载入同一个公共全局对象中。</p>
 <p>在JavaScript中声明全局变量的三种方式：</p>
@@ -143,9 +148,7 @@
 <li>直接给全局对象添加一个属性。全局对象是所有全局变量的容器，在web浏览器中，全局对象是<code>window</code>；</li>
 <li>直接使用未经声明的变量，这种被称为隐式的全局变量。</li>
 </ol>
-<hr>
 <p>JavaScript中的代码块不会创建新的作用域，因此变量应该被定义在函数的头部，而不是定义在代码块中。</p>
-<hr>
 <p>Tip:</p>
 <p><a href="https://juejin.im/post/59905bea6fb9a03c34192c51" target="_blank" rel="noopener">ES6 变量作用域与提升：变量的生命周期详解</a></p>
 <p>理解执行上下文：</p>
@@ -184,12 +187,11 @@
 </ul>
 </li>
 </ol>
-<hr>
 <p><code>try</code>语句执行一个代码块，并捕获该代码块抛出的任何异常。<code>catch</code>从句定义一个新的变量<code>variable</code>来接收抛出的异常对象。<code>throw</code>语句抛出一个异常。如果<code>throw</code>语句在一个<code>try</code>代码块中，那么控制流会跳转到<code>catch</code>从句中。如果<code>throw</code>语句在函数中，则该函数调用被放弃，控制流跳转到调用该函数的<code>try</code>语句的<code>catch</code>从句中。<code>throw</code>语句中的表达式通常是一个对象字面量，它包含一个<code>name</code>属性和一个<code>message</code>属性，异常捕获器可以使用这些信息去决定该做什么。</p>
-<h1 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h1><p>尝试从<code>undefined</code>的成员属性中取值将会导致TypeError异常，可以通过<code>&amp;&amp;</code>运算符来避免错误。</p>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p>尝试从<code>undefined</code>的成员属性中取值将会导致TypeError异常，可以通过<code>&amp;&amp;</code>运算符来避免错误。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">flight.equipment <span class="comment">/* undefined */</span></span><br><span class="line">flight.equipment.model <span class="comment">/* throw "TypeError" */</span></span><br><span class="line">flight.equipment &amp;&amp; flight.equipment.model <span class="comment">/* undefined */</span></span><br></pre></td></tr></table></figure>
 <p>原型连接在更新时是不起作用的，当对某个对象作出改变的时候，不会触及该对象的原型。原型连接只在检索值的时候才被用到。如果尝试去获取对象的某个属性值，但是该对象没有此属性名，那么JavaScript会尝试着从原型对象中获取属性值。如果那个原型对象也没有该属性，那么再从它的原型中寻找，以此类推，知道该过程最后到达终点<code>Object.prototype</code>。如果想要的属性完全不存在于原型链中，那么结果就是<code>undefined</code>值，这个过程称为委托。原型关系是一种动态的关系，如果我们添加一个新的属性到原型中，那么该属性会立即对所有基于该原型创建的对象可见。</p>
-<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><p>调用一个函数会暂停当前函数的执行，传递控制权和参数给新的函数。除了声明时定义的形式参数，每个函数还要接收两个附加的参数：<code>this</code>和<code>arguments</code>。参数<code>this</code>在面向对象编程中非常重要，他的值取决于调用的模式。在JavaScript中一共有4中调用模式：</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>调用一个函数会暂停当前函数的执行，传递控制权和参数给新的函数。除了声明时定义的形式参数，每个函数还要接收两个附加的参数：<code>this</code>和<code>arguments</code>。参数<code>this</code>在面向对象编程中非常重要，他的值取决于调用的模式。在JavaScript中一共有4中调用模式：</p>
 <ol>
 <li>方法调用模式；</li>
 <li>函数调用模式；</li>
@@ -198,21 +200,20 @@
 </ol>
 <p>这些模式在如何初始化关键参数<code>this</code>上存在差异。</p>
 <p>调用运算符跟在任何产生一个函数值的表达式之后的一对圆括号。圆括号内可以包含零个或者多个用逗号隔开的表达式。每个表达式产生一个参数值。每个参数值被赋予函数声明时定义的形式参数名。当实际参数的个数与形式参数的个数不匹配时。不会导致运行时错误。如果实际参数值过多了，超出的参数值会被忽略。如果实际参数值过少，缺失的值会被替换成<code>undefined</code>。对参数值不会进行类型检查，热河类型的值都可以被传递给任何参数。</p>
-<h6 id="方法调用模式"><a href="#方法调用模式" class="headerlink" title="方法调用模式"></a>方法调用模式</h6><p>当一个函数被保存为对象的一个属性时，称之为一个方法。方法可以使用<code>this</code>访问自己所属的对象，所以它能从对象中取值，或者对对象进行修改。<code>this</code>到对象的绑定发生在调用的时候。这个“超级”延迟绑定使得函数可以对<code>this</code>高度复用<br>。通过<code>this</code>可取得它们所属对象的上下文的方法称为公共方法。</p>
+<h3 id="方法调用模式"><a href="#方法调用模式" class="headerlink" title="方法调用模式"></a>方法调用模式</h3><p>当一个函数被保存为对象的一个属性时，称之为一个方法。方法可以使用<code>this</code>访问自己所属的对象，所以它能从对象中取值，或者对对象进行修改。<code>this</code>到对象的绑定发生在调用的时候。这个“超级”延迟绑定使得函数可以对<code>this</code>高度复用<br>。通过<code>this</code>可取得它们所属对象的上下文的方法称为公共方法。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myObject = &#123;</span><br><span class="line">	value: <span class="number">0</span>,</span><br><span class="line">	increment: <span class="function"><span class="keyword">function</span>(<span class="params">inc</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.value += <span class="keyword">typeof</span> inc === <span class="string">'number'</span>?inc:<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">myObject.increment(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-<h6 id="函数调用模式"><a href="#函数调用模式" class="headerlink" title="函数调用模式"></a>函数调用模式</h6><p>当一个函数并非一个对象的属性时，那么他就被当作一个函数来调用。</p>
+<h3 id="函数调用模式"><a href="#函数调用模式" class="headerlink" title="函数调用模式"></a>函数调用模式</h3><p>当一个函数并非一个对象的属性时，那么他就被当作一个函数来调用。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sum = add(<span class="number">3</span>, <span class="number">4</span>);</span><br></pre></td></tr></table></figure>
 <p>在此模式调用函数时，<code>this</code>被绑定到全局对象。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">myObject.double = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> that = <span class="keyword">this</span>; <span class="comment">/* 内部函数使用函数调用模式导致this绑定问题的解决方法 */</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">var</span> helper = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		that.value = add(that.value, that.value);</span><br><span class="line">	&#125;;</span><br><span class="line">	helper(); <span class="comment">/* 以函数的形式调用helper */</span> </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 以方法的形式调用double */</span></span><br><span class="line">myObject.double();</span><br><span class="line"><span class="built_in">document</span>.writeIn(myObject.value);</span><br></pre></td></tr></table></figure>
 <p>在这个例子里，<code>helper</code>是个内部函数，这里调用它的时候才会发生<code>this</code>的绑定，由于调用方式时函数调用模式，因此<code>this</code>会被绑定在全局对象上，而不是我们希望的绑定在外部函数<code>double</code>函数的<code>this</code>上，为了解决这个问题，提前在外部函数中将<code>this</code>赋值给<code>that</code>。</p>
-<h6 id="构造器调用模式"><a href="#构造器调用模式" class="headerlink" title="构造器调用模式"></a>构造器调用模式</h6><p>构造器函数就是创建新对象的函数。如果一个函数前面带上<code>new</code>来调用，那么底层会创建一个连接到该函数的<code>prototype</code>成员的新对象，同时<code>this</code>会被绑定到新对象上。<code>new</code>前缀也会改变<code>return</code>语句的行为。</p>
-<h6 id="apply调用模式"><a href="#apply调用模式" class="headerlink" title="apply调用模式"></a><code>apply</code>调用模式</h6><p><code>apply</code>方法让我们构建一个参数数组传递给调用函数，并且允许选择<code>this</code>的值。<code>apply</code>方法接收两个参数，第一个时要绑定给<code>this</code>的值，第二个是参数数组。</p>
+<h3 id="构造器调用模式"><a href="#构造器调用模式" class="headerlink" title="构造器调用模式"></a>构造器调用模式</h3><p>构造器函数就是创建新对象的函数。如果一个函数前面带上<code>new</code>来调用，那么底层会创建一个连接到该函数的<code>prototype</code>成员的新对象，同时<code>this</code>会被绑定到新对象上。<code>new</code>前缀也会改变<code>return</code>语句的行为。</p>
+<h3 id="apply调用模式"><a href="#apply调用模式" class="headerlink" title="apply调用模式"></a><code>apply</code>调用模式</h3><p><code>apply</code>方法让我们构建一个参数数组传递给调用函数，并且允许选择<code>this</code>的值。<code>apply</code>方法接收两个参数，第一个时要绑定给<code>this</code>的值，第二个是参数数组。</p>
 <p>当一个函数被调用时，它从第一个语句开始执行，并在遇到关闭函数体的<code>}</code>时结束，然后函数把控制权交还给调用该函数的程序。</p>
 <p><code>return</code>语句可用来使函数提前返回。当<code>return</code>被执行时，函数立即返回而不再执行余下的语句。</p>
 <p>一个函数总是会返回一个值，如果没有指定返回值，那么返回<code>undefined</code>。</p>
 <p>如果函数调用时在前面加上了<code>new</code>前缀，并且返回值并不是一个对象，那么返回<code>this</code>(该新对象)。</p>
 <p>JavaScript确实有函数作用域，意味着定义在函数中的参数和变量在函数外部时不可见的，而在一个函数内部任何位置定义的变量，在该函数内部的任何地方都可见。由于JavaScript中没有块级作用域，因此最好的做法是在函数体的顶部声明函数中可能用到的所有变量。</p>
-<hr>
 <p>Tip:</p>
 <p><a href="http://www.laruence.com/2009/05/28/863.html" target="_blank" rel="noopener">Javascript作用域原理</a></p>
 <p>JavaScript中的函数运行在它们被定义的作用域里，而不是它们被执行的作用域里。JS中作用域的实现使用的并非“堆栈”的方式，而是使用列表。</p>
@@ -226,7 +227,6 @@
 <p>为什么输出结果是这样的呢？当<code>echo</code>函数被调用的时候，<code>echo</code>的活动对象已经被预编译过程创建，这个时候<code>echo</code>的活动对象为：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[callobj] = &#123;</span><br><span class="line">	name: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当第一次<code>alert</code>的时候，发生了标示符解析，在<code>echo</code>的活动对象中找到了<code>name</code>属性，所以这个<code>name</code>属性完全的遮挡了全局对象中的<code>name</code>属性。</p>
-<hr>
 <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures" target="_blank" rel="noopener">闭包</a></p>
 <p>理解闭包</p>
 <p>闭包是函数和声明该函数的词法环境的组合。</p>
@@ -240,14 +240,14 @@
 <p>级联：有一些方法没有返回值。例如，一些设置或者修改对象的某个状态却不返回任何值的方法就是典型的例子。如果想要让这些方法返回<code>this</code>而不是<code>undefined</code>，就可以启用级联。在一个级联中，我们可以在单独一条语句中依次调用同一个对象的很多方法。</p>
 <p>柯里化：柯里化运行我们把函数与传递给它的参数像结合，产生出一个新的函数。</p>
 <p>记忆：函数可以将先前操作的结果记录在某个对象里，从而避免重复运算，这种优化称为记忆。</p>
-<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>这一部分不详细说了，之前一篇<a href="https://www.echomeng.cn/2018/11/04/JavaScript%E4%B8%AD%E7%9A%84%E7%BB%A7%E6%89%BF%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/">JavaScript中的继承和原型链</a>已经理解的差不太多了。</p>
-<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>数组是一段线性分配的内存，它通过整数计算偏移并访问其中的元素。JavaScript使用的是类数组特性的对象。它把数组的下标转变为字符串，用其作为属性。与数组相比更慢。</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>这一部分不详细说了，之前一篇<a href="https://www.echomeng.cn/2018/11/04/JavaScript%E4%B8%AD%E7%9A%84%E7%BB%A7%E6%89%BF%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/">JavaScript中的继承和原型链</a>已经理解的差不太多了。</p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>数组是一段线性分配的内存，它通过整数计算偏移并访问其中的元素。JavaScript使用的是类数组特性的对象。它把数组的下标转变为字符串，用其作为属性。与数组相比更慢。</p>
 <p>JavaScript的数组不会发生越界。</p>
-<h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> parse_url = <span class="regexp">/^(?:([A-Za-z]+):)?(\/&#123;0,3&#125;)([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> url = <span class="string">"http://www.ora.com:80/goodparts?q#fragment"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = parse_url.exec(url);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> i;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> names = [<span class="string">'url'</span>, <span class="string">'scheme'</span>, <span class="string">'slash'</span>, <span class="string">'host'</span>, <span class="string">'port'</span>, <span class="string">'path'</span>, <span class="string">'query'</span>, <span class="string">'hash'</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; names.lengths; i += <span class="number">1</span>) &#123;</span><br><span class="line">	<span class="built_in">document</span>.writeIn(names[i] + <span class="string">':'</span>, result[i]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">url: http:<span class="comment">//www.ora.com:80/goodparts?q#fragment</span></span><br><span class="line">scheme: http</span><br><span class="line">slash: <span class="comment">//</span></span><br><span class="line">host: www.ora.com</span><br><span class="line">port: <span class="number">80</span></span><br><span class="line">path: goodparts</span><br><span class="line">query: q</span><br><span class="line">hash: fragment</span><br></pre></td></tr></table></figure>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> parse_url = <span class="regexp">/^(?:([A-Za-z]+):)?(\/&#123;0,3&#125;)([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> url = <span class="string">"http://www.ora.com:80/goodparts?q#fragment"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = parse_url.exec(url);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> i;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> names = [<span class="string">'url'</span>, <span class="string">'scheme'</span>, <span class="string">'slash'</span>, <span class="string">'host'</span>, <span class="string">'port'</span>, <span class="string">'path'</span>, <span class="string">'query'</span>, <span class="string">'hash'</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; names.lengths; i += <span class="number">1</span>) &#123;</span><br><span class="line">	<span class="built_in">document</span>.writeIn(names[i] + <span class="string">':'</span>, result[i]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">url: http://www.ora.com:80/goodparts?q#fragment</span></span><br><span class="line"><span class="comment">scheme: http</span></span><br><span class="line"><span class="comment">slash: //</span></span><br><span class="line"><span class="comment">host: www.ora.com</span></span><br><span class="line"><span class="comment">port: 80</span></span><br><span class="line"><span class="comment">path: goodparts</span></span><br><span class="line"><span class="comment">query: q</span></span><br><span class="line"><span class="comment">hash: fragment</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 <p>分析以上的正则表达式：</p>
 <ul>
 <li><code>^</code>字符表示此字符串的开始。</li>
-<li>第一个分组<code>(?:([A-Za-z]+):)?</code>匹配一个协议名，但是仅当它后面跟随一个<code>:</code>的时候才开始匹配。<code>(?: . . .)</code>表示一个非捕获型分组。后缀<code>?</code>表示这个分组是可选的。<code>(. . .)</code>表示一个捕获型分组。一个捕获型分组会复制它所匹配的文本，并放在<code>result</code>数组中。每个捕获型分组都会被指定一个编号。<code>[. . .]</code>表示一个字符类。<code>+</code>后缀表示这个字符类会被匹配一次或者多次。</li>
+<li>第一个分组<code>(?:([A-Za-z]+):)?</code>匹配一个协议名，但是仅当它后面跟随一个<code>:</code>的时候才开始匹配。<code>(?: . . .)</code>表示一个非捕获型分组。后缀<code>?</code>表示这个分组是可选的。<code>(. . .)</code>表示一个捕获型分组。一个捕获型分组会复制它所匹配的文本，并放在<code>result</code>数组中。每个捕获型分组都会被指定一个编号。<code>[. . .]</code>表示一个字符类。<code>+</code>后缀表示这个字符类会被匹配一次或者多次。非捕获组仅做简单匹配，并不会捕获所匹配的文本，这回带来性能优势，并且非捕获组不会影响捕获组的分组编号。</li>
 <li>第二个分组<code>(\/{0,3})</code>。反斜杠进行转义。<code>{0,3}</code>表示<code>/</code>会被匹配0次或者1～3次。</li>
 <li>第三个分组<code>([0-9.\-A-Za-z]+)</code></li>
 <li>第四个分组<code>(?::(\d+))?</code>匹配端口号，由一个<code>:</code>加上一个或者多个数字组成。<code>\d</code>表示一个数字字符。</li>
@@ -255,6 +255,63 @@
 <li>第六个分组<code>(?:\?([^#]*))?</code></li>
 <li>第七个分组<code>(?:#(.*))?</code>中<code>.</code>表示会匹配除了行结束符以外的所有字符。</li>
 <li><code>$</code>表示这个字符串的结束。</li>
+</ul>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>这一章主要介绍了一些可用在标准类型上的标准方法集，这里只做一个索引，不做详细解释。</p>
+<ul>
+<li><code>Array</code><ul>
+<li><code>array.concat(item)</code></li>
+<li><code>array.join(separator)</code></li>
+<li><code>array.pop()</code></li>
+<li><code>array.push(item...)</code></li>
+<li><code>array.reverse()</code></li>
+<li><code>array.shift()</code></li>
+<li><code>array.slice(start, end)</code></li>
+<li><code>array.sort(comparefn)</code></li>
+<li><code>array.splice(start, deleteCount, item...)</code></li>
+<li><code>array.unshift(item...)</code></li>
+</ul>
+</li>
+<li><code>Function</code><ul>
+<li><code>function.apply(thisArg, argArray)</code></li>
+</ul>
+</li>
+<li><code>Number</code><ul>
+<li><code>number.toExponential(fractionDigits)</code></li>
+<li><code>number.toFixed(fractionDigits)</code></li>
+<li><code>number.toPrecision(precision)</code></li>
+<li><code>number.toString(radix)</code></li>
+</ul>
+</li>
+<li><code>Object</code><ul>
+<li><code>object.hasOwnProperty(name)</code></li>
+</ul>
+</li>
+<li><code>RegExp</code><ul>
+<li><code>regexp.exec(string)</code></li>
+<li><code>regexp.test(string)</code></li>
+</ul>
+</li>
+<li><code>String</code><ul>
+<li><code>string.charAt(pos)</code></li>
+<li><code>string.charCodeAt(pos)</code></li>
+<li><code>string.concat(string...)</code></li>
+<li><code>string.indexOf(searchString, position)</code></li>
+<li><code>string.lastIndexOf(searchString, positon)</code></li>
+<li><code>string.lastIndexOf(searchString, positon)</code></li>
+<li><code>string.localeCompare(that)</code></li>
+<li><code>string.match(regexp)</code></li>
+<li><code>string.replace(searchValue, replaceValue)</code></li>
+<li><code>string.search(regexp)</code></li>
+<li><code>string.slice(start, end)</code></li>
+<li><code>string.split(separator, limit)</code></li>
+<li><code>string.substring(start, end)</code></li>
+<li><code>string.toLocaleLowerCase()</code></li>
+<li><code>string.toLocaleUpperCase()</code></li>
+<li><code>string.toLowerCase()</code></li>
+<li><code>string.toUpperCase()</code></li>
+<li><code>string.fromCharCode(char...)</code></li>
+</ul>
+</li>
 </ul>
 
         </div>
