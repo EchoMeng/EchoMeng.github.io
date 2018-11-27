@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-11-26</span>
-            <span class="time">22:03:53</span>
+            <span class="time">22:02:16</span>
           </span>
           
           <!--  Categories  -->
@@ -149,7 +149,26 @@
 </ol>
 <p>研究了一下发现：在iOS中的“类簇”其实就是抽象工厂。例如<code>NSNumber</code>调用初始化方法后返回的对象是<code>NSCFNumber</code>和<code>NSCFBoolean</code>工厂，这两个工厂继承自<code>NSNumber</code>，拥有同样的一些方法，例如<code>intValue</code>和<code>boolValue</code>，在<code>NSNumber</code>角度来看，这就是抽象工厂。</p>
 <p>参考：<a href="https://juejin.im/entry/5923ca53570c350069c8a4b7" target="_blank" rel="noopener">设计模式与iOS</a></p>
-<h3 id="builder-生成器"><a href="#builder-生成器" class="headerlink" title="builder 生成器"></a>builder 生成器</h3><h3 id="factory-mothod-工厂方法"><a href="#factory-mothod-工厂方法" class="headerlink" title="factory mothod 工厂方法"></a>factory mothod 工厂方法</h3><h3 id="prototype-原型"><a href="#prototype-原型" class="headerlink" title="prototype 原型"></a>prototype 原型</h3><h3 id="singleton-单例"><a href="#singleton-单例" class="headerlink" title="singleton 单例"></a>singleton 单例</h3><h2 id="结构型模式"><a href="#结构型模式" class="headerlink" title="结构型模式"></a>结构型模式</h2><h3 id="adapter-适配器"><a href="#adapter-适配器" class="headerlink" title="adapter 适配器"></a>adapter 适配器</h3><h3 id="bridge-桥接"><a href="#bridge-桥接" class="headerlink" title="bridge 桥接"></a>bridge 桥接</h3><h3 id="composite-组合"><a href="#composite-组合" class="headerlink" title="composite 组合"></a>composite 组合</h3><p>将对象组合成树形结构以表示“整体-部分”的层次结构</p>
+<h3 id="builder-生成器"><a href="#builder-生成器" class="headerlink" title="builder 生成器"></a>builder 生成器</h3><h3 id="factory-mothod-工厂方法"><a href="#factory-mothod-工厂方法" class="headerlink" title="factory mothod 工厂方法"></a>factory mothod 工厂方法</h3><h3 id="prototype-原型"><a href="#prototype-原型" class="headerlink" title="prototype 原型"></a>prototype 原型</h3><h3 id="singleton-单例"><a href="#singleton-单例" class="headerlink" title="singleton 单例"></a>singleton 单例</h3><p>单例模式可以保证一个类只有一个实例，并提供一个访问它的全局访问点。</p>
+<p>想要达到这一目的，一个办法是让类自身负责保存它的唯一实例，这个类可以保证没有其他实例可以被创建（通过截取创建新对象的请求），并且可以提供一个访问该实例的方法。</p>
+<p>在iOS中单例使用很多，例如<code>UIApplication</code>以及<code>NSFileManager</code>等</p>
+<h2 id="结构型模式"><a href="#结构型模式" class="headerlink" title="结构型模式"></a>结构型模式</h2><h3 id="adapter-适配器"><a href="#adapter-适配器" class="headerlink" title="adapter 适配器"></a>adapter 适配器</h3><h3 id="bridge-桥接"><a href="#bridge-桥接" class="headerlink" title="bridge 桥接"></a>bridge 桥接</h3><h3 id="composite-组合"><a href="#composite-组合" class="headerlink" title="composite 组合"></a>composite 组合</h3><p>将对象组合成树形结构以表示“整体-部分”的层次结构，使用户对单个对象和组合对象的使用具有一致性。</p>
+<p>iOS中的UIKit框架中UIView的设计能够体现组合设计模式。UIView是可以添加UIView类和其子类对象的，对象的渲染以及其他操作会遍历到子类中依次进行。</p>
+<p>在实现组合模式的时候需要考虑的几个问题：</p>
+<ol>
+<li>显式的父部件引用。保持从子部件到父部件的引用能简化组合结构的遍历和管理。父部件的引用可以简化结构的上移和组件的删除，同时父部件引用也支持<code>Chain of Responsibility</code>。通常在组合类中定义父部件引用，<code>Leaf</code>和<code>Composite</code>类可以继承这个引用以及管理这个引用的那些操作。对于父部件的引用，必须维护一个不变式，即一个组合的所有子节点以这个组合为父节点，而反之该组合以这些节点为子节点。保证这一点最容易的方法是，仅当在一个组合中增加或者删除一个组件时，才改变这个组件的父部件。如果能在组合类的增加和删除操作中实现这种方法，那么所有的子类都可以继承这一方法，并且将自动维护这一不变式。</li>
+<li>共享组件。</li>
+<li>最大化组合接口。组合模式的目的之一是使得用户不知道他们正在使用的具体的<code>Leaf</code>和<code>Composite</code>类，为了达到这一目的，组合类应该为<code>Leaf</code>和<code>Composite</code>类尽可能多定义一些公共接口。</li>
+<li>声明管理子部件的操作。需要在安全性和透明性之间作出权衡选择：<ul>
+<li>在类层次结构的根部定义子节点管理接口的方法具有良好的透明性，因为可以一致的使用所有的组件，但是这一方法是以安全性为代价的，因为客户有可能会做一些无意义的事情，例如在<code>Leaf</code>中增加和删除对象等。</li>
+<li>在<code>Composite</code>类中定义管理子部件的方法具有良好的安全性，因为在C++这样的静态类型语言中，在编译时任何从<code>Leaf</code>中增加或者删除对象的尝试都将被发现，但是这又损失了透明性，因为这样<code>Leaf</code>和<code>Composite</code>具有不同的接口。</li>
+</ul>
+</li>
+<li>子部件排序。</li>
+<li>使用高速缓冲存储改善性能。</li>
+<li>垃圾回收机制。</li>
+<li>储存的数据结构。可以用到的包括列表、树、数组、hash表。</li>
+</ol>
 <h3 id="dectorator-装饰"><a href="#dectorator-装饰" class="headerlink" title="dectorator 装饰"></a>dectorator 装饰</h3><p>将组件嵌入另一个对象中，这个嵌入的对象称为装饰。这个装饰和它所装饰的组件接口一致，因此它对使用该组件的客户透明。它将客户请求转发给该组件，并且可能在转发前后执行一些额外的动作。透明性使得你可以递归的嵌套多个装饰，从而可以添加任意多的功能。</p>
 <p>以下情况使用装饰模式：</p>
 <ol>
@@ -226,7 +245,16 @@
 <li>通知机制</li>
 <li>KVO</li>
 </ol>
-<h3 id="state-状态"><a href="#state-状态" class="headerlink" title="state 状态"></a>state 状态</h3><h3 id="strategy-策略"><a href="#strategy-策略" class="headerlink" title="strategy 策略"></a>strategy 策略</h3><h3 id="template-method-模版方法"><a href="#template-method-模版方法" class="headerlink" title="template method 模版方法"></a>template method 模版方法</h3><h3 id="visitor-访问者"><a href="#visitor-访问者" class="headerlink" title="visitor 访问者"></a>visitor 访问者</h3>
+<h3 id="state-状态"><a href="#state-状态" class="headerlink" title="state 状态"></a>state 状态</h3><h3 id="strategy-策略"><a href="#strategy-策略" class="headerlink" title="strategy 策略"></a>strategy 策略</h3><p>定义一系列的算法，把它们一个个封装起来，并且使它们<br>可以相互替换，使得算法可以独立于使用它的客户而变化，避免将算法的具体细节暴露给外部。</p>
+<p>在以下情况使用策略模式：</p>
+<ol>
+<li>许多相关的类仅仅是行为有区别。策略提供了一种用多个行为中的一个行为来配置一个类的方法。</li>
+<li>需要使用一个算法的不同变体。</li>
+<li>短发使用用户不应该知道的数据。</li>
+<li>一个类定义个了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现。将相关的条件分支移入个字的策略类中来代替这些语句。</li>
+</ol>
+<p>在iOS开发中，MVC模式中涵盖了策略模式，体现为：控制器作为试图的策略类，视图在没有控制器的情况下，显示应该是一样的，但是不同的控制器将会给视图赋予不同的数据以及输出模式。</p>
+<h3 id="template-method-模版方法"><a href="#template-method-模版方法" class="headerlink" title="template method 模版方法"></a>template method 模版方法</h3><h3 id="visitor-访问者"><a href="#visitor-访问者" class="headerlink" title="visitor 访问者"></a>visitor 访问者</h3>
         </div>
       </div>
     </div>
