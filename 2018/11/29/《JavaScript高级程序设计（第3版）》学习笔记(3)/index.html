@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Echo Meng">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="《JavaScript高级程序设计（第3版）》-- 事件"/>
+  <meta property="og:description" content="Can&#39;t help but code." />
+  <meta property="og:site_name" content="Echo Meng&#39;s Blog"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://www.echomeng.cn"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Echo Meng&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Echo Meng's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">《JavaScript高级程序设计（第3版）》-- 事件</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/EchoMeng/">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:mengxiangxxa@163.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Echo Meng</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-11-29</span>
+            <span class="time">20:41:31</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/技术/">技术</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/JavaScript/">#JavaScript</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+            
+              <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#事件流"><span class="toc-text">事件流</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件处理程序"><span class="toc-text">事件处理程序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML事件处理程序"><span class="toc-text">HTML事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM0级事件处理程序"><span class="toc-text">DOM0级事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM2级事件处理程序"><span class="toc-text">DOM2级事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IE事件处理程序"><span class="toc-text">IE事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨浏览器事件处理程序"><span class="toc-text">跨浏览器事件处理程序</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件对象"><span class="toc-text">事件对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件类型"><span class="toc-text">事件类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#内存和性能"><span class="toc-text">内存和性能</span></a></li></ol>
+              </div>
+              
+          <p>JavaScript与HTML之间的交互是通过事件实现的。这一章专门讲事件。</p>
+<a id="more"></a>
+<h1 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h1><p>事件流描述的是从页面中接收事件的顺序。IE事件流是事件冒泡流，而Netscape Communicator的事件流是事件捕获流。</p>
+<p>事件冒泡是指事件开始时由具体的元素（文档中嵌套层次最深的那个节点）接收，然后逐级向上传播到较为不具体的节点。</p>
+<p>事件捕获的思想是不太具体的节点应该更早接收到事件，而最具体的节点应该最后接收到事件。事件捕获的用意在于在事件到达预定目标之前捕获他。</p>
+<p>所有现代浏览器都支持事件冒泡，但是具体实现上还是有一定差别。老版本的浏览器不支持事件捕获，所有很少有人使用事件捕获。</p>
+<p>“DOM2级事件”规定的事件流包括三个阶段：事件捕获阶段，处于目标阶段和事件冒泡阶段。多数支持DOM事件流的浏览器都实现了一种特定的行为，即使“DOM2事件流”规范明确要求捕获阶段不会设计事件目标，但是IE9、Safari、Chrome、Firefox、Opera9.5以及更高版本都会在捕获阶段触发事件对象上的事件，结果就是有两个机会在目标对象上操作事件。</p>
+<p>DOM事件流：<br><img src="/images/js事件/dom事件流.png" align="center"></p>
+<h1 id="事件处理程序"><a href="#事件处理程序" class="headerlink" title="事件处理程序"></a>事件处理程序</h1><h2 id="HTML事件处理程序"><a href="#HTML事件处理程序" class="headerlink" title="HTML事件处理程序"></a>HTML事件处理程序</h2><p>在HTML中指定事件处理程序有两个缺点。首先存在一个时差问题。因为用户可能会在HTML元素一出现在页面上就触发相应的事件，但是当时的事件处理程序有可能尚不具备执行条件。为此，很多的HTML事件处理程序都会被封装在一个<code>try-catch</code>块中，以便错误捕获。另一个缺点是这样扩展时间处理程序的作用域链在不同浏览器中会导致不同结果，不同的JavaScript引擎遵循的标识符解析规则略有差异，很可能会在访问非限定对象成员时出错。最后一个缺点是HTML和JavaScript代码紧密耦合，如果要更换事件处理程序，就要改动两个地方。因此，很多开发不用HTML事件处理程序，转而使用JavaScript指定事件处理程序。</p>
+<h2 id="DOM0级事件处理程序"><a href="#DOM0级事件处理程序" class="headerlink" title="DOM0级事件处理程序"></a>DOM0级事件处理程序</h2><p>通过JavaScript指定事件处理程序的传统方式，就是将一个函数赋值给一个事件处理程序属性。这种方式至今仍然为所有现代浏览器所支持。要使用JavaScript指定事件处理程序，首先必须获得一个要操作的对象的引用。使用DOM0级方法指定的事件处理程序被认为是元素的方法，因此这个时候的事件处理程序是在元素的作用域中运行，程序中的<code>this</code>引用当前元素。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">btn.onClick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	alert(<span class="keyword">this</span>.id); <span class="comment">/* myBtn */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也可以删除通过DOM0级方法指定的事件处理程序，只要将事件处理程序属性的值设置为<code>null</code>即可。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">btn.onClick = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="DOM2级事件处理程序"><a href="#DOM2级事件处理程序" class="headerlink" title="DOM2级事件处理程序"></a>DOM2级事件处理程序</h2><p>DOM2级事件定义了两个方法，用于处理指定和删除事件处理程序的操作：<code>addEventListener()</code>和<code>removeEventListener()</code>。所有DOM节点中都包含着两个方法，并且接受3个参数：要处理的事件名、作为事件处理程序的函数和一个布尔值。布尔值参数为<code>true</code>表示在捕获阶段调用事件处理程序，如果是<code>false</code>表示在冒泡阶段调用事件处理程序。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">btn.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	alert(<span class="keyword">this</span>.id);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 这里添加的是一个匿名函数，将无法移除。想要移除必须添加有函数名的函数 */</span></span><br></pre></td></tr></table></figure>
+<h2 id="IE事件处理程序"><a href="#IE事件处理程序" class="headerlink" title="IE事件处理程序"></a>IE事件处理程序</h2><p>IE实现和DOM类似的方法，<code>attachEvent()</code>和<code>detachEvent()</code>，接收两个参数：事件处理程序名称和事件处理程序函数。会被添加到事件冒泡阶段。匿名代码同样不能移除。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">btn.attachEvent(<span class="string">"onClick"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	alert(<span class="string">"Clicked"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在IE中使用<code>attachEvent()</code>与使用DOM0级方法的主要区别在于事件处理程序的作用域。在使用DOM0级方法的情况下，事件处理程序会在其他所属元素的作用域内进行；在使用<code>attachEvent()</code>方法的情况下，事件处理程序额会在全局作用域中运行，因此<code>this</code>等于<code>window</code>。</p>
+<h2 id="跨浏览器事件处理程序"><a href="#跨浏览器事件处理程序" class="headerlink" title="跨浏览器事件处理程序"></a>跨浏览器事件处理程序</h2><p>创建<code>addHandler()</code>的职责是视情况分别使用DOM0方法、DOM2方法或者IE方法来添加事件。这个方法属于一个名叫<code>EventUtil</code>的对象，用来处理浏览器之间的差异。<code>addHandler()</code>方法接受三个参数：要操作的元素、事件名称、事件处理程序函数。相对应的方法是<code>removeHandler()</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> EventUtil = &#123;</span><br><span class="line">	addHandler: <span class="function"><span class="keyword">function</span>(<span class="params">element, type, handler</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (element.addEventListener) &#123;</span><br><span class="line">			element.addEventListener(type, handler, <span class="literal">false</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (element.attachEvent) &#123;</span><br><span class="line">			element.attachEvent(<span class="string">"on"</span>+type, handler);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			element[<span class="string">"on"</span>+type] = handler;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	removeHandler: <span class="function"><span class="keyword">function</span>(<span class="params">element, type, handler</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (element.removeEventListener) &#123;</span><br><span class="line">			element.removeEventListener(type, handler, <span class="literal">false</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span>(element.detachEvent) &#123;</span><br><span class="line">			element.detachEvent(<span class="string">"on"</span>+type, handler);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			element[<span class="string">"on"</span>+type] = <span class="literal">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h1><h1 id="事件类型"><a href="#事件类型" class="headerlink" title="事件类型"></a>事件类型</h1><h1 id="内存和性能"><a href="#内存和性能" class="headerlink" title="内存和性能"></a>内存和性能</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
