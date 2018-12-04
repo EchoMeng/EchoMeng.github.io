@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-11-29</span>
-            <span class="time">20:41:31</span>
+            <span class="time">22:00:53</span>
           </span>
           
           <!--  Categories  -->
@@ -125,7 +125,7 @@
             
               <div id="toc" class="toc-article">
                 <strong class="toc-title">文章目录</strong>
-              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#事件流"><span class="toc-text">事件流</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件处理程序"><span class="toc-text">事件处理程序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML事件处理程序"><span class="toc-text">HTML事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM0级事件处理程序"><span class="toc-text">DOM0级事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM2级事件处理程序"><span class="toc-text">DOM2级事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IE事件处理程序"><span class="toc-text">IE事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨浏览器事件处理程序"><span class="toc-text">跨浏览器事件处理程序</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件对象"><span class="toc-text">事件对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件类型"><span class="toc-text">事件类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#内存和性能"><span class="toc-text">内存和性能</span></a></li></ol>
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#事件流"><span class="toc-text">事件流</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件处理程序"><span class="toc-text">事件处理程序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML事件处理程序"><span class="toc-text">HTML事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM0级事件处理程序"><span class="toc-text">DOM0级事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM2级事件处理程序"><span class="toc-text">DOM2级事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IE事件处理程序"><span class="toc-text">IE事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨浏览器事件处理程序"><span class="toc-text">跨浏览器事件处理程序</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件对象"><span class="toc-text">事件对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM中的事件对象"><span class="toc-text">DOM中的事件对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IE中的事件对象"><span class="toc-text">IE中的事件对象</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件类型"><span class="toc-text">事件类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#内存和性能"><span class="toc-text">内存和性能</span></a></li></ol>
               </div>
               
           <p>JavaScript与HTML之间的交互是通过事件实现的。这一章专门讲事件。</p>
@@ -148,7 +148,37 @@
 <p>在IE中使用<code>attachEvent()</code>与使用DOM0级方法的主要区别在于事件处理程序的作用域。在使用DOM0级方法的情况下，事件处理程序会在其他所属元素的作用域内进行；在使用<code>attachEvent()</code>方法的情况下，事件处理程序额会在全局作用域中运行，因此<code>this</code>等于<code>window</code>。</p>
 <h2 id="跨浏览器事件处理程序"><a href="#跨浏览器事件处理程序" class="headerlink" title="跨浏览器事件处理程序"></a>跨浏览器事件处理程序</h2><p>创建<code>addHandler()</code>的职责是视情况分别使用DOM0方法、DOM2方法或者IE方法来添加事件。这个方法属于一个名叫<code>EventUtil</code>的对象，用来处理浏览器之间的差异。<code>addHandler()</code>方法接受三个参数：要操作的元素、事件名称、事件处理程序函数。相对应的方法是<code>removeHandler()</code>。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> EventUtil = &#123;</span><br><span class="line">	addHandler: <span class="function"><span class="keyword">function</span>(<span class="params">element, type, handler</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (element.addEventListener) &#123;</span><br><span class="line">			element.addEventListener(type, handler, <span class="literal">false</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (element.attachEvent) &#123;</span><br><span class="line">			element.attachEvent(<span class="string">"on"</span>+type, handler);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			element[<span class="string">"on"</span>+type] = handler;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	removeHandler: <span class="function"><span class="keyword">function</span>(<span class="params">element, type, handler</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (element.removeEventListener) &#123;</span><br><span class="line">			element.removeEventListener(type, handler, <span class="literal">false</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span>(element.detachEvent) &#123;</span><br><span class="line">			element.detachEvent(<span class="string">"on"</span>+type, handler);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			element[<span class="string">"on"</span>+type] = <span class="literal">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h1><h1 id="事件类型"><a href="#事件类型" class="headerlink" title="事件类型"></a>事件类型</h1><h1 id="内存和性能"><a href="#内存和性能" class="headerlink" title="内存和性能"></a>内存和性能</h1>
+<h1 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h1><h2 id="DOM中的事件对象"><a href="#DOM中的事件对象" class="headerlink" title="DOM中的事件对象"></a>DOM中的事件对象</h2><p>兼容DOM的浏览器会将一个<code>event</code>对象传入到事件处理程序中，无论指定事件处理程序时使用DOM0或者DOM2级方法。</p>
+<p><code>cancelable</code>属性设置为<code>true</code>的事件，可以通过<code>preventDefault()</code>来取消默认行为。另外，<code>stopPropagation()</code>方法用于立即停止事件在DOM层次中的传播，即取消进一步的事件捕获或者冒泡。</p>
+<p>事件对象的<code>eventPause</code>属性可以用来确定事件当前正处于事件流的那个阶段，捕获阶段为1，处于目标对象时未2，冒泡阶段为3。</p>
+<p>只有事件处理程序执行期间<code>event</code>对象才会存在，一旦事件处理程序执行完毕，<code>event</code>对象就会被销毁。</p>
+<h2 id="IE中的事件对象"><a href="#IE中的事件对象" class="headerlink" title="IE中的事件对象"></a>IE中的事件对象</h2><p>在使用DOM0级方法添加事件处理程序时，<code>event</code>对象作为<code>window</code>对象的一个属性存在。如果事件处理程序是使用<code>attachEvent()</code>添加的，那么就会有一个<code>event</code>对象作为参数被传入事件处理程序函数中，也可以通过<code>window</code>对象访问，如果是通过HTML特性指定的事件处理程序，那么还可以通过<code>event</code>变量访问<code>event</code>对象。</p>
+<h1 id="事件类型"><a href="#事件类型" class="headerlink" title="事件类型"></a>事件类型</h1><p>DOM3级事件规定了以下几类事件：</p>
+<ul>
+<li>UI事件，当用户与页面上的元素交互使触发</li>
+<li>焦点事件，当元素获得或者失去焦点时触发</li>
+<li>鼠标事件，当用户通过鼠标在页面上执行操作时触发</li>
+<li>滚轮事件</li>
+<li>文本事件，当在文档中输入文本时触发</li>
+<li>键盘事件</li>
+<li>合成事件，当为IME(输入法编辑器)输入字符时触发</li>
+<li>变动事件，当底层DOM结构发生变化时触发</li>
+<li>变动名称事件，当元素或者属性名变动时触发，已废弃。</li>
+</ul>
+<h1 id="内存和性能"><a href="#内存和性能" class="headerlink" title="内存和性能"></a>内存和性能</h1><p>在JavaScript中，添加到页面上的事件处理程序数量将直接关系到页面的整体运行性能，导致这一问题的原因是多方面的。首先，每个函数都是对象，都会占用内存，内存中对象越多，性能越差。其次，必须事先指定所有事件处理程序而导致DOM访问次数，会延迟整个页面的交互就绪事件。</p>
+<p>对事件处理程序过多问题的解决办法是事件委托。事件委托利用了事件冒泡，只指定一个事件处理程序，就可以管理某一类型的所有事件。例如<code>click</code>事件会一致冒泡到<code>document</code>层级，也就是说，我们可以为整个页面指定一个<code>onClick</code>事件处理程序，而不必给每个单击的元素分别添加事件处理程序。优点在于：</p>
+<ul>
+<li><code>document</code>对象很快就可以访问，而且可以在页面生命周期的任何时间点上为它添加事件处理程序，无需等到<code>DOMContentLoaded</code>或者<code>load</code>事件。换句话说，只要可单击的元素呈现在页面上，就可以立即具备适当的功能。</li>
+<li>在页面中设置事件处理程序所需的事件更少，只添加一个事件处理程序所需的DOM引用更少，所花的时间也更少。</li>
+<li>整个页面占用的内存空间更少，能够提升整体性能。</li>
+</ul>
+<p>每当将事件处理程序指定给元素时，运行中的浏览器代码与支持页面交互的JavaScript代码之间就会建立一个连接，这种连接越多，页面执行起来就越慢。可以采用事件委托技术，限制建立的连接数量，另外，在不需要的时候移除事件处理程序，也是一个解决办法。内存中留油那些过时不用的“空事件处理程序”，也是造成web应用程序内存与性能问题的主要原因。</p>
+<p>在两种情况下会造成上述问题：第一种情况就是从文档中移除带有事件处理程序的元素时，可能是通过纯粹的DOM操作，例如使用<code>removeChild()</code>和<code>replaceChild()</code>方法。但更多的是发生在使用<code>innerHTML</code>替换页面中某一部分的时候，如果带有事件处理程序的元素被<code>innerHTML</code>删除了，那么原来添加到元素中的事件处理程序极有可能无法被当作垃圾回收。第二种情况是卸载页面的时候。如果在页面被卸载之前没有清理干净事件处理程序，那么它们就会滞留在内存中，每次加载完页面再卸载页面时（可能是在两个页面间来回切换，也可能是点击了刷新按钮），内存中滞留的对象数目就会增加，因为事件处理程序占用的内存没有被释放。</p>
+<p>一般来说，最好的做法就是在页面卸载之前，先通过<code>onunload</code>事件处理程序移除所有的事件处理程序。在这里，如果使用事件委托，那么要跟踪的事件处理程序越少，移除就越容易。对于这种类似撤销的操作，可以想象成只要是通过<code>onload</code>事件处理程序添加的东西，最后都要通过<code>onunload</code>移除。使用<code>onunload</code>事件处理程序意味着页面不会被换存在bfcache种，如果在意这个问题，那么就只能在IE中通过<code>onunload</code>来移除事件处理程序了。</p>
+<hr>
+<p>这一章没有很详细的看，太具体了，对于我这个只是想明白JavaScript运行相关的知识点的人来说参考价值不大，在具体网页开发过程中倒是有必要了解。所以就这样掠过了。</p>
+<hr>
+
         </div>
       </div>
     </div>
