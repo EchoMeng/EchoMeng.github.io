@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Echo Meng">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Echo Meng&#39;s Blog"/>
+  <meta property="og:description" content="Can&#39;t help but code." />
+  <meta property="og:site_name" content="Echo Meng&#39;s Blog"/>
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://www.echomeng.cn"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Echo Meng&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Echo Meng's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Untitled Post</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/EchoMeng/">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:mengxiangxxa@163.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Echo Meng</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-04-10</span>
+            <span class="time">17:22:25</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+            
+          <p>#动态规划</p>
+<p>###求解动态规划问题：求解最优化问题<br>动态规划问题和分治方法相似，都是通过嘴和子问题的解来求解原问题的解。分治方法将问题划分为互不相交的子问题，递归的求解子问题，再将它们的解组合起来，求出原问题的解。与之相法，动态规划应用于子问题重叠的情况，即不同的子问题之间具有公共的子子问题，子问题的求解是递归进行的，将其划分为更小的子子问题。</p>
+<p>###设计动态规划问题的四个步骤</p>
+<ol>
+<li>刻画一个最优解的结构特征；</li>
+<li>递归的定义最优解的值；</li>
+<li>计算最优解的值，通常采用自底向上的方法；</li>
+<li>利用计算出的信息构造一个最优解</li>
+</ol>
+<p>###典型问题求解</p>
+<p>####一、最优二叉查找树问题</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//最优二叉查找树</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> 思路：需要检查所有可能的根结点，并对每种情况下分别求解根结点分开的两个子序列的最优二叉搜索树。</span></span><br><span class="line"><span class="comment"> 计算过程中要保存搜索代价</span></span><br><span class="line"><span class="comment"> 虚拟键：有一些需要搜索的值并不在“库”中，称为虚拟键，每一个虚拟键也有相应的概率</span></span><br><span class="line"><span class="comment"> 虚拟键的个数是n+1,比关键字数目多1：d0表示所有小于k1的值，</span></span><br><span class="line"><span class="comment"> dn表示所有大于kn的值，其他值表示在对应关键字之间的值。因此会有+1的特征</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; <span class="comment">//命名空间为std</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MaxVal = <span class="number">9999</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> n = <span class="number">5</span>;</span><br><span class="line"><span class="comment">//搜索到根节点和虚拟键的概率</span></span><br><span class="line"><span class="keyword">double</span> p[n + <span class="number">1</span>] = &#123;<span class="number">-1</span>,<span class="number">0.15</span>,<span class="number">0.1</span>,<span class="number">0.05</span>,<span class="number">0.1</span>,<span class="number">0.2</span>&#125;;</span><br><span class="line"><span class="comment">//q的数目应该比p的数目+1的，这里p的第一个值-1即做特殊化处理</span></span><br><span class="line"><span class="keyword">double</span> q[n + <span class="number">1</span>] = &#123;<span class="number">0.05</span>,<span class="number">0.1</span>,<span class="number">0.05</span>,<span class="number">0.05</span>,<span class="number">0.05</span>,<span class="number">0.1</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> root[n + <span class="number">1</span>][n + <span class="number">1</span>];<span class="comment">//记录根节点</span></span><br><span class="line"><span class="keyword">double</span> w[n + <span class="number">2</span>][n + <span class="number">2</span>];<span class="comment">//子树概率总和</span></span><br><span class="line"><span class="keyword">double</span> e[n + <span class="number">2</span>][n + <span class="number">2</span>];<span class="comment">//子树期望代价</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">optimalBST</span><span class="params">(<span class="keyword">double</span> *p,<span class="keyword">double</span> *q,<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//初始化只包括虚拟键的子树</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n + <span class="number">1</span>;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        w[i][i - <span class="number">1</span>] = q[i - <span class="number">1</span>];</span><br><span class="line">        e[i][i - <span class="number">1</span>] = q[i - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//由下到上，由左到右逐步计算</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> len = <span class="number">1</span>;len &lt;= n;++len)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n - len + <span class="number">1</span>;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> j = i + len - <span class="number">1</span>;</span><br><span class="line">            e[i][j] = MaxVal;</span><br><span class="line">            w[i][j] = w[i][j - <span class="number">1</span>] + p[j] + q[j];</span><br><span class="line">            <span class="comment">//求取最小代价的子树的根</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = i;k &lt;= j;++k)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">double</span> temp = e[i][k - <span class="number">1</span>] + e[k + <span class="number">1</span>][j] + w[i][j];</span><br><span class="line">                <span class="keyword">if</span> (temp &lt; e[i][j])</span><br><span class="line">                &#123;</span><br><span class="line">                    e[i][j] = temp;</span><br><span class="line">                    root[i][j] = k;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//输出最优二叉查找树所有子树的根</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printRoot</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"各子树的根："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= n;++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; root[i][j] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//打印最优二叉查找树的结构</span></span><br><span class="line"><span class="comment">//打印出[i,j]子树，它是根r的左子树和右子树</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printOptimalBST</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> j,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> rootChild = root[i][j];<span class="comment">//子树根节点</span></span><br><span class="line">    <span class="keyword">if</span> (rootChild == root[<span class="number">1</span>][n])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//输出整棵树的根</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"k"</span> &lt;&lt; rootChild &lt;&lt; <span class="string">"是根"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        printOptimalBST(i,rootChild - <span class="number">1</span>,rootChild);</span><br><span class="line">        printOptimalBST(rootChild + <span class="number">1</span>,j,rootChild);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (j &lt; i - <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (j == i - <span class="number">1</span>)<span class="comment">//遇到虚拟键</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (j &lt; r)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"d"</span> &lt;&lt; j &lt;&lt; <span class="string">"是"</span> &lt;&lt; <span class="string">"k"</span> &lt;&lt; r &lt;&lt; <span class="string">"的左孩子"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"d"</span> &lt;&lt; j &lt;&lt; <span class="string">"是"</span> &lt;&lt; <span class="string">"k"</span> &lt;&lt; r &lt;&lt; <span class="string">"的右孩子"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span><span class="comment">//遇到内部结点</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (rootChild &lt; r)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"k"</span> &lt;&lt; rootChild &lt;&lt; <span class="string">"是"</span> &lt;&lt; <span class="string">"k"</span> &lt;&lt; r &lt;&lt; <span class="string">"的左孩子"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"k"</span> &lt;&lt; rootChild &lt;&lt; <span class="string">"是"</span> &lt;&lt; <span class="string">"k"</span> &lt;&lt; r &lt;&lt; <span class="string">"的右孩子"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    printOptimalBST(i,rootChild - <span class="number">1</span>,rootChild);</span><br><span class="line">    printOptimalBST(rootChild + <span class="number">1</span>,j,rootChild);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    optimalBST(p,q,n);</span><br><span class="line">    printRoot();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"最优二叉树结构："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    printOptimalBST(<span class="number">1</span>,n,<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>####二、连续子数组的最大和<br>输入一个整型数组，数组中有证书也有负数，数组中的一个或者连续多个整数组组成一个子数组，求所有子数组中和的最大值。要求时间复杂度为o(n)。</p>
+<p>这道题可以用动态规划的思想思考。  </p>
+<p>如果用函数f(i)表示以第i个数字结尾的子数组的最大和，那么我们需要求出max（f(i)），其中i是在0到n之间的。可以用以下的递归公式求解f(n):  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f(i) = data[i]				 (i = 0 || f(i - 1) &lt;= 0);   </span><br><span class="line">	   data[i] + f(i - 1)    (i != 0 &amp;&amp; f(i - 1) &gt; 0).</span><br></pre></td></tr></table></figure>
+<p>在整个动态规划的过程中，使用一个数字记录最大值，使用一个数字记录f(i - 1)，通过判断值的正负求解即可。详细代码如下:  </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">FindGreatestSumOfSubArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">array</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="built_in">array</span>.size();</span><br><span class="line">    <span class="keyword">if</span> (count == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> maxSumRecord = <span class="built_in">array</span>[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">        sum += <span class="built_in">array</span>[i];</span><br><span class="line">        <span class="keyword">if</span> (sum &gt; maxSumRecord) maxSumRecord = sum;</span><br><span class="line">        <span class="keyword">if</span> (sum &lt; <span class="number">0</span>) sum = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxSumRecord;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
