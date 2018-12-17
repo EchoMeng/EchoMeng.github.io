@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-12-09</span>
-            <span class="time">17:22:25</span>
+            <span class="time">09:39:11</span>
           </span>
           
           <!--  Categories  -->
@@ -125,12 +125,12 @@
             
               <div id="toc" class="toc-article">
                 <strong class="toc-title">文章目录</strong>
-              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python爬虫架构"><span class="toc-text">Python爬虫架构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#搭建开发环境"><span class="toc-text">搭建开发环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#动手前需要知道"><span class="toc-text">动手前需要知道</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#开始动手了！"><span class="toc-text">开始动手了！</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#爬虫编码之糗百"><span class="toc-text">爬虫编码之糗百</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#爬虫编码之爱问知识人并保存到数据库"><span class="toc-text">爬虫编码之爱问知识人并保存到数据库</span></a></li></ol></li></ol>
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python爬虫架构"><span class="toc-text">Python爬虫架构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#搭建开发环境"><span class="toc-text">搭建开发环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#动手前需要知道"><span class="toc-text">动手前需要知道</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#开始动手了！"><span class="toc-text">开始动手了！</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#糗百"><span class="toc-text">糗百</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#百度贴吧"><span class="toc-text">百度贴吧</span></a></li></ol></li></ol>
               </div>
               
           <p>怎么使用爬虫抓数据呢？</p>
 <a id="more"></a>
-<h1 id="Python爬虫架构"><a href="#Python爬虫架构" class="headerlink" title="Python爬虫架构"></a>Python爬虫架构</h1><p><a href="http://www.runoob.com/w3cnote/python-spider-intro.html" target="_blank" rel="noopener">Python爬虫介绍</a></p>
+<h1 id="Python爬虫架构"><a href="#Python爬虫架构" class="headerlink" title="Python爬虫架构"></a>Python爬虫架构</h1><p><a href="http://www.runoob.com/w3cnote/python-spider-intro.html" target="_blank" rel="noopener">Python爬虫介绍</a><br><a href="https://zhuanlan.zhihu.com/p/21479334" target="_blank" rel="noopener">如何学习python爬虫</a></p>
 <p>Python爬虫架构主要有五个部分构成，分别是调度器，URL管理器，网页下载器，网页解析器，应用程序（爬取的有价值数据）。</p>
 <ul>
 <li>调度器：相当于一台电脑的CPU，负责调度URL管理器、下载器、解析器之间的协调工作。</li>
@@ -186,7 +186,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="开始动手了！"><a href="#开始动手了！" class="headerlink" title="开始动手了！"></a>开始动手了！</h1><h2 id="爬虫编码之糗百"><a href="#爬虫编码之糗百" class="headerlink" title="爬虫编码之糗百"></a>爬虫编码之糗百</h2><p><a href="https://cuiqingcai.com/990.html" target="_blank" rel="noopener">Python爬虫实战一之爬取糗事百科段子</a></p>
+<h1 id="开始动手了！"><a href="#开始动手了！" class="headerlink" title="开始动手了！"></a>开始动手了！</h1><h2 id="糗百"><a href="#糗百" class="headerlink" title="糗百"></a>糗百</h2><p><a href="https://cuiqingcai.com/990.html" target="_blank" rel="noopener">Python爬虫实战一之爬取糗事百科段子</a></p>
 <p>这里发现的问题：</p>
 <ul>
 <li>在Python3中打印函数的格式变成了<code>print()</code>，Python2中的格式是<code>print xx</code></li>
@@ -206,10 +206,7 @@
 <li>python不用分号，因此一定要注意缩进位置，十分重要</li>
 <li>Python3使用<code>input()</code>代替Python2中的<code>raw_input()</code>函数</li>
 </ul>
-<h2 id="爬虫编码之爱问知识人并保存到数据库"><a href="#爬虫编码之爱问知识人并保存到数据库" class="headerlink" title="爬虫编码之爱问知识人并保存到数据库"></a>爬虫编码之爱问知识人并保存到数据库</h2><p>首先需要安装两个库，beautifulsoup和数据库，python2使用MySQLdb，python3使用pymysql。数据库部分可参考这里：<a href="https://www.jianshu.com/p/4490957e29ad" target="_blank" rel="noopener">python3使用pymysql操作mysql</a>。</p>
-<p>安装命令分别是：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip3 install beautifulsoup4</span><br><span class="line">pip3 install pymysql</span><br></pre></td></tr></table></figure>
-<p>以这个页面为例：<a href="https://iask.sina.com.cn/c/1101.html（原参考文章的URL已经失效了）" target="_blank" rel="noopener">https://iask.sina.com.cn/c/1101.html（原参考文章的URL已经失效了）</a></p>
+<h2 id="百度贴吧"><a href="#百度贴吧" class="headerlink" title="百度贴吧"></a>百度贴吧</h2><p>目标：<a href="http://tieba.baidu.com/p/3138733512?see_lz=1&amp;pn=1" target="_blank" rel="noopener">纯原创我心中的NBA2014-2015赛季现役50大</a></p>
 
         </div>
       </div>
