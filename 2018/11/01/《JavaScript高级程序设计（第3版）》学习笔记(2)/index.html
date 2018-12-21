@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-11-01</span>
-            <span class="time">16:19:12</span>
+            <span class="time">18:28:34</span>
           </span>
           
           <!--  Categories  -->
@@ -155,7 +155,13 @@
 <h4 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age, job</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = name;</span><br><span class="line">	<span class="keyword">this</span>.age = age;</span><br><span class="line">	<span class="keyword">this</span>.job = job;</span><br><span class="line">	<span class="keyword">this</span>.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		alert(<span class="keyword">this</span>.name);</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">"Jack"</span>, <span class="number">30</span>, <span class="string">"Worker"</span>);</span><br></pre></td></tr></table></figure>
 <p>与工厂模式的区别：没有显示的创建对象，直接将属性和方法赋给了<code>this</code>对象，没有<code>return</code>语句。</p>
 <p>Tips: 按照惯例，构造函数都要用一个大写字母开头，非构造函数都要以小写字母开头。</p>
-<p>而创建构造函数对应的实例，必须要用一个<code>new</code>操作符。</p>
+<p>而创建构造函数对应的实例，必须要用一个<code>new</code>操作符。这种方式调用构造函数实际上会经历以下4个步骤：</p>
+<ol>
+<li>创建一个新对象；</li>
+<li>将构造函数的作用域赋给新对象，因此<code>this</code>就指向了新对象；</li>
+<li>执行构造函数中的代码，为新对象增加属性；</li>
+<li>返回新对象。</li>
+</ol>
 <p>构造函数模式的问题：每个方法都要在每个实例上重新创建一遍。ECMAScript中函数是对象，因此每定义一个函数，也就是实例化了一个对象。（指的是<code>sayName()</code>函数）为了解决这个问题，可以把<code>sayName()</code>函数转移到函数外部，但是这样又会导致函数称为一个全局函数，所有对象都可以调用，没有封装性可言了。</p>
 <h4 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h4><p>我们创建的每一个函数都有一个<code>prototype</code>属性，这个属性是一个指针，指向一个对象，这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法。<code>prototype</code>是通过调用构造函数而创建的那个对象实例的原型对象。使用原型对象的好处是可以让所有的对象实例共享它所包含的属性和方法，不必在构造函数中定义对象实例的信息，而是可以将这些信息直接添加到原型对象中。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.name = <span class="string">"Sam"</span>;</span><br><span class="line">Person.prototype.age = <span class="number">29</span>;</span><br><span class="line">Person.prototype.job = <span class="string">"Doctor"</span>;</span><br><span class="line">Person.prototype.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	alert(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person1 = <span class="keyword">new</span> Person();</span><br><span class="line">person1.sayName(); <span class="comment">/* Sam */</span></span><br></pre></td></tr></table></figure>

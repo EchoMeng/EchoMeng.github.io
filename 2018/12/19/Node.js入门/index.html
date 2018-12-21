@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Echo Meng">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="《Node.js入门》"/>
+  <meta property="og:description" content="Can&#39;t help but code." />
+  <meta property="og:site_name" content="Echo Meng&#39;s Blog"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://www.echomeng.cn"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Echo Meng&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Echo Meng's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">《Node.js入门》</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/EchoMeng/">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:mengxiangxxa@163.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Echo Meng</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-12-19</span>
+            <span class="time">18:28:34</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/技术/">技术</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/Node-js/">#Node.js</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+            
+              <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#环境搭建"><span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#一个简单的express应用"><span class="toc-text">一个简单的express应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用外部模块"><span class="toc-text">使用外部模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#简单的superagent与cheerio爬虫"><span class="toc-text">简单的superagent与cheerio爬虫</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#eventproxy控制并发"><span class="toc-text">eventproxy控制并发</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用async控制并发"><span class="toc-text">使用async控制并发</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#测试：mocha-should-istanbul"><span class="toc-text">测试：mocha, should, istanbul</span></a></li></ol>
+              </div>
+              
+          <p>想要深入实践JavaScript，所以尝试学习Node.js。</p>
+<a id="more"></a>
+<p>先上参考链接：<a href="https://github.com/alsotang/node-lessons" target="_blank" rel="noopener">Node.js 包教不包会</a></p>
+<p>练习代码：<a href="https://github.com/echomeng/node_lession" target="_blank" rel="noopener">Node.js练习</a></p>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>首先需要安装nvm，就是Node Version Manager，负责Node.js的版本管理。因为考虑不涉及Node.js新老版本的切换，因此这里没有安装nvm，直接进入了下一步。（主要是安装时遇到了问题不想花时间解决QAQ）</p>
+<p>然后安装Node.js，之前已经借助brew安装过了。</p>
+<p>最后需要安装npm，负责自动管理包的依赖，就是Node.js Package Manager的意思。之前用brew安装过。</p>
+<h1 id="一个简单的express应用"><a href="#一个简单的express应用" class="headerlink" title="一个简单的express应用"></a>一个简单的express应用</h1><p>express是Node.js应用最广泛的web框架，<a href="http://expressjs.com/" target="_blank" rel="noopener">express官网</a>。</p>
+<p>Node.js的依赖是以项目为单位的，不是安装在全局的，直接安装在项目的node_modules目录下，每个依赖都可以有指定版本的其他依赖。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install express</span><br></pre></td></tr></table></figure>
+<p>写第一个express代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">    res.send(<span class="string">'Hello World'</span>);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(<span class="number">3000</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'app is listening at port 3000'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这里需要理解的知识点：</p>
+<ul>
+<li>端口：通过端口来区分出同一电脑内不同应用或者进程，从而实现一条物理网线同时连接多个程序（通过分组交换技术）。端口号是一个16位的uint，所以范围是1-65535，对TCP，port 0被保留，UDP的source端端口号是可选的，为0时表示无端口。</li>
+<li>URL:常见的格式<code>&lt;scheme&gt;://&lt;host&gt;:&lt;port&gt;/&lt;url-path&gt;</code></li>
+</ul>
+<h1 id="使用外部模块"><a href="#使用外部模块" class="headerlink" title="使用外部模块"></a>使用外部模块</h1><p>package.json文件的用法：</p>
+<p>定义了项目的各种元信息，包括项目的名称，git repo地址，作者等等，定义了项目的依赖，这样项目在部署的时候不需要将node_modules目录也上传到服务器，<code>npm install</code>即可。</p>
+<p>安装依赖的具体步骤:</p>
+<ol>
+<li><code>npm init</code>。初始化项目并帮我吗创建一个package.json文件；</li>
+<li><code>npm install express utility --save</code>。安装依赖，同时<code>--save</code>命令会帮助我们把依赖写入package.json文件。</li>
+</ol>
+<p>这里分不清http的query和body了，所以还是翻了《自顶向下》，有空了应该把这本再看一遍…query实际上就是URL上带着的para参数。</p>
+<p>这里记录网络中应用层里几个之前有疑惑的点：</p>
+<ul>
+<li>HTTP一定使用TCP支撑运输协议。</li>
+<li>HTTP请求报文：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET /somedir/page.html HTTP/1.1 </span><br><span class="line">/* request line 请求行:方法字段，URL字段，HTTP版本字段 */</span><br><span class="line">----------------------------------------------------</span><br><span class="line">/* header line 首部行 */</span><br><span class="line">Host: www.someschool.com</span><br><span class="line">Connection: close /* 非持续连接 */</span><br><span class="line">User-Agent: Mozilla/5.0</span><br><span class="line">Accept-language: fr</span><br></pre></td></tr></table></figure>
+<ul>
+<li>HTTP响应报文：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/* 状态行 */</span><br><span class="line">HTTP/1.1 200 OK</span><br><span class="line">/* 首部行 */</span><br><span class="line">Connection: close</span><br><span class="line">Date: Tue, 09 Aug 2011 15:44:04 GMT</span><br><span class="line">Server: Apache/2.2.3 (CentOS)</span><br><span class="line">Last-Modified: Tur, 09 Aug 2011 15:11:03 GMT</span><br><span class="line">Content-Length: 6821</span><br><span class="line">Content-Type: text/html</span><br><span class="line">/* 实体行 */</span><br><span class="line">(data data data data data...)</span><br></pre></td></tr></table></figure>
+<p>这一部分的代码就不贴出来了。</p>
+<h1 id="简单的superagent与cheerio爬虫"><a href="#简单的superagent与cheerio爬虫" class="headerlink" title="简单的superagent与cheerio爬虫"></a>简单的superagent与cheerio爬虫</h1><ul>
+<li>superagent是一个http库，可以发起get或者post请求</li>
+<li>cheerio用来从网页中以css selector取数据</li>
+</ul>
+<p>这一段代码不是很理解，所以研究了一下cheerio这个库到底在干嘛，先贴代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $ = cheerio.load(sres.text);</span><br><span class="line"><span class="keyword">var</span> items = [];</span><br><span class="line">$(<span class="string">'#topic_list .topic_title'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params">inx, element</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> $element = $(element);</span><br><span class="line">	items.push(&#123;</span><br><span class="line">		title: $element.attr(<span class="string">'title'</span>),</span><br><span class="line">		href: $element.attr(<span class="string">'href'</span>)</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>以上代码做的其实是以下几件事：</p>
+<ol>
+<li>装载html文件。</li>
+<li>选择器：<code>$(selelctor,[context],[root])</code>。选择器在context范围内进行搜索，context又在root范围内搜索。</li>
+<li><code>attr(name, value)</code>获得和修改属性。在匹配的元素中只能获得第一元素的属性，如果设置一个属性的值为<code>null</code>，则移除这个属性。只传第一个参数，则获得属性；传两个参数，则是修改属性。</li>
+</ol>
+<p>ref: <a href="https://www.jianshu.com/p/6c6aba741c59" target="_blank" rel="noopener">cheerio 笔记</a></p>
+<h1 id="eventproxy控制并发"><a href="#eventproxy控制并发" class="headerlink" title="eventproxy控制并发"></a>eventproxy控制并发</h1><p>Node.js的异步并发是一大亮点。eventproxy这个库是用来管理异步操作是否完成，监听异步操作，在他们都被完成之后自动调用提供的处理函数，并将抓取到的数据当参数传出来。</p>
+<p>哈哈哈哈哈，这一段好逗，贴出来乐一下：</p>
+<p><img src="/images/node入门/enentproxy.png" alt=""></p>
+<p>个人觉得js这种随意的语言，真的非常不符合我的严谨型人格…</p>
+<p>这里解读一下eventproxy的用法（先会用再理解吧）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ep = <span class="keyword">new</span> eventproxy;</span><br><span class="line">ep.after(<span class="string">'topic_html'</span>, topicURLs.length, <span class="function"><span class="keyword">function</span>(<span class="params">topics</span>)</span>&#123;</span><br><span class="line">	topics = topics.map(<span class="function"><span class="keyword">function</span>(<span class="params">topicPair</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">var</span> topicURL = topicPair[<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">var</span> topicHTML = topicPair[<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">var</span> $ = cheerio.load(topicHTML);</span><br><span class="line">		<span class="keyword">return</span> (&#123;</span><br><span class="line">			title: $(<span class="string">'.topic_full_title'</span>).text().trim(),</span><br><span class="line">			herf: topicURL,</span><br><span class="line">			comment: $(<span class="string">'.reply_content'</span>).eq(<span class="number">0</span>).text().trim(),</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'final:'</span>);</span><br><span class="line">	<span class="built_in">console</span>.log(topics);</span><br><span class="line">&#125;);</span><br><span class="line">topicURLs.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">topicurl</span>)</span>&#123;</span><br><span class="line">	superagent.get(topicurl)</span><br><span class="line">		.end(<span class="function"><span class="keyword">function</span>(<span class="params">err, res</span>)</span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(<span class="string">'fetch '</span>+topicurl+<span class="string">' successful'</span>);</span><br><span class="line">			ep.emit(<span class="string">'topic_html'</span>, [topicurl, res.text]);</span><br><span class="line">		&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ol>
+<li>创建<code>eventproxy</code>的实例；</li>
+<li><code>.after()</code>方法的三个参数，第一个参数表示监听的是<code>&#39;topic_html&#39;</code>，第二个参数表示要监听达到<code>topicURLs.length</code>次才会执行回调函数，第三个参数就是要执行的回调函数。</li>
+<li><code>.map()</code>方法是Array方法，他会返回一个新数组，数组中的元素为原数组元素调用函数处理后返回的值，并不会改变原数组的值。</li>
+<li><code>trim()</code>函数用来去除字符串开头和结尾的空格。</li>
+<li>这一段代码刚看到的时候没看懂，实际上<code>eventproxy</code>的使用是先执行<code>ep.emit(&#39;topic_html&#39;, [topicurl, res.text]);</code>语句，指定监听的事件，这些被监听的事件是异步完成的，当监听的事件全部完成后，再抛出事件，即执行<code>after()</code>。先监听，后抛出。</li>
+<li><code>topic_html</code>实际上只是为监听事件起一个事件名，能够使回调时对应正确的监听事件。</li>
+<li><code>topicURLs.length</code>才是实际上指定监听结束发起回调的时刻。</li>
+<li><code>.eq()</code>方法将匹配元素集缩减至指定index上的一个。</li>
+<li><code>forEach()</code>和<code>each()</code>之间的区别：前者是用来遍历数组和json对象的，而后者是专门用来遍历jquery对象的。</li>
+<li>jquery到底是什么？<a href="https://www.jquery123.com/" target="_blank" rel="noopener">jQuery API中文文档</a></li>
+</ol>
+<blockquote>
+<p>jQuery 是一个高效、精简并且功能丰富的 JavaScript 工具库。它提供的 API 易于使用且兼容众多浏览器，这让诸如 HTML 文档遍历和操作、事件处理、动画和 Ajax 操作更加简单。</p>
+</blockquote>
+<p>jQuery库通常用于前端操作DOM节点，后端通常使用cheerio写爬虫脚本。cheerio是专门为服务端设计的快读、灵活精简实现的jQuery。cheerio模块引入了jquery核心的一部分，去除了jquery库中所有在dom和浏览器的不兼容部分，只保留了核心API。两者的API很类似，例如前文说到的<code>each()</code>也是用来遍历cheerio对象的。这样就说得通了。</p>
+<p>有一个eventproxy的源码分析：<a href="https://cnodejs.org/topic/5926b111d371b6372a8afdba" target="_blank" rel="noopener">eventproxy原理分析</a></p>
+<h1 id="使用async控制并发"><a href="#使用async控制并发" class="headerlink" title="使用async控制并发"></a>使用async控制并发</h1><p>当发起请求过多时，大部分网站会因此禁止恶意请求而封IP，因此需要控制并发数量。</p>
+<p>async常用的控制并发数量的接口：<code>mapLimit(arr, limit, iterator, callback)</code>。另一个常用的控制并发数量的接口<code>queue(worker, concurrency)</code>。</p>
+<p>这里用到<code>setTimeout(function, delay)</code>这个函数，是在等待<code>delay</code>毫秒后执行<code>function</code>。</p>
+<h1 id="测试：mocha-should-istanbul"><a href="#测试：mocha-should-istanbul" class="headerlink" title="测试：mocha, should, istanbul"></a>测试：mocha, should, istanbul</h1><p>直接上代码，用来跑测试用例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="string">'test/main.test.js'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  it(<span class="string">'should equal 55 when n === 10'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    main.fibonacci(<span class="number">10</span>).should.equal(<span class="number">55</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
