@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-12-19</span>
-            <span class="time">10:09:35</span>
+            <span class="time">17:36:41</span>
           </span>
           
           <!--  Categories  -->
@@ -125,17 +125,17 @@
             
               <div id="toc" class="toc-article">
                 <strong class="toc-title">文章目录</strong>
-              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#环境搭建"><span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#一个简单的express应用"><span class="toc-text">一个简单的express应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用外部模块"><span class="toc-text">使用外部模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#简单的superagent与cheerio爬虫"><span class="toc-text">简单的superagent与cheerio爬虫</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#eventproxy控制并发"><span class="toc-text">eventproxy控制并发</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用async控制并发"><span class="toc-text">使用async控制并发</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#测试：mocha-should-istanbul"><span class="toc-text">测试：mocha, should, istanbul</span></a></li></ol>
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#lession1-环境搭建"><span class="toc-text">lession1:环境搭建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lession2-一个简单的express应用"><span class="toc-text">lession2:一个简单的express应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lession3-使用外部模块"><span class="toc-text">lession3:使用外部模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lession4-简单的superagent与cheerio爬虫"><span class="toc-text">lession4:简单的superagent与cheerio爬虫</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#eventproxy控制并发"><span class="toc-text">eventproxy控制并发</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lession5-使用async控制并发"><span class="toc-text">lession5:使用async控制并发</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lession6-测试：mocha-should-istanbul"><span class="toc-text">lession6:测试：mocha, should, istanbul</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lesssion7-浏览器端测试：mocha-chai-phantomjs"><span class="toc-text">lesssion7:浏览器端测试：mocha, chai, phantomjs</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lession8-supertest"><span class="toc-text">lession8:supertest</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lession9-正则表达式"><span class="toc-text">lession9:正则表达式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lession10-benchmark"><span class="toc-text">lession10: benchmark</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lession11-作用域和闭包"><span class="toc-text">lession11:作用域和闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-text"></span></a></li></ol></li></ol>
               </div>
               
           <p>想要深入实践JavaScript，所以尝试学习Node.js。</p>
 <a id="more"></a>
 <p>先上参考链接：<a href="https://github.com/alsotang/node-lessons" target="_blank" rel="noopener">Node.js 包教不包会</a></p>
 <p>练习代码：<a href="https://github.com/echomeng/node_lession" target="_blank" rel="noopener">Node.js练习</a></p>
-<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>首先需要安装nvm，就是Node Version Manager，负责Node.js的版本管理。因为考虑不涉及Node.js新老版本的切换，因此这里没有安装nvm，直接进入了下一步。（主要是安装时遇到了问题不想花时间解决QAQ）</p>
+<h1 id="lession1-环境搭建"><a href="#lession1-环境搭建" class="headerlink" title="lession1:环境搭建"></a>lession1:环境搭建</h1><p>首先需要安装nvm，就是Node Version Manager，负责Node.js的版本管理。因为考虑不涉及Node.js新老版本的切换，因此这里没有安装nvm，直接进入了下一步。（主要是安装时遇到了问题不想花时间解决QAQ）</p>
 <p>然后安装Node.js，之前已经借助brew安装过了。</p>
 <p>最后需要安装npm，负责自动管理包的依赖，就是Node.js Package Manager的意思。之前用brew安装过。</p>
-<h1 id="一个简单的express应用"><a href="#一个简单的express应用" class="headerlink" title="一个简单的express应用"></a>一个简单的express应用</h1><p>express是Node.js应用最广泛的web框架，<a href="http://expressjs.com/" target="_blank" rel="noopener">express官网</a>。</p>
+<h1 id="lession2-一个简单的express应用"><a href="#lession2-一个简单的express应用" class="headerlink" title="lession2:一个简单的express应用"></a>lession2:一个简单的express应用</h1><p>express是Node.js应用最广泛的web框架，<a href="http://expressjs.com/" target="_blank" rel="noopener">express官网</a>。</p>
 <p>Node.js的依赖是以项目为单位的，不是安装在全局的，直接安装在项目的node_modules目录下，每个依赖都可以有指定版本的其他依赖。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install express</span><br></pre></td></tr></table></figure>
 <p>写第一个express代码：</p>
@@ -145,7 +145,7 @@
 <li>端口：通过端口来区分出同一电脑内不同应用或者进程，从而实现一条物理网线同时连接多个程序（通过分组交换技术）。端口号是一个16位的uint，所以范围是1-65535，对TCP，port 0被保留，UDP的source端端口号是可选的，为0时表示无端口。</li>
 <li>URL:常见的格式<code>&lt;scheme&gt;://&lt;host&gt;:&lt;port&gt;/&lt;url-path&gt;</code></li>
 </ul>
-<h1 id="使用外部模块"><a href="#使用外部模块" class="headerlink" title="使用外部模块"></a>使用外部模块</h1><p>package.json文件的用法：</p>
+<h1 id="lession3-使用外部模块"><a href="#lession3-使用外部模块" class="headerlink" title="lession3:使用外部模块"></a>lession3:使用外部模块</h1><p>package.json文件的用法：</p>
 <p>定义了项目的各种元信息，包括项目的名称，git repo地址，作者等等，定义了项目的依赖，这样项目在部署的时候不需要将node_modules目录也上传到服务器，<code>npm install</code>即可。</p>
 <p>安装依赖的具体步骤:</p>
 <ol>
@@ -164,7 +164,7 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/* 状态行 */</span><br><span class="line">HTTP/1.1 200 OK</span><br><span class="line">/* 首部行 */</span><br><span class="line">Connection: close</span><br><span class="line">Date: Tue, 09 Aug 2011 15:44:04 GMT</span><br><span class="line">Server: Apache/2.2.3 (CentOS)</span><br><span class="line">Last-Modified: Tur, 09 Aug 2011 15:11:03 GMT</span><br><span class="line">Content-Length: 6821</span><br><span class="line">Content-Type: text/html</span><br><span class="line">/* 实体行 */</span><br><span class="line">(data data data data data...)</span><br></pre></td></tr></table></figure>
 <p>这一部分的代码就不贴出来了。</p>
-<h1 id="简单的superagent与cheerio爬虫"><a href="#简单的superagent与cheerio爬虫" class="headerlink" title="简单的superagent与cheerio爬虫"></a>简单的superagent与cheerio爬虫</h1><ul>
+<h1 id="lession4-简单的superagent与cheerio爬虫"><a href="#lession4-简单的superagent与cheerio爬虫" class="headerlink" title="lession4:简单的superagent与cheerio爬虫"></a>lession4:简单的superagent与cheerio爬虫</h1><ul>
 <li>superagent是一个http库，可以发起get或者post请求</li>
 <li>cheerio用来从网页中以css selector取数据</li>
 </ul>
@@ -200,11 +200,62 @@
 </blockquote>
 <p>jQuery库通常用于前端操作DOM节点，后端通常使用cheerio写爬虫脚本。cheerio是专门为服务端设计的快读、灵活精简实现的jQuery。cheerio模块引入了jquery核心的一部分，去除了jquery库中所有在dom和浏览器的不兼容部分，只保留了核心API。两者的API很类似，例如前文说到的<code>each()</code>也是用来遍历cheerio对象的。这样就说得通了。</p>
 <p>有一个eventproxy的源码分析：<a href="https://cnodejs.org/topic/5926b111d371b6372a8afdba" target="_blank" rel="noopener">eventproxy原理分析</a></p>
-<h1 id="使用async控制并发"><a href="#使用async控制并发" class="headerlink" title="使用async控制并发"></a>使用async控制并发</h1><p>当发起请求过多时，大部分网站会因此禁止恶意请求而封IP，因此需要控制并发数量。</p>
+<h1 id="lession5-使用async控制并发"><a href="#lession5-使用async控制并发" class="headerlink" title="lession5:使用async控制并发"></a>lession5:使用async控制并发</h1><p>当发起请求过多时，大部分网站会因此禁止恶意请求而封IP，因此需要控制并发数量。</p>
 <p>async常用的控制并发数量的接口：<code>mapLimit(arr, limit, iterator, callback)</code>。另一个常用的控制并发数量的接口<code>queue(worker, concurrency)</code>。</p>
 <p>这里用到<code>setTimeout(function, delay)</code>这个函数，是在等待<code>delay</code>毫秒后执行<code>function</code>。</p>
-<h1 id="测试：mocha-should-istanbul"><a href="#测试：mocha-should-istanbul" class="headerlink" title="测试：mocha, should, istanbul"></a>测试：mocha, should, istanbul</h1><p>直接上代码，用来跑测试用例：</p>
+<h1 id="lession6-测试：mocha-should-istanbul"><a href="#lession6-测试：mocha-should-istanbul" class="headerlink" title="lession6:测试：mocha, should, istanbul"></a>lession6:测试：mocha, should, istanbul</h1><p>直接上代码，用来跑测试用例：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="string">'test/main.test.js'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  it(<span class="string">'should equal 55 when n === 10'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    main.fibonacci(<span class="number">10</span>).should.equal(<span class="number">55</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这里的教程看的比较懵了，使用mocha和istanbul的目的是什么。这里参考了阮一峰的<a href="http://www.ruanyifeng.com/blog/2015/06/istanbul.html" target="_blank" rel="noopener">代码覆盖率工具 Istanbul 入门教程</a>.</p>
+<p>测试的时候需要关注是否所有的代码都测试到了，所以引入“代码覆盖率”这个指标，从四个维度测试代码：</p>
+<ul>
+<li>行覆盖率：是否每一行都执行了</li>
+<li>函数覆盖率：是否每个函数都调用了</li>
+<li>分支覆盖率：是否每个if代码块都执行了</li>
+<li>语句覆盖率：是否每个语句都执行了</li>
+</ul>
+<p>istabbul就是js中这样一个测试工具，常常和测试框架mocha结合使用。</p>
+<p>相关的命令行：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">istanbul cover _mocha</span><br></pre></td></tr></table></figure>
+<h1 id="lesssion7-浏览器端测试：mocha-chai-phantomjs"><a href="#lesssion7-浏览器端测试：mocha-chai-phantomjs" class="headerlink" title="lesssion7:浏览器端测试：mocha, chai, phantomjs"></a>lesssion7:浏览器端测试：mocha, chai, phantomjs</h1><p>总结一下这几个工具：</p>
+<ul>
+<li>islanbul：js代码股概率测试工具<code>npm i istanbul -g</code></li>
+<li>mocha：测试框架，即运行测试的工具，使用<code>describe</code>和<code>it</code>方法对不同的测试情况进行分组<code>npm install mocha -g</code></li>
+<li>chai：mocha本身不提供assert断言，chai是一个断言库</li>
+<li>phantomjs：帮助搭建测试需要的前端浏览器环境<code>npm i -g mocha-phantomjs</code></li>
+</ul>
+<p>这里运行phantomjs出现了问题，运行<code>mocha-phantomjs index.html --ssl-protocol=any --ignore-ssl-errors=true</code>显示<code>phantomjs terminated with signal SIGSEGV</code>，随后执行<code>mocha-phantomjs --path /usr/local/lib/node_modules/mocha-phantomjs/node_modules/phantomjs ./index.html</code>抛出错误<code>An error occurred trying to launch phantomjs at &quot;/usr/local/lib/node_modules/mocha-phantomjs/node_modules/phantomjs&quot;: TypeError: Cannot read property &#39;pipe&#39; of undefined</code>.</p>
+<p>官网上显示：PhantomJS development is suspended until further notice.</p>
+<p>不再提供支持了。所以这里不再追究了，没有进行进一步的调研，直接进入下一节学习。</p>
+<h1 id="lession8-supertest"><a href="#lession8-supertest" class="headerlink" title="lession8:supertest"></a>lession8:supertest</h1><p>supertest和superagent的API一模一样，superagent是用来抓取页面的，supertest是专门用来配合express进行集成测试的。</p>
+<p>这里区别一下<code>npm install</code>的时候<code>--save`</code>–save-dev`的区别：</p>
+<ul>
+<li><code>--save</code>会把依赖包添加到package.json文件的<code>dependencies</code>键下，<code>--save-dev</code>会把依赖添加到package.json<code>devDependencies</code>键下；</li>
+<li><code>dependencies</code>是运行时依赖，而<code>devDependencies</code>是开发时依赖。如果发布后用不到这个模块，只有开发时用得到，使用后者。</li>
+</ul>
+<h1 id="lession9-正则表达式"><a href="#lession9-正则表达式" class="headerlink" title="lession9:正则表达式"></a>lession9:正则表达式</h1><p><a href="http://refiddle.com/" target="_blank" rel="noopener">正在表达式测试</a></p>
+<p>不详述了，主要是之前看过，但是不用到的话又记不住那么多规则，用到的时候再查询吧。</p>
+<h1 id="lession10-benchmark"><a href="#lession10-benchmark" class="headerlink" title="lession10: benchmark"></a>lession10: benchmark</h1><p>这个课程的缺点就是不解释这些都是啥东西，默认已经知道了…</p>
+<p>benchmark：A robust benchmarking library that supports high-resolution timers &amp; returns statistically significant results. </p>
+<p>这个课程的目标是测试将字符串的100转换成Number类型的100的三种方法哪个更快，使用benchmark作为测试速度的工具。</p>
+<p><a href="https://benchmarkjs.com/docs" target="_blank" rel="noopener">benchmark文档</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+ x 861,361,931 ops/sec ±0.64% (47 runs sampled)</span><br><span class="line">index.js:29</span><br><span class="line">parseint x 232,488,875 ops/sec ±1.68% (46 runs sampled)</span><br><span class="line">index.js:29</span><br><span class="line">Number x 862,891,767 ops/sec ±0.62% (47 runs sampled)</span><br><span class="line">index.js:29</span><br><span class="line">Fastest is Number,+</span><br></pre></td></tr></table></figure>
+<p>运行代码会显示每秒钟代码运行的次数（ops/sec），对比出最快的计算方式。</p>
+<h1 id="lession11-作用域和闭包"><a href="#lession11-作用域和闭包" class="headerlink" title="lession11:作用域和闭包"></a>lession11:作用域和闭包</h1><p>这一部分主要是理解两个点：</p>
+<p>第一，js是没有块级作用域这个概念的。</p>
+<p>第二，理解闭包。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">  &#125;, <span class="number">5</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个例子看到过很多次了，这里的解释我觉得还比较明白：</p>
+<blockquote>
+<p>上面这个代码块会打印五个 5 出来，而我们预想的结果是打印 0 1 2 3 4。</p>
+</blockquote>
+<blockquote>
+<p>之所以会这样，是因为 setTimeout 中的 i 是对外层 i 的引用。当 setTimeout 的代码被解释的时候，运行时只是记录了 i 的引用，而不是值。而当 setTimeout 被触发时，五个 setTimeout 中的 i 同时被取值，由于它们都指向了外层的同一个 i，而那个 i 的值在迭代完成时为 5，所以打印了五次 5。<br>为了得到我们预想的结果，我们可以把 i 赋值成一个局部的变量，从而摆脱外层迭代的影响。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span> (<span class="params">idx</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(idx);</span><br><span class="line">    &#125;, <span class="number">5</span>);</span><br><span class="line">  &#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><br></h2><p><b><br>到此为止后面的部分不想再跟着研究了。觉得自己研究js这么长时间，理解上有进展，但是实际上没有什么长足的进步，主要原因就是自己并没有从头至尾的搭建一个完整的项目，始终停留在简单的demo阶段，这里主要原因是自己在写代码的思路上总是依赖模仿的，这是我停留在这个初级阶段始终不前进的原因之一吧，对于一个工程没有什么思路上的构想。</b></p>
+<p>但是我想我也不可以急功近利吧，继续从模仿做总有一天也会有自己的想法产生，能够把握一个较为完整的程序。接下来想要写一个博客项目，希望能够在两周的时间内搭建起来基本功能，当然这取决于我找的这个例子的代码规范能不能满足我的要求 = =试试看咯。每一天都要加油鸭!</p>
+<hr>
 
         </div>
       </div>
